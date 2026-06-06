@@ -20,8 +20,10 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:4px}
 input,select,textarea,button{font-family:'DM Sans',sans-serif}
 
+/* ═══ LAYOUT ═══ */
 #wrap{display:flex;height:100vh;overflow:hidden}
 
+/* SIDEBAR */
 #sb{width:var(--sb);flex-shrink:0;background:var(--surf);border-right:1px solid var(--br);display:flex;flex-direction:column;z-index:10}
 .sb-logo{padding:24px 20px 14px}
 .sb-logo h1{font-size:21px;font-weight:800;color:var(--ac2);letter-spacing:-.5px}
@@ -40,6 +42,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .si-ico{font-size:17px;width:22px;text-align:center}
 .sb-clock{padding:14px 20px;font-family:'DM Mono',monospace;font-size:17px;color:var(--tx3);border-top:1px solid var(--br)}
 
+/* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #topbar{display:none;background:var(--surf);border-bottom:1px solid var(--br);padding:11px 16px;align-items:center;justify-content:space-between}
 .tb-logo{font-size:18px;font-weight:800;color:var(--ac2)}
@@ -47,6 +50,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .tb-clock{font-size:12px;color:var(--tx3);font-family:'DM Mono',monospace}
 #scroll{flex:1;overflow-y:auto;padding:26px}
 
+/* BOTTOM NAV */
 #bnav{display:none;background:rgba(253,250,246,.95);backdrop-filter:blur(14px);border-top:1px solid var(--br);padding:7px 0 16px}
 .bn-wrap{display:flex}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;border:none;background:none;cursor:pointer}
@@ -55,12 +59,14 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .bi.on .bi-lb{color:var(--ac)}
 .bi-dot{width:4px;height:4px;border-radius:50%;background:var(--ac);margin-top:1px}
 
+/* PAGES */
 .pg{display:none}
 .pg.on{display:block}
 .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
 .ph-title{font-size:22px;font-weight:800;color:var(--ac2);letter-spacing:-.5px}
 .ph-sub{font-size:13px;color:var(--tx3);margin-top:3px}
 
+/* CARD */
 .card{background:var(--surf);border:1px solid var(--br);border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 4px rgba(90,50,20,.05)}
 .ch{padding:13px 16px;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .ch-title{font-size:14px;font-weight:700;color:var(--ac2)}
@@ -74,6 +80,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .vr-s{font-size:11px;color:var(--tx3);margin-top:1px}
 .sec{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.6px;margin:14px 0 7px}
 
+/* CALENDAR */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 14px 5px}
 .cal-m{font-size:16px;font-weight:700;color:var(--ac2)}
 .cal-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--br);background:none;cursor:pointer;font-size:15px;color:var(--tx2);display:flex;align-items:center;justify-content:center}
@@ -89,12 +96,14 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .dc.sel::after{background:rgba(255,255,255,.7)}
 .dc.emp{pointer-events:none}
 
+/* EVENTS */
 .ev-item{display:flex;gap:10px;padding:11px 16px;align-items:flex-start}
 .ev-item+.ev-item{border-top:.5px solid var(--br)}
 .ev-pip{width:3px;border-radius:2px;background:var(--ac);align-self:stretch;min-height:30px;flex-shrink:0}
 .ev-t{font-size:13px;font-weight:600;color:var(--ac2)}
 .ev-s{font-size:11px;color:var(--tx3);margin-top:2px;font-family:'DM Mono',monospace}
 
+/* FORM */
 .fi{width:100%;background:var(--bg2);border:1px solid var(--br);outline:none;color:var(--tx);font-size:13px;padding:10px 12px;border-radius:9px;transition:border .15s}
 .fi:focus{border-color:var(--ac);background:var(--surf)}
 .fi::placeholder{color:var(--tx3)}
@@ -105,6 +114,7 @@ textarea.fi{resize:vertical;min-height:75px}
 .fg:last-child{margin-bottom:0}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
+/* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;font-size:13px;font-weight:600;padding:9px 15px;cursor:pointer;border:none;transition:all .15s}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
@@ -119,44 +129,48 @@ textarea.fi{resize:vertical;min-height:75px}
 .btn-ic{width:29px;height:29px;padding:0;border-radius:50%}
 .btn-lk{background:none;border:none;color:var(--ac);font-size:12px;font-weight:600;cursor:pointer;padding:3px 0}
 
+/* TOGGLE */
 .tgl{width:46px;height:26px;background:var(--br2);border-radius:13px;cursor:pointer;position:relative;transition:background .25s;border:none;flex-shrink:0}
 .tgl.on{background:var(--ac)}
 .tgl::after{content:'';width:22px;height:22px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:left .25s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .tgl.on::after{left:22px}
 
+/* CHIPS */
 .chips{display:flex;gap:5px;flex-wrap:wrap}
 .chip{padding:5px 11px;border-radius:20px;border:1px solid var(--br);font-size:12px;font-weight:600;color:var(--tx2);cursor:pointer;background:none}
 .chip:hover{border-color:var(--br2);background:var(--bg2)}
 .chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
 
+/* RINGTONE */
 .rt{padding:6px 12px;border-radius:20px;border:1px solid var(--br);font-size:12px;font-weight:500;color:var(--tx2);cursor:pointer;background:none;transition:all .15s}
 .rt:hover{border-color:var(--br2);background:var(--bg2)}
 .rt.on{background:var(--ac);border-color:var(--ac);color:#fff}
 
+/* PILL */
 .pill{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:500;margin:8px 0}
 .pill.ok{background:#eaf3ed;color:#2d6e45}
 .pill.err{background:#faeaea;color:var(--red)}
 .pill.inf{background:var(--acsoft);color:var(--ac)}
 .pill.warn{background:#fff8e6;color:#7a5c00}
 
+/* ALARM CARD */
 .ac-card{background:var(--surf);border:1px solid var(--br);border-radius:14px;padding:15px;margin-bottom:10px;box-shadow:0 1px 3px rgba(90,50,20,.04)}
 .ac-card.off{opacity:.55}
-.ac-big{font-size:32px;font-weight:300;color:var(--ac2);font-family:'DM Mono',monospace;letter-spacing:-1px;line-height:1}
-.ac-date{font-size:13px;color:var(--tx3);margin-top:3px;font-family:'DM Mono',monospace}
+.ac-big{font-size:36px;font-weight:300;color:var(--ac2);font-family:'DM Mono',monospace;letter-spacing:-1px;line-height:1}
 .ac-tags{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
 .atag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--bg2);color:var(--tx3);border:1px solid var(--br)}
-.atag.upcoming{background:#eaf3ed;color:#2d6e45;border-color:#b8dac3}
-.atag.fired{background:#fff8e6;color:#7a5c00;border-color:#f0d9a0}
-.atag.expired{background:#f5f5f5;color:#999;border-color:#ddd}
 
+/* COUNTDOWN RINGS */
 .cd-wrap{display:flex;justify-content:center;gap:18px;padding:22px 12px}
 .cd-unit{display:flex;flex-direction:column;align-items:center;gap:5px}
 .cd-num{font-size:22px;font-weight:700;font-family:'DM Mono',monospace}
 .cd-lbl{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:1px;text-transform:uppercase}
 
+/* DROPZONE */
 .dz{border:1.5px dashed var(--br2);border-radius:14px;padding:34px 20px;text-align:center;cursor:pointer;background:var(--surf);transition:all .2s}
 .dz:hover,.dz.drag{border-color:var(--ac);background:var(--acsoft)}
 
+/* AUTH */
 .auth-sc{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:78vh;text-align:center;padding:28px}
 .auth-ico{font-size:52px;margin-bottom:14px}
 .auth-title{font-size:26px;font-weight:800;color:var(--ac2);letter-spacing:-.5px;margin-bottom:7px}
@@ -165,6 +179,7 @@ textarea.fi{resize:vertical;min-height:75px}
 .g-btn:hover{box-shadow:0 4px 14px rgba(90,50,20,.14);border-color:var(--br2)}
 .g-btn:disabled{opacity:.6;cursor:not-allowed}
 
+/* MODAL */
 .ov{position:fixed;inset:0;background:rgba(44,26,14,.42);z-index:400;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s}
 .mo{background:var(--surf);border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;border:1px solid var(--br);box-shadow:0 8px 32px rgba(44,26,14,.18);animation:scaleIn .2s}
 .mh-handle{display:none}
@@ -173,22 +188,27 @@ textarea.fi{resize:vertical;min-height:75px}
 .mo-close{width:27px;height:27px;border-radius:50%;background:var(--bg2);border:none;cursor:pointer;font-size:13px;color:var(--tx3);display:flex;align-items:center;justify-content:center}
 .mo-body{padding:18px;display:flex;flex-direction:column;gap:12px}
 
+/* GRID */
 .d2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
+/* EMPTY */
 .empty{text-align:center;padding:36px 20px;color:var(--tx3)}
 .empty-ic{font-size:38px;margin-bottom:9px}
 .empty-t{font-size:14px;font-weight:600;color:var(--tx2)}
 .empty-s{font-size:12px;margin-top:3px}
 
+/* FAB */
 .fab{position:fixed;bottom:74px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--ac);border:none;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(139,94,60,.38);display:none;align-items:center;justify-content:center;z-index:50;transition:transform .15s}
 .fab:active{transform:scale(.91)}
 
+/* SPIN */
 .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--pale);border-top-color:var(--ac);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle}
 @keyframes sp{to{transform:rotate(360deg)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:767px){
   #sb{display:none!important}
   #topbar{display:flex!important}
@@ -213,6 +233,7 @@ textarea.fi{resize:vertical;min-height:75px}
 <body>
 <div id="wrap">
 
+<!-- ── SIDEBAR ── -->
 <aside id="sb">
   <div class="sb-logo"><h1>ALLENDER</h1><p>Calendar & Alarm System</p></div>
   <div id="sb-user"></div>
@@ -225,6 +246,7 @@ textarea.fi{resize:vertical;min-height:75px}
   <div class="sb-clock" id="sb-clk">--:--:--</div>
 </aside>
 
+<!-- ── MAIN ── -->
 <div id="main">
   <div id="topbar">
     <span class="tb-logo">ALLENDER</span>
@@ -245,6 +267,7 @@ textarea.fi{resize:vertical;min-height:75px}
       <div id="cal-gate"></div>
       <div id="cal-body" style="display:none">
         <div class="d2">
+          <!-- Calendar grid -->
           <div class="card">
             <div class="cal-nav">
               <button class="cal-btn" onclick="prevMo()">‹</button>
@@ -254,6 +277,7 @@ textarea.fi{resize:vertical;min-height:75px}
             <div class="dhds" id="dhds"></div>
             <div class="dgrid" id="dgrid"></div>
           </div>
+          <!-- Events list -->
           <div>
             <div class="card">
               <div class="ch">
@@ -330,21 +354,22 @@ textarea.fi{resize:vertical;min-height:75px}
         <div class="cd-wrap" id="cd-rings"></div>
         <div id="cd-end-msg" style="text-align:center;padding:0 16px 10px;font-size:14px;font-weight:700;color:var(--red);display:none">⏰ Time's up!</div>
         <div style="display:flex;gap:9px;padding:0 15px 15px">
-          <button class="btn btn-br" style="flex:1" id="cd-s" onclick="cdStart()">▶ Start</button>
-          <button class="btn btn-gh" style="flex:1" id="cd-p" onclick="cdPause()" disabled>⏸ Pause</button>
-          <button class="btn btn-gh" style="flex:1" onclick="cdReset()">↺ Reset</button>
+          <button class="btn btn-br" style="flex:1" id="cd-s" onclick="cdStart()">Start</button>
+          <button class="btn btn-gh" style="flex:1" id="cd-p" onclick="cdPause()" disabled>Pause</button>
+          <button class="btn btn-gh" style="flex:1" onclick="cdReset()">Reset</button>
         </div>
       </div>
       <div class="g2" style="margin-bottom:11px">
-        <div><div class="lb">Target Date & Time</div><input class="fi" type="datetime-local" id="cd-tgt"/></div>
-        <div><div class="lb">Event Name</div><input class="fi" id="cd-lbl-inp" placeholder="e.g. Ujian Nasional" oninput="updCdName()"/></div>
+        <div><div class="lb">Target Date & Time</div><input class="fi" type="datetime-local" id="cd-tgt" oninput="cdReset()"/></div>
+        <div><div class="lb">Event Name</div><input class="fi" id="cd-lbl" placeholder="e.g. Ujian Nasional" oninput="updCdName()"/></div>
       </div>
       <div class="lb">Alarm Ringtone</div>
       <div id="cd-rts" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:2px"></div>
     </div>
 
-  </div>
+  </div><!-- end #scroll -->
 
+  <!-- BOTTOM NAV -->
   <div id="bnav">
     <div class="bn-wrap">
       <button class="bi on" data-tab="calendar"><div class="bi-ic">📅</div><div class="bi-lb">Calendar</div><div class="bi-dot"></div></button>
@@ -358,7 +383,7 @@ textarea.fi{resize:vertical;min-height:75px}
 </div>
 </div>
 
-<!-- EVENT MODAL -->
+<!-- ══ EVENT MODAL ══ -->
 <div class="ov" id="mo-event" style="display:none" onclick="bgClose(event,'mo-event')">
   <div class="mo">
     <div class="mh-handle"></div>
@@ -381,12 +406,14 @@ textarea.fi{resize:vertical;min-height:75px}
         <button class="btn-lk" onclick="addRem()">+ Add reminder</button>
       </div>
       <div id="ev-mo-st"></div>
-      <button class="btn btn-br btn-full" id="ev-save-btn" onclick="saveEvent()">Save to Google Calendar</button>
+      <button class="btn btn-br btn-full" id="ev-save-btn" onclick="saveEvent()">
+        Save to Google Calendar
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ALARM MODAL -->
+<!-- ══ ALARM MODAL ══ -->
 <div class="ov" id="mo-alarm" style="display:none" onclick="bgClose(event,'mo-alarm')">
   <div class="mo">
     <div class="mh-handle"></div>
@@ -395,48 +422,27 @@ textarea.fi{resize:vertical;min-height:75px}
       <button class="mo-close" onclick="closeMo('mo-alarm')">✕</button>
     </div>
     <div class="mo-body">
+      <div class="g2">
+        <div class="fg"><div class="lb">Time</div><input class="fi" type="time" id="al-time" value="07:00" oninput="updAlBase()"/></div>
+        <div class="fg"><div class="lb">Label</div><input class="fi" id="al-lbl" placeholder="e.g. Bangun tidur"/></div>
+      </div>
       <div class="fg">
-        <div class="lb">Alarm Type</div>
-        <div style="display:flex;gap:8px">
-          <button class="chip on" id="al-type-time" onclick="switchAlType('time')">🕐 By Time</button>
-          <button class="chip" id="al-type-date" onclick="switchAlType('date')">📅 By Date & Time</button>
+        <div class="lb">Repeat Days</div>
+        <div class="chips" id="al-days">
+          <button class="chip" onclick="this.classList.toggle('on')">Su</button>
+          <button class="chip" onclick="this.classList.toggle('on')">Mo</button>
+          <button class="chip" onclick="this.classList.toggle('on')">Tu</button>
+          <button class="chip" onclick="this.classList.toggle('on')">We</button>
+          <button class="chip" onclick="this.classList.toggle('on')">Th</button>
+          <button class="chip" onclick="this.classList.toggle('on')">Fr</button>
+          <button class="chip" onclick="this.classList.toggle('on')">Sa</button>
         </div>
       </div>
-      <!-- By-time fields -->
-      <div id="al-time-fields">
-        <div class="g2">
-          <div class="fg"><div class="lb">Time</div><input class="fi" type="time" id="al-time" value="07:00" oninput="updAlBase()"/></div>
-          <div class="fg"><div class="lb">Label</div><input class="fi" id="al-lbl" placeholder="e.g. Bangun tidur"/></div>
-        </div>
-        <div class="fg">
-          <div class="lb">Repeat Days</div>
-          <div class="chips" id="al-days">
-            <button class="chip" onclick="this.classList.toggle('on')">Su</button>
-            <button class="chip" onclick="this.classList.toggle('on')">Mo</button>
-            <button class="chip" onclick="this.classList.toggle('on')">Tu</button>
-            <button class="chip" onclick="this.classList.toggle('on')">We</button>
-            <button class="chip" onclick="this.classList.toggle('on')">Th</button>
-            <button class="chip" onclick="this.classList.toggle('on')">Fr</button>
-            <button class="chip" onclick="this.classList.toggle('on')">Sa</button>
-          </div>
-        </div>
-        <div class="fg">
-          <div class="lb">Intervals <span style="font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--tx3)">(multiple alarms from base time)</span></div>
-          <div id="al-base" class="fi" style="color:var(--tx3);margin-bottom:6px">Base: 07:00</div>
-          <div id="al-ints"></div>
-          <button class="btn-lk" onclick="addInt()">+ Add interval</button>
-        </div>
-      </div>
-      <!-- By-date fields -->
-      <div id="al-date-fields" style="display:none">
-        <div class="g2">
-          <div class="fg"><div class="lb">Date & Time</div><input class="fi" type="datetime-local" id="al-datetime"/></div>
-          <div class="fg"><div class="lb">Label</div><input class="fi" id="al-lbl-date" placeholder="e.g. Deadline tugas"/></div>
-        </div>
-        <div class="fg">
-          <div class="lb">Note (optional)</div>
-          <input class="fi" id="al-note" placeholder="Additional info…"/>
-        </div>
+      <div class="fg">
+        <div class="lb">Intervals <span style="font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--tx3)">(multiple alarms from base time)</span></div>
+        <div id="al-base" class="fi" style="color:var(--tx3);margin-bottom:6px">Base: 07:00</div>
+        <div id="al-ints"></div>
+        <button class="btn-lk" onclick="addInt()">+ Add interval</button>
       </div>
       <div class="fg">
         <div class="lb">Ringtone</div>
@@ -448,12 +454,14 @@ textarea.fi{resize:vertical;min-height:75px}
 </div>
 
 <script>
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
 const S={
   tab:'calendar',signedIn:false,user:null,
   vy:new Date().getFullYear(),vm:new Date().getMonth(),vd:new Date().getDate(),
   events:[],alarms:[],custRt:[],
   alRt:'beep',cdRt:'beep',
-  alType:'time',
   cdRun:false,cdTarget:null,cdRem:null,cdDone:false,
   impRows:[]
 };
@@ -472,54 +480,23 @@ const pad=n=>String(n).padStart(2,'0');
 const $=id=>document.getElementById(id);
 const dim=(y,m)=>new Date(y,m+1,0).getDate();
 
-// ── CLOCK & ALARM CHECK ──
+// ═══════════════════════════════════════════════════
+// CLOCK
+// ═══════════════════════════════════════════════════
 function tick(){
   const n=new Date();
   $('sb-clk').textContent=`${pad(n.getHours())}:${pad(n.getMinutes())}:${pad(n.getSeconds())}`;
   $('tb-clk').textContent=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
-
-  // Check alarms every second
-  S.alarms.forEach((a,i)=>{
-    if(!a.active)return;
-
-    if(a.isDate){
-      // Date-based alarm: fire once when current time matches
-      if(!a.fired){
-        const now=new Date();
-        const target=new Date(a.datetime);
-        const diff=target-now;
-        if(diff<=0&&diff>-60000){ // within the minute it's due
-          playRt(a.rt);
-          S.alarms[i].fired=true;
-          showAlarmNotif(a.label||'Alarm',a.note||'');
-          renderAlarms();
-        }
-      }
-    } else {
-      // Time-based: check HH:MM and day
-      if(n.getSeconds()===0){
-        const ts=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
-        if(a.time===ts){
-          const dayName=DAYS[n.getDay()];
-          if(!a.days||!a.days.length||a.days.includes(dayName)){
-            playRt(a.rt);
-          }
-        }
-      }
-    }
-  });
+  if(n.getSeconds()===0){
+    const ts=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
+    S.alarms.filter(a=>a.active&&a.time===ts).forEach(a=>playRt(a.rt));
+  }
 }
 setInterval(tick,1000);tick();
 
-function showAlarmNotif(label,note){
-  const el=document.createElement('div');
-  el.style.cssText='position:fixed;top:20px;right:20px;background:var(--ac2);color:#fff;padding:14px 18px;border-radius:14px;z-index:9999;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.25);animation:scaleIn .2s';
-  el.innerHTML=`🔔 ${label}${note?`<div style="font-size:12px;opacity:.8;margin-top:3px">${note}</div>`:''}`;
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),5000);
-}
-
-// ── TABS ──
+// ═══════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════
 function goTab(t){
   S.tab=t;
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
@@ -540,7 +517,9 @@ function fabClick(){
   else if(S.tab==='alarms')openMo('mo-alarm');
 }
 
-// ── MODAL ──
+// ═══════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════
 function openMo(id){
   $(id).style.display='flex';
   document.body.style.overflow='hidden';
@@ -548,23 +527,13 @@ function openMo(id){
     $('ev-mo-title').textContent=`New Event · ${MS[S.vm]} ${S.vd}`;
     $('ev-mo-st').innerHTML='';
   }
-  if(id==='mo-alarm'){
-    switchAlType('time');
-  }
 }
 function closeMo(id){$(id).style.display='none';document.body.style.overflow='';}
 function bgClose(e,id){if(e.target===e.currentTarget)closeMo(id);}
 
-// ── ALARM TYPE SWITCH ──
-function switchAlType(type){
-  S.alType=type;
-  $('al-type-time').classList.toggle('on',type==='time');
-  $('al-type-date').classList.toggle('on',type==='date');
-  $('al-time-fields').style.display=type==='time'?'block':'none';
-  $('al-date-fields').style.display=type==='date'?'block':'none';
-}
-
-// ── AUDIO ──
+// ═══════════════════════════════════════════════════
+// AUDIO
+// ═══════════════════════════════════════════════════
 let ac=null;
 const caMap={};
 function getAc(){if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();return ac;}
@@ -589,7 +558,9 @@ function mkRtGrid(el,selId,cb){
   el.innerHTML=[...RTS,...S.custRt].map(r=>`<button class="rt${r.id===selId?' on':''}" onclick="(${cb.toString()})('${r.id}',this)">${r.isC?'🎵 ':''}${r.label}</button>`).join('');
 }
 
-// ── GOOGLE AUTH ──
+// ═══════════════════════════════════════════════════
+// GOOGLE AUTH
+// ═══════════════════════════════════════════════════
 let tclient=null,gReady=false,gisReady=false;
 const CLIENT_ID='469599972152-m9dotqvj2k76t9p3nvorf6m86k7q8hmm.apps.googleusercontent.com';
 const SCOPE='https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile email';
@@ -669,7 +640,10 @@ function signOut(){
 }
 
 async function loadProfile(){
-  try{const r=await gapi.client.request({path:'https://www.googleapis.com/oauth2/v1/userinfo'});S.user=r.result;}catch(e){}
+  try{
+    const r=await gapi.client.request({path:'https://www.googleapis.com/oauth2/v1/userinfo'});
+    S.user=r.result;
+  }catch(e){}
 }
 
 function onSignedIn(){
@@ -678,7 +652,10 @@ function onSignedIn(){
   $('btn-new-ev').style.display='inline-flex';
   $('cal-sub').textContent='Connected to Google Calendar ✓';
   if(S.tab==='calendar')$('fab').style.display='flex';
-  renderSbUser();renderTbUser();renderCal();fetchEvents();
+  renderSbUser();
+  renderTbUser();
+  renderCal();
+  fetchEvents();
 }
 
 function renderSbUser(){
@@ -700,12 +677,15 @@ function renderTbUser(){
     </div>`;
 }
 
+// Load scripts
 (function(){
   const g=document.createElement('script');g.src='https://apis.google.com/js/api.js';g.onload=()=>gapiCb();document.head.appendChild(g);
   const gs=document.createElement('script');gs.src='https://accounts.google.com/gsi/client';gs.onload=()=>gisCb();document.head.appendChild(gs);
 })();
 
-// ── CALENDAR ──
+// ═══════════════════════════════════════════════════
+// CALENDAR RENDER
+// ═══════════════════════════════════════════════════
 function renderCal(){
   $('cal-lbl').textContent=`${MN[S.vm]} ${S.vy}`;
   $('dhds').innerHTML=DAYS.map(d=>`<div class="dhd">${d}</div>`).join('');
@@ -751,6 +731,9 @@ function renderEvList(){
   }).join('');
 }
 
+// ═══════════════════════════════════════════════════
+// GOOGLE CALENDAR API
+// ═══════════════════════════════════════════════════
 async function fetchEvents(){
   if(!S.signedIn)return;
   $('cal-sp').style.display='inline-block';
@@ -767,6 +750,7 @@ async function fetchEvents(){
   $('cal-sp').style.display='none';
 }
 
+// ─── REMINDERS ───
 function renderRems(){
   $('ev-rems').innerHTML=reminders.map((r,i)=>`
     <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
@@ -779,32 +763,63 @@ function renderRems(){
 function addRem(){reminders.push({off:15});renderRems();}
 renderRems();
 
+// ─── SAVE EVENT ───
 async function saveEvent(){
   const title=$('ev-title').value.trim();
-  if(!title){showSt('ev-mo-st','err','Please enter an event title');return;}
-  if(!S.signedIn){showSt('ev-mo-st','err','Not signed in to Google Calendar');return;}
+  if(!title){
+    showSt('ev-mo-st','err','Please enter an event title');
+    return;
+  }
+  if(!S.signedIn){
+    showSt('ev-mo-st','err','Not signed in to Google Calendar');
+    return;
+  }
+
   const btn=$('ev-save-btn');
-  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Saving…';
+  btn.disabled=true;
+  btn.innerHTML='<span class="spin"></span> Saving…';
   $('ev-mo-st').innerHTML='';
+
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
   const ds=`${S.vy}-${pad(S.vm+1)}-${pad(S.vd)}`;
+  const startTime=`${ds}T${$('ev-start').value}:00`;
+  const endTime=`${ds}T${$('ev-end').value}:00`;
+
   const resource={
     summary:title,
-    start:{dateTime:`${ds}T${$('ev-start').value}:00`,timeZone:tz},
-    end:{dateTime:`${ds}T${$('ev-end').value}:00`,timeZone:tz},
-    reminders:{useDefault:false,overrides:reminders.map(r=>({method:'popup',minutes:r.off}))}
+    start:{dateTime:startTime,timeZone:tz},
+    end:{dateTime:endTime,timeZone:tz},
+    reminders:{
+      useDefault:false,
+      overrides:reminders.map(r=>({method:'popup',minutes:r.off}))
+    }
   };
+
   try{
-    const res=await gapi.client.calendar.events.insert({calendarId:'primary',resource});
+    const res=await gapi.client.calendar.events.insert({
+      calendarId:'primary',
+      resource:resource
+    });
+
     if(res.status===200||res.status===201){
-      showSt('ev-mo-st','ok','✓ Event saved!');
-      $('ev-title').value='';reminders=[{off:15}];renderRems();
-      setTimeout(()=>{closeMo('mo-event');fetchEvents();},1200);
+      showSt('ev-mo-st','ok','✓ Event saved to Google Calendar!');
+      $('ev-title').value='';
+      reminders=[{off:15}];
+      renderRems();
+      setTimeout(()=>{
+        closeMo('mo-event');
+        fetchEvents();
+      },1200);
+    } else {
+      showSt('ev-mo-st','err','Unexpected response. Please try again.');
     }
   }catch(err){
-    showSt('ev-mo-st','err',err?.result?.error?.message||'Failed to create event');
+    console.error('Event creation error:',err);
+    const msg=err?.result?.error?.message||'Failed to create event. Check your connection.';
+    showSt('ev-mo-st','err',msg);
   }finally{
-    btn.disabled=false;btn.innerHTML='Save to Google Calendar';
+    btn.disabled=false;
+    btn.innerHTML='💾 Save to Google Calendar';
   }
 }
 
@@ -812,13 +827,15 @@ async function delEvent(id){
   if(!S.signedIn)return;
   try{
     await gapi.client.calendar.events.delete({calendarId:'primary',eventId:id});
-    S.events=S.events.filter(e=>e.id!==id);renderEvList();renderCal();
+    S.events=S.events.filter(e=>e.id!==id);
+    renderEvList();renderCal();
   }catch(e){showSt('cal-st','err','Failed to delete event');}
 }
 
-// ── ALARMS ──
+// ═══════════════════════════════════════════════════
+// ALARMS
+// ═══════════════════════════════════════════════════
 function updAlBase(){$('al-base').textContent=`Base: ${$('al-time').value||'07:00'}`;}
-
 function renderAlInts(){
   $('al-ints').innerHTML=alInts.slice(1).map((a,i)=>`
     <div style="display:flex;gap:8px;margin-bottom:6px;align-items:center">
@@ -829,76 +846,23 @@ function renderAlInts(){
 function addInt(){alInts.push({off:''});renderAlInts();}
 
 function saveAlarm(){
-  if(S.alType==='date'){
-    // Date-based alarm
-    const dt=$('al-datetime').value;
-    const lb=$('al-lbl-date').value;
-    const note=$('al-note').value;
-    if(!dt){alert('Pilih tanggal dan waktu alarm');return;}
-    const target=new Date(dt);
-    if(target<=new Date()){alert('Waktu alarm sudah lewat. Pilih waktu yang akan datang.');return;}
+  const t=$('al-time').value,lb=$('al-lbl').value;
+  const [hh,mm]=t.split(':').map(Number);
+  const days=[...$('al-days').querySelectorAll('.chip.on')].map(c=>c.textContent);
+  alInts.forEach((a,i)=>{
+    const tot=hh*60+mm+(+a.off||0);
     S.alarms.push({
-      id:Date.now(),
-      isDate:true,
-      datetime:dt,
-      label:lb||'Alarm',
-      note:note||'',
-      rt:S.alRt,
-      active:true,
-      fired:false
+      id:Date.now()+i,
+      time:`${pad(Math.floor(tot/60)%24)}:${pad(tot%60)}`,
+      label:lb||(i===0?'Alarm':`+${a.off||0}min`),
+      rt:S.alRt,days,active:true
     });
-    $('al-datetime').value='';
-    $('al-lbl-date').value='';
-    $('al-note').value='';
-  } else {
-    // Time-based alarm (existing logic)
-    const t=$('al-time').value,lb=$('al-lbl').value;
-    const [hh,mm]=t.split(':').map(Number);
-    const days=[...$('al-days').querySelectorAll('.chip.on')].map(c=>c.textContent);
-    alInts.forEach((a,i)=>{
-      const tot=hh*60+mm+(+a.off||0);
-      S.alarms.push({
-        id:Date.now()+i,
-        isDate:false,
-        time:`${pad(Math.floor(tot/60)%24)}:${pad(tot%60)}`,
-        label:lb||(i===0?'Alarm':`+${a.off||0}min`),
-        rt:S.alRt,days,active:true
-      });
-    });
-    alInts=[{off:0}];renderAlInts();
-    $('al-time').value='07:00';$('al-lbl').value='';
-    $('al-days').querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));
-  }
+  });
+  alInts=[{off:0}];renderAlInts();
+  $('al-time').value='07:00';$('al-lbl').value='';
+  $('al-days').querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));
   closeMo('mo-alarm');
   renderAlarms();
-}
-
-function getAlarmStatus(a){
-  if(!a.active)return'off';
-  if(a.isDate){
-    if(a.fired)return'fired';
-    const diff=new Date(a.datetime)-new Date();
-    if(diff<0)return'expired';
-    return'upcoming';
-  }
-  return'active';
-}
-
-function fmtDatetime(dt){
-  const d=new Date(dt);
-  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  return`${days[d.getDay()]}, ${d.getDate()} ${MS[d.getMonth()]} ${d.getFullYear()} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
-
-function timeUntil(dt){
-  const diff=new Date(dt)-new Date();
-  if(diff<0)return'Expired';
-  const h=Math.floor(diff/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const d=Math.floor(h/24);
-  if(d>0)return`${d}d ${h%24}h`;
-  if(h>0)return`${h}h ${m}m`;
-  return`${m}m`;
 }
 
 function renderAlarms(){
@@ -908,34 +872,8 @@ function renderAlarms(){
     el.innerHTML=`<div class="card"><div class="empty"><div class="empty-ic">🔕</div><div class="empty-t">No alarms yet</div><div class="empty-s">Tap + to set one</div></div></div>`;
     return;
   }
-  el.innerHTML=S.alarms.map((a,i)=>{
-    const status=getAlarmStatus(a);
-    const off=!a.active;
-    if(a.isDate){
-      return`<div class="ac-card${off?' off':''}">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between">
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">📅 Date Alarm</div>
-            <div class="ac-big" style="font-size:24px">${pad(new Date(a.datetime).getHours())}:${pad(new Date(a.datetime).getMinutes())}</div>
-            <div class="ac-date">${fmtDatetime(a.datetime)}</div>
-          </div>
-          <button class="tgl${a.active?' on':''}" onclick="S.alarms[${i}].active=!S.alarms[${i}].active;renderAlarms()"></button>
-        </div>
-        <div style="font-size:13px;font-weight:600;color:var(--ac2);margin-top:7px">${a.label}</div>
-        ${a.note?`<div style="font-size:12px;color:var(--tx3);margin-top:3px">${a.note}</div>`:''}
-        <div class="ac-tags">
-          <span class="atag">${getRtName(a.rt)}</span>
-          <span class="atag ${status}">${status==='upcoming'?`⏳ in ${timeUntil(a.datetime)}`:status==='fired'?'✓ Fired':'⚠ Expired'}</span>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:11px;padding-top:11px;border-top:.5px solid var(--br)">
-          <button class="btn btn-gh btn-sm" onclick="playRt('${a.rt}')">▶ Preview</button>
-          ${status==='fired'||status==='expired'?`<button class="btn btn-gh btn-sm" onclick="S.alarms[${i}].fired=false;renderAlarms()">↺ Reset</button>`:''}
-          <div style="flex:1"></div>
-          <button class="btn btn-dn btn-sm" onclick="S.alarms.splice(${i},1);renderAlarms()">Delete</button>
-        </div>
-      </div>`;
-    }
-    return`<div class="ac-card${off?' off':''}">
+  el.innerHTML=S.alarms.map((a,i)=>`
+    <div class="ac-card${a.active?'':' off'}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between">
         <div class="ac-big">${a.time}</div>
         <button class="tgl${a.active?' on':''}" onclick="S.alarms[${i}].active=!S.alarms[${i}].active;renderAlarms()"></button>
@@ -943,15 +881,14 @@ function renderAlarms(){
       <div style="font-size:13px;font-weight:500;color:var(--tx2);margin-top:7px">${a.label||'Alarm'}</div>
       <div class="ac-tags">
         <span class="atag">${getRtName(a.rt)}</span>
-        <span class="atag">${a.days&&a.days.length?a.days.join(' '):'Once'}</span>
+        <span class="atag">${a.days.length?a.days.join(' '):'Once'}</span>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:11px;padding-top:11px;border-top:.5px solid var(--br)">
         <button class="btn btn-gh btn-sm" onclick="playRt('${a.rt}')">▶ Preview</button>
         <div style="flex:1"></div>
         <button class="btn btn-dn btn-sm" onclick="S.alarms.splice(${i},1);renderAlarms()">Delete</button>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
 }
 function getRtName(id){return[...RTS,...S.custRt].find(r=>r.id===id)?.label||'Beep';}
 renderAlarms();
@@ -962,11 +899,14 @@ mkRtGrid($('al-rts'),S.alRt,(id,el)=>{
   el.classList.add('on');playRt(id);
 });
 
-// ── CUSTOM RINGTONES ──
+// ═══════════════════════════════════════════════════
+// CUSTOM RINGTONES
+// ═══════════════════════════════════════════════════
 function addCustRt(inp){
   const f=inp.files[0];if(!f||!f.type.startsWith('audio/'))return;
   S.custRt.push({id:`c${Date.now()}`,label:f.name.replace(/\.[^.]+$/,''),url:URL.createObjectURL(f),isC:true});
-  renderCrtList();inp.value='';refreshRtGrids();
+  renderCrtList();inp.value='';
+  refreshRtGrids();
 }
 function renderCrtList(){
   $('crt-list').innerHTML=S.custRt.map((r,i)=>`
@@ -982,7 +922,9 @@ function refreshRtGrids(){
   mkRtGrid($('cd-rts'),S.cdRt,(id,el)=>{S.cdRt=id;el.closest('#cd-rts').querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));el.classList.add('on');playRt(id);});
 }
 
-// ── IMPORT ──
+// ═══════════════════════════════════════════════════
+// IMPORT
+// ═══════════════════════════════════════════════════
 function parseCsv(txt){
   return txt.trim().split('\n').filter(Boolean).map(ln=>{
     const c=ln.split(',').map(s=>s.trim().replace(/^"|"$/g,''));
@@ -1028,13 +970,14 @@ async function doImport(){
   S.impRows=[];$('imp-prev').style.display='none';fetchEvents();
 }
 
-// ── COUNTDOWN (FIXED) ──
+// ═══════════════════════════════════════════════════
+// COUNTDOWN
+// ═══════════════════════════════════════════════════
 function fmtMs(ms){
   if(ms<=0)return{d:0,h:0,m:0,s:0};
   const s=Math.floor(ms/1000),mi=Math.floor(s/60),h=Math.floor(mi/60),d=Math.floor(h/24);
   return{d,h:h%24,m:mi%60,s:s%60};
 }
-
 function renderRings(){
   const dur=S.cdRem!==null?fmtMs(Math.max(0,S.cdRem)):{d:0,h:0,m:0,s:0};
   const units=[
@@ -1063,102 +1006,35 @@ function renderRings(){
     </div>`;
   }).join('');
 }
-
-function updCdName(){
-  const v=$('cd-lbl-inp').value.trim();
-  $('cd-name').textContent=v;
-  $('cd-name').style.display=v?'block':'none';
-}
-
+function updCdName(){const v=$('cd-lbl').value.trim();$('cd-name').textContent=v;$('cd-name').style.display=v?'block':'none';}
 function cdStart(){
-  const tVal=$('cd-tgt').value;
-  if(!tVal){
-    showSt('cd-stxt','','');
-    $('cd-stxt').textContent='⚠️ Pilih tanggal dan waktu target dulu!';
-    $('cd-stxt').style.color='var(--red)';
-    return;
-  }
-
-  const targetMs=new Date(tVal).getTime();
-  const nowMs=Date.now();
-  const rem=targetMs-nowMs;
-
-  if(rem<=0){
-    $('cd-stxt').textContent='⚠️ Waktu target sudah lewat!';
-    $('cd-stxt').style.color='var(--red)';
-    return;
-  }
-
-  $('cd-stxt').style.color='var(--tx3)';
-  S.cdTarget=targetMs;
-  S.cdRem=rem;
-  S.cdDone=false;
-  S.cdRun=true;
-  $('cd-s').disabled=true;
-  $('cd-p').disabled=false;
-  $('cd-stxt').textContent=`Until ${new Date(targetMs).toLocaleString()}`;
+  const t=$('cd-tgt').value;if(!t)return;
+  S.cdTarget=new Date(t).getTime();
+  const rem=S.cdTarget-Date.now();if(rem<=0)return;
+  S.cdRem=rem;S.cdDone=false;S.cdRun=true;
+  $('cd-s').disabled=true;$('cd-p').disabled=false;
+  $('cd-stxt').textContent=`Until ${new Date(S.cdTarget).toLocaleString()}`;
   $('cd-end-msg').style.display='none';
-
-  if(cdTimer)clearInterval(cdTimer);
   cdTimer=setInterval(()=>{
     S.cdRem=S.cdTarget-Date.now();
     if(S.cdRem<=0){
-      clearInterval(cdTimer);cdTimer=null;
-      S.cdRun=false;S.cdDone=true;S.cdRem=0;
+      clearInterval(cdTimer);S.cdRun=false;S.cdDone=true;S.cdRem=0;
       $('cd-end-msg').style.display='block';
-      $('cd-stxt').textContent='Selesai! 🎉';
+      $('cd-stxt').textContent='Completed! 🎉';
       $('cd-s').disabled=false;$('cd-p').disabled=true;
       playRt(S.cdRt);
     }
     renderRings();
   },1000);
-  renderRings();
 }
-
-function cdPause(){
-  clearInterval(cdTimer);cdTimer=null;
-  S.cdRun=false;
-  $('cd-s').disabled=false;$('cd-p').disabled=true;
-  $('cd-stxt').textContent='Paused';
-}
-
-// Override cdStart to resume from paused state
-const _cdStart=cdStart;
-window.cdStart=function(){
-  if(S.cdRem!==null&&!S.cdRun&&!S.cdDone&&S.cdTarget){
-    // Resume
-    S.cdTarget=Date.now()+S.cdRem;
-    S.cdRun=true;
-    $('cd-s').disabled=true;$('cd-p').disabled=false;
-    $('cd-stxt').textContent=`Until ${new Date(S.cdTarget).toLocaleString()}`;
-    if(cdTimer)clearInterval(cdTimer);
-    cdTimer=setInterval(()=>{
-      S.cdRem=S.cdTarget-Date.now();
-      if(S.cdRem<=0){
-        clearInterval(cdTimer);cdTimer=null;
-        S.cdRun=false;S.cdDone=true;S.cdRem=0;
-        $('cd-end-msg').style.display='block';
-        $('cd-stxt').textContent='Selesai! 🎉';
-        $('cd-s').disabled=false;$('cd-p').disabled=true;
-        playRt(S.cdRt);
-      }
-      renderRings();
-    },1000);
-  } else {
-    _cdStart();
-  }
-};
-
+function cdPause(){clearInterval(cdTimer);S.cdRun=false;$('cd-s').disabled=false;$('cd-p').disabled=true;}
 function cdReset(){
-  if(cdTimer){clearInterval(cdTimer);cdTimer=null;}
-  S.cdRun=false;S.cdRem=null;S.cdDone=false;S.cdTarget=null;
+  clearInterval(cdTimer);S.cdRun=false;S.cdRem=null;S.cdDone=false;
   $('cd-s').disabled=false;$('cd-p').disabled=true;
   $('cd-stxt').textContent='Set a target below to start';
-  $('cd-stxt').style.color='var(--tx3)';
   $('cd-end-msg').style.display='none';
   renderRings();
 }
-
 renderRings();
 mkRtGrid($('cd-rts'),S.cdRt,(id,el)=>{
   S.cdRt=id;
@@ -1166,10 +1042,12 @@ mkRtGrid($('cd-rts'),S.cdRt,(id,el)=>{
   el.classList.add('on');playRt(id);
 });
 
-// ── UTILS ──
+// ═══════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════
 function showSt(cid,type,msg){
   const el=$(cid);if(!el)return;
-  if(msg){el.innerHTML=`<div class="pill ${type}">${msg}</div>`;}
+  el.innerHTML=`<div class="pill ${type}">${msg}</div>`;
   if(type!=='inf')setTimeout(()=>{if(el.querySelector('.pill')?.textContent===msg)el.innerHTML='';},5000);
 }
 </script>
