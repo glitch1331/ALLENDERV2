@@ -719,41 +719,52 @@ function dismissCdBanner(){
 function stopCdAudio(){
   stopAll();
   S.cdAudioPaused=false;
+  _cdPausedRtId=null;
   $('cd-audio-bar').classList.remove('visible');
   const btn=$('cd-audio-pause-btn');
   if(btn) btn.textContent='⏸ Pause';
 }
 
+// id ringtone yang sedang di-pause (supaya bisa resume ulang)
+let _cdPausedRtId=null;
+
 // Pause/resume audio countdown
 function toggleCdAudio(){
   const btn=$('cd-audio-pause-btn');
-  if(!_cs) return;
 
   if(!S.cdAudioPaused){
-    // Pause audio
+    // ── PAUSE ──
+    if(!_cs) return; // tidak ada audio aktif
+    _cdPausedRtId=_cs.id; // simpan id agar bisa resume
+
     if(_cs.type==='custom' && _cs.audio){
-      _cs.audio.pause();
-    } else if(_cs.type==='tone' && _cs.iv!=null){
-      clearInterval(_cs.iv);
-      _cs.iv=null;
+      _cs.audio.pause(); // HTML Audio bisa di-pause
+    } else {
+      // Tone: hentikan interval tapi JANGAN hapus _cs agar resume tahu id-nya
+      if(_cs.iv!=null){ clearInterval(_cs.iv); _cs.iv=null; }
     }
     S.cdAudioPaused=true;
     if(btn) btn.textContent='▶ Lanjut';
-    // Update pulse animation pause
-    const pulse=$('cd-audio-bar').querySelector('.cd-audio-pulse');
-    if(pulse) pulse.style.animationPlayState='paused';
-    const spans=$('cd-audio-bar').querySelectorAll('.cd-audio-pulse span');
-    spans.forEach(s=>s.style.animationPlayState='paused');
+    // Freeze animasi pulse
+    $('cd-audio-bar').querySelectorAll('.cd-audio-pulse span')
+      .forEach(s=>s.style.animationPlayState='paused');
+
   } else {
-    // Resume audio
-    if(_cs.type==='custom' && _cs.audio){
+    // ── RESUME ──
+    const rtId=_cdPausedRtId||S.cdRt;
+
+    if(_cs && _cs.type==='custom' && _cs.audio){
+      // Resume HTML Audio langsung
       _cs.audio.play().catch(()=>{});
-    } else if(_cs.type==='tone'){
-      // restart tone loop
-      const r=RTS.find(x=>x.id===_cs.id)||RTS[0];
+    } else {
+      // Tone: mulai ulang loop (buat slot baru karena interval sudah di-clear)
+      const r=RTS.find(x=>x.id===rtId)||RTS[0];
       const ctx=getAc();
-      const slot=_cs;
-      function pulse(){
+      // Bersihkan slot lama dulu tanpa trigger stopAll (yang akan hide bar)
+      if(_cs){ _cs.dead=true; _cs=null; }
+      const slot={type:'tone',id:rtId,iv:null,audio:null,dead:false};
+      _cs=slot;
+      function tonePulse(){
         if(slot.dead){ clearInterval(slot.iv); return; }
         const osc=ctx.createOscillator(), gain=ctx.createGain();
         osc.type=r.w; osc.frequency.value=r.f;
@@ -762,13 +773,15 @@ function toggleCdAudio(){
         osc.connect(gain); gain.connect(ctx.destination);
         osc.start(); osc.stop(ctx.currentTime+0.12);
       }
-      pulse();
-      slot.iv=setInterval(pulse,180);
+      tonePulse();
+      slot.iv=setInterval(tonePulse,180);
     }
+
     S.cdAudioPaused=false;
+    _cdPausedRtId=null;
     if(btn) btn.textContent='⏸ Pause';
-    const spans=$('cd-audio-bar').querySelectorAll('.cd-audio-pulse span');
-    spans.forEach(s=>s.style.animationPlayState='running');
+    $('cd-audio-bar').querySelectorAll('.cd-audio-pulse span')
+      .forEach(s=>s.style.animationPlayState='running');
   }
 }
 
@@ -1521,6 +1534,9 @@ function updCdName(){
 $('cd-lbl-in').addEventListener('input',updCdName);
 
 function cdStart(){
+  // Stop any preview / lingering audio first
+  stopCdAudio();
+
   const dateVal=($('cd-tgt-date').value||'').trim();
   const timeVal=($('cd-tgt-time').value||'').trim();
   if(!dateVal||!timeVal){
