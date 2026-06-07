@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>ALLENDER</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -19,8 +19,6 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:4px}
 input,select,textarea,button{font-family:'DM Sans',sans-serif}
-
-/* ═══ LAYOUT ═══ */
 #wrap{display:flex;height:100vh;overflow:hidden}
 
 /* SIDEBAR */
@@ -46,7 +44,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 #topbar{display:none;background:var(--surf);border-bottom:1px solid var(--br);padding:11px 16px;align-items:center;justify-content:space-between}
 .tb-logo{font-size:18px;font-weight:800;color:var(--ac2)}
-#tb-user{display:flex;align-items:center;gap:8px}
+#tb-right{display:flex;align-items:center;gap:10px}
 .tb-clock{font-size:12px;color:var(--tx3);font-family:'DM Mono',monospace}
 #scroll{flex:1;overflow-y:auto;padding:26px}
 
@@ -57,7 +55,8 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .bi-ic{font-size:21px}
 .bi-lb{font-size:10px;font-weight:600;color:var(--tx3)}
 .bi.on .bi-lb{color:var(--ac)}
-.bi-dot{width:4px;height:4px;border-radius:50%;background:var(--ac);margin-top:1px}
+.bi-dot{width:4px;height:4px;border-radius:50%;background:var(--ac);margin-top:1px;display:none}
+.bi.on .bi-dot{display:block}
 
 /* PAGES */
 .pg{display:none}
@@ -71,7 +70,6 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .ch{padding:13px 16px;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .ch-title{font-size:14px;font-weight:700;color:var(--ac2)}
 .ch-sub{font-size:11px;color:var(--tx3);margin-top:2px}
-.cb{padding:16px}
 .vrow{display:flex;align-items:center;padding:11px 16px;gap:10px}
 .vrow+.vrow{border-top:.5px solid var(--br)}
 .vr-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
@@ -95,8 +93,6 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 .dc.has-ev::after{content:'';width:4px;height:4px;background:var(--ac);border-radius:50%;position:absolute;bottom:3px}
 .dc.sel::after{background:rgba(255,255,255,.7)}
 .dc.emp{pointer-events:none}
-
-/* EVENTS */
 .ev-item{display:flex;gap:10px;padding:11px 16px;align-items:flex-start}
 .ev-item+.ev-item{border-top:.5px solid var(--br)}
 .ev-pip{width:3px;border-radius:2px;background:var(--ac);align-self:stretch;min-height:30px;flex-shrink:0}
@@ -117,7 +113,7 @@ textarea.fi{resize:vertical;min-height:75px}
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;font-size:13px;font-weight:600;padding:9px 15px;cursor:pointer;border:none;transition:all .15s}
 .btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .btn-br{background:var(--ac);color:#fff}
 .btn-br:hover:not(:disabled){background:var(--ac2)}
 .btn-full{width:100%;border-radius:12px;font-size:14px;padding:12px}
@@ -159,8 +155,9 @@ textarea.fi{resize:vertical;min-height:75px}
 .ac-big{font-size:36px;font-weight:300;color:var(--ac2);font-family:'DM Mono',monospace;letter-spacing:-1px;line-height:1}
 .ac-tags{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
 .atag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--bg2);color:var(--tx3);border:1px solid var(--br)}
+.date-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--ac);background:var(--acsoft);padding:2px 9px;border-radius:20px;margin-top:4px}
 
-/* COUNTDOWN RINGS */
+/* COUNTDOWN */
 .cd-wrap{display:flex;justify-content:center;gap:18px;padding:22px 12px}
 .cd-unit{display:flex;flex-direction:column;align-items:center;gap:5px}
 .cd-num{font-size:22px;font-weight:700;font-family:'DM Mono',monospace}
@@ -187,8 +184,6 @@ textarea.fi{resize:vertical;min-height:75px}
 .mo-title{font-size:15px;font-weight:700;color:var(--ac2)}
 .mo-close{width:27px;height:27px;border-radius:50%;background:var(--bg2);border:none;cursor:pointer;font-size:13px;color:var(--tx3);display:flex;align-items:center;justify-content:center}
 .mo-body{padding:18px;display:flex;flex-direction:column;gap:12px}
-
-/* GRID */
 .d2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
 /* EMPTY */
@@ -198,7 +193,7 @@ textarea.fi{resize:vertical;min-height:75px}
 .empty-s{font-size:12px;margin-top:3px}
 
 /* FAB */
-.fab{position:fixed;bottom:74px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--ac);border:none;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(139,94,60,.38);display:none;align-items:center;justify-content:center;z-index:50;transition:transform .15s}
+.fab{position:fixed;bottom:74px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--ac);border:none;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(139,94,60,.38);display:none;align-items:center;justify-content:center;z-index:50}
 .fab:active{transform:scale(.91)}
 
 /* SPIN */
@@ -208,7 +203,6 @@ textarea.fi{resize:vertical;min-height:75px}
 @keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 
-/* ═══ RESPONSIVE ═══ */
 @media(max-width:767px){
   #sb{display:none!important}
   #topbar{display:flex!important}
@@ -225,15 +219,13 @@ textarea.fi{resize:vertical;min-height:75px}
   .cd-wrap{gap:10px}
   .cd-num{font-size:18px}
 }
-@media(min-width:768px){
-  .fab{display:none!important}
-}
+@media(min-width:768px){.fab{display:none!important}}
 </style>
 </head>
 <body>
 <div id="wrap">
 
-<!-- ── SIDEBAR ── -->
+<!-- SIDEBAR -->
 <aside id="sb">
   <div class="sb-logo"><h1>ALLENDER</h1><p>Calendar & Alarm System</p></div>
   <div id="sb-user"></div>
@@ -246,16 +238,16 @@ textarea.fi{resize:vertical;min-height:75px}
   <div class="sb-clock" id="sb-clk">--:--:--</div>
 </aside>
 
-<!-- ── MAIN ── -->
+<!-- MAIN -->
 <div id="main">
   <div id="topbar">
     <span class="tb-logo">ALLENDER</span>
-    <div id="tb-user"><span class="tb-clock" id="tb-clk">--:--</span></div>
+    <div id="tb-right"><span class="tb-clock" id="tb-clk">--:--</span></div>
   </div>
 
   <div id="scroll">
 
-    <!-- CALENDAR PAGE -->
+    <!-- CALENDAR -->
     <div class="pg on" id="pg-calendar">
       <div class="ph">
         <div>
@@ -267,7 +259,6 @@ textarea.fi{resize:vertical;min-height:75px}
       <div id="cal-gate"></div>
       <div id="cal-body" style="display:none">
         <div class="d2">
-          <!-- Calendar grid -->
           <div class="card">
             <div class="cal-nav">
               <button class="cal-btn" onclick="prevMo()">‹</button>
@@ -277,7 +268,6 @@ textarea.fi{resize:vertical;min-height:75px}
             <div class="dhds" id="dhds"></div>
             <div class="dgrid" id="dgrid"></div>
           </div>
-          <!-- Events list -->
           <div>
             <div class="card">
               <div class="ch">
@@ -298,7 +288,7 @@ textarea.fi{resize:vertical;min-height:75px}
       </div>
     </div>
 
-    <!-- ALARMS PAGE -->
+    <!-- ALARMS -->
     <div class="pg" id="pg-alarms">
       <div class="ph">
         <div>
@@ -320,7 +310,7 @@ textarea.fi{resize:vertical;min-height:75px}
       </div>
     </div>
 
-    <!-- IMPORT PAGE -->
+    <!-- IMPORT -->
     <div class="pg" id="pg-import">
       <div class="ph">
         <div><div class="ph-title">Import</div><div class="ph-sub">CSV → Google Calendar</div></div>
@@ -336,40 +326,56 @@ textarea.fi{resize:vertical;min-height:75px}
         <input type="file" id="csv-f" accept=".csv,.txt" style="display:none" onchange="loadCsv(this)"/>
       </div>
       <div style="margin-top:14px">
-        <div class="lb">Or paste CSV text</div>
-        <textarea class="fi" rows="4" placeholder="Meeting,2026-06-15T09:00,2026-06-15T10:00,Weekly sync" oninput="pasteCsv(this.value)"></textarea>
+        <div class="lb">Or paste CSV</div>
+        <textarea class="fi" rows="4" placeholder="Meeting,2026-06-15T09:00,2026-06-15T10:00,Weekly" oninput="pasteCsv(this.value)"></textarea>
       </div>
       <div id="imp-st"></div>
       <div id="imp-prev" style="display:none"></div>
     </div>
 
-    <!-- COUNTDOWN PAGE -->
+    <!-- COUNTDOWN -->
     <div class="pg" id="pg-countdown">
       <div class="ph">
-        <div><div class="ph-title">Countdown</div><div class="ph-sub">Track time to any event</div></div>
+        <div><div class="ph-title">Countdown</div><div class="ph-sub">Hitung mundur ke event apapun</div></div>
       </div>
+
+      <!-- Display card -->
       <div class="card" style="margin-bottom:14px">
         <div id="cd-name" style="text-align:center;font-size:21px;font-weight:700;color:var(--ac2);padding:18px 18px 0;display:none"></div>
-        <div id="cd-stxt" style="text-align:center;font-size:13px;color:var(--tx3);padding:7px 18px 0">Set a target below to start</div>
+        <div id="cd-stxt" style="text-align:center;font-size:13px;color:var(--tx3);padding:10px 18px 0">Isi target di bawah lalu tekan Mulai</div>
         <div class="cd-wrap" id="cd-rings"></div>
-        <div id="cd-end-msg" style="text-align:center;padding:0 16px 10px;font-size:14px;font-weight:700;color:var(--red);display:none">⏰ Time's up!</div>
+        <div id="cd-end-msg" style="display:none;text-align:center;padding:0 16px 10px;font-size:15px;font-weight:700;color:var(--red)">⏰ Waktu habis!</div>
         <div style="display:flex;gap:9px;padding:0 15px 15px">
-          <button class="btn btn-br" style="flex:1" id="cd-s" onclick="cdStart()">Start</button>
-          <button class="btn btn-gh" style="flex:1" id="cd-p" onclick="cdPause()" disabled>Pause</button>
-          <button class="btn btn-gh" style="flex:1" onclick="cdReset()">Reset</button>
+          <button class="btn btn-br" style="flex:1" id="cd-btn-start" onclick="cdStart()">▶ Mulai</button>
+          <button class="btn btn-gh" style="flex:1" id="cd-btn-pause" onclick="cdPause()">⏸ Pause</button>
+          <button class="btn btn-gh" style="flex:1" onclick="cdReset()">↺ Reset</button>
         </div>
       </div>
-      <div class="g2" style="margin-bottom:11px">
-        <div><div class="lb">Target Date & Time</div><input class="fi" type="datetime-local" id="cd-tgt" oninput="cdReset()"/></div>
-        <div><div class="lb">Event Name</div><input class="fi" id="cd-lbl" placeholder="e.g. Ujian Nasional" oninput="updCdName()"/></div>
+
+      <!-- Config card -->
+      <div class="card">
+        <div class="ch"><div class="ch-title">⚙️ Konfigurasi</div></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div class="g2">
+            <div>
+              <div class="lb">Target Tanggal & Waktu *</div>
+              <input class="fi" type="datetime-local" id="cd-tgt"/>
+            </div>
+            <div>
+              <div class="lb">Nama Event</div>
+              <input class="fi" id="cd-lbl-in" placeholder="e.g. Ujian Nasional"/>
+            </div>
+          </div>
+          <div>
+            <div class="lb">Ringtone Alarm</div>
+            <div id="cd-rts" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:4px"></div>
+          </div>
+        </div>
       </div>
-      <div class="lb">Alarm Ringtone</div>
-      <div id="cd-rts" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:2px"></div>
     </div>
 
-  </div><!-- end #scroll -->
+  </div><!-- end scroll -->
 
-  <!-- BOTTOM NAV -->
   <div id="bnav">
     <div class="bn-wrap">
       <button class="bi on" data-tab="calendar"><div class="bi-ic">📅</div><div class="bi-lb">Calendar</div><div class="bi-dot"></div></button>
@@ -383,8 +389,8 @@ textarea.fi{resize:vertical;min-height:75px}
 </div>
 </div>
 
-<!-- ══ EVENT MODAL ══ -->
-<div class="ov" id="mo-event" style="display:none" onclick="bgClose(event,'mo-event')">
+<!-- EVENT MODAL -->
+<div class="ov" id="mo-event" style="display:none" onclick="if(event.target===this)closeMo('mo-event')">
   <div class="mo">
     <div class="mh-handle"></div>
     <div class="mo-head">
@@ -393,41 +399,50 @@ textarea.fi{resize:vertical;min-height:75px}
     </div>
     <div class="mo-body">
       <div class="fg">
-        <div class="lb">Event Title *</div>
-        <input class="fi" id="ev-title" placeholder="e.g. Team Meeting"/>
+        <div class="lb">Judul Event *</div>
+        <input class="fi" id="ev-title" placeholder="e.g. Rapat Tim"/>
       </div>
       <div class="g2">
-        <div class="fg"><div class="lb">Start Time</div><input class="fi" type="time" id="ev-start" value="09:00"/></div>
-        <div class="fg"><div class="lb">End Time</div><input class="fi" type="time" id="ev-end" value="10:00"/></div>
+        <div class="fg"><div class="lb">Waktu Mulai</div><input class="fi" type="time" id="ev-start" value="09:00"/></div>
+        <div class="fg"><div class="lb">Waktu Selesai</div><input class="fi" type="time" id="ev-end" value="10:00"/></div>
       </div>
       <div class="fg">
-        <div class="lb">Reminders</div>
+        <div class="lb">Reminder</div>
         <div id="ev-rems"></div>
-        <button class="btn-lk" onclick="addRem()">+ Add reminder</button>
+        <button class="btn-lk" onclick="addRem()">+ Tambah reminder</button>
       </div>
       <div id="ev-mo-st"></div>
-      <button class="btn btn-br btn-full" id="ev-save-btn" onclick="saveEvent()">
-        Save to Google Calendar
-      </button>
+      <button class="btn btn-br btn-full" id="ev-save-btn" onclick="saveEvent()">Simpan ke Google Calendar</button>
     </div>
   </div>
 </div>
 
-<!-- ══ ALARM MODAL ══ -->
-<div class="ov" id="mo-alarm" style="display:none" onclick="bgClose(event,'mo-alarm')">
+<!-- ALARM MODAL -->
+<div class="ov" id="mo-alarm" style="display:none" onclick="if(event.target===this)closeMo('mo-alarm')">
   <div class="mo">
     <div class="mh-handle"></div>
     <div class="mo-head">
-      <span class="mo-title">New Alarm</span>
+      <span class="mo-title">Alarm Baru</span>
       <button class="mo-close" onclick="closeMo('mo-alarm')">✕</button>
     </div>
     <div class="mo-body">
       <div class="g2">
-        <div class="fg"><div class="lb">Time</div><input class="fi" type="time" id="al-time" value="07:00" oninput="updAlBase()"/></div>
+        <div class="fg"><div class="lb">Waktu</div><input class="fi" type="time" id="al-time" value="07:00"/></div>
         <div class="fg"><div class="lb">Label</div><input class="fi" id="al-lbl" placeholder="e.g. Bangun tidur"/></div>
       </div>
+
+      <!-- Tipe alarm -->
       <div class="fg">
-        <div class="lb">Repeat Days</div>
+        <div class="lb">Tipe Alarm</div>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button class="btn btn-br btn-sm" id="al-t-rep" onclick="setAlType('repeat')" style="flex:1">🔁 Hari Berulang</button>
+          <button class="btn btn-gh btn-sm" id="al-t-date" onclick="setAlType('date')" style="flex:1">📅 Tanggal Spesifik</button>
+        </div>
+      </div>
+
+      <!-- Panel repeat -->
+      <div id="al-rep-panel" class="fg">
+        <div class="lb">Ulangi Hari</div>
         <div class="chips" id="al-days">
           <button class="chip" onclick="this.classList.toggle('on')">Su</button>
           <button class="chip" onclick="this.classList.toggle('on')">Mo</button>
@@ -437,16 +452,24 @@ textarea.fi{resize:vertical;min-height:75px}
           <button class="chip" onclick="this.classList.toggle('on')">Fr</button>
           <button class="chip" onclick="this.classList.toggle('on')">Sa</button>
         </div>
+        <div style="margin-top:10px">
+          <div class="lb">Interval <span style="font-size:10px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--tx3)">(opsional — beberapa alarm sekaligus)</span></div>
+          <div id="al-base-lbl" style="padding:9px 12px;background:var(--bg2);border-radius:9px;font-size:13px;color:var(--tx3);margin-bottom:6px">Base: 07:00</div>
+          <div id="al-ints"></div>
+          <button class="btn-lk" onclick="addInt()">+ Tambah interval</button>
+        </div>
       </div>
-      <div class="fg">
-        <div class="lb">Intervals <span style="font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--tx3)">(multiple alarms from base time)</span></div>
-        <div id="al-base" class="fi" style="color:var(--tx3);margin-bottom:6px">Base: 07:00</div>
-        <div id="al-ints"></div>
-        <button class="btn-lk" onclick="addInt()">+ Add interval</button>
+
+      <!-- Panel date -->
+      <div id="al-date-panel" class="fg" style="display:none">
+        <div class="lb">Pilih Tanggal *</div>
+        <input class="fi" type="date" id="al-date"/>
+        <div style="font-size:11px;color:var(--tx3);margin-top:5px">Alarm berbunyi sekali pada tanggal & waktu yang dipilih</div>
       </div>
+
       <div class="fg">
         <div class="lb">Ringtone</div>
-        <div id="al-rts" style="display:flex;gap:7px;flex-wrap:wrap"></div>
+        <div id="al-rts" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:4px"></div>
       </div>
       <button class="btn btn-br btn-full" onclick="saveAlarm()">Set Alarm</button>
     </div>
@@ -454,18 +477,19 @@ textarea.fi{resize:vertical;min-height:75px}
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════
+// ═══ STATE ═══
 const S={
   tab:'calendar',signedIn:false,user:null,
   vy:new Date().getFullYear(),vm:new Date().getMonth(),vd:new Date().getDate(),
   events:[],alarms:[],custRt:[],
   alRt:'beep',cdRt:'beep',
-  cdRun:false,cdTarget:null,cdRem:null,cdDone:false,
+  cdRun:false,cdTarget:0,cdRem:0,cdDone:false,
   impRows:[]
 };
-let cdTimer=null, reminders=[{off:15}], alInts=[{off:0}];
+let cdTimer=null;
+let reminders=[{off:15}];
+let alInts=[{off:0}];
+let alType='repeat';
 
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -480,63 +504,69 @@ const pad=n=>String(n).padStart(2,'0');
 const $=id=>document.getElementById(id);
 const dim=(y,m)=>new Date(y,m+1,0).getDate();
 
-// ═══════════════════════════════════════════════════
-// CLOCK
-// ═══════════════════════════════════════════════════
+// ═══ CLOCK ═══
 function tick(){
   const n=new Date();
   $('sb-clk').textContent=`${pad(n.getHours())}:${pad(n.getMinutes())}:${pad(n.getSeconds())}`;
   $('tb-clk').textContent=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
+  // check alarms
   if(n.getSeconds()===0){
     const ts=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
-    S.alarms.filter(a=>a.active&&a.time===ts).forEach(a=>playRt(a.rt));
+    const today=`${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;
+    S.alarms.forEach(a=>{
+      if(!a.active) return;
+      if(a.type==='date'){
+        if(a.date===today && a.time===ts) playRt(a.rt);
+      } else {
+        if(a.time===ts) playRt(a.rt);
+      }
+    });
   }
 }
-setInterval(tick,1000);tick();
+setInterval(tick,1000); tick();
 
-// ═══════════════════════════════════════════════════
-// TABS
-// ═══════════════════════════════════════════════════
+// ═══ TABS ═══
 function goTab(t){
   S.tab=t;
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   $('pg-'+t).classList.add('on');
   document.querySelectorAll('.si').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
-  document.querySelectorAll('.bi').forEach(b=>{
-    const on=b.dataset.tab===t;
-    b.classList.toggle('on',on);
-    const d=b.querySelector('.bi-dot');
-    if(d)d.style.display=on?'block':'none';
-  });
+  document.querySelectorAll('.bi').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
   $('fab').style.display=(t==='calendar'&&S.signedIn)||t==='alarms'?'flex':'none';
 }
 document.querySelectorAll('.si,.bi').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.tab)));
-
 function fabClick(){
-  if(S.tab==='calendar')openMo('mo-event');
-  else if(S.tab==='alarms')openMo('mo-alarm');
+  if(S.tab==='calendar') openMo('mo-event');
+  else if(S.tab==='alarms') openMo('mo-alarm');
 }
 
-// ═══════════════════════════════════════════════════
-// MODAL
-// ═══════════════════════════════════════════════════
+// ═══ MODAL ═══
 function openMo(id){
   $(id).style.display='flex';
   document.body.style.overflow='hidden';
   if(id==='mo-event'){
-    $('ev-mo-title').textContent=`New Event · ${MS[S.vm]} ${S.vd}`;
+    $('ev-mo-title').textContent=`Event Baru · ${MS[S.vm]} ${S.vd}`;
     $('ev-mo-st').innerHTML='';
+    $('ev-title').value='';
+    $('ev-save-btn').disabled=false;
+    $('ev-save-btn').textContent='Simpan ke Google Calendar';
+  }
+  if(id==='mo-alarm'){
+    $('al-time').value='07:00';
+    $('al-lbl').value='';
+    $('al-date').value='';
+    alInts=[{off:0}]; renderAlInts();
+    alType='repeat'; setAlType('repeat');
+    $('al-days').querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));
+    $('al-base-lbl').textContent='Base: 07:00';
   }
 }
 function closeMo(id){$(id).style.display='none';document.body.style.overflow='';}
-function bgClose(e,id){if(e.target===e.currentTarget)closeMo(id);}
 
-// ═══════════════════════════════════════════════════
-// AUDIO
-// ═══════════════════════════════════════════════════
-let ac=null;
+// ═══ AUDIO ═══
+let actx=null;
 const caMap={};
-function getAc(){if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();return ac;}
+function getAc(){if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();return actx;}
 function playTone(f,w,d){
   const c=getAc(),o=c.createOscillator(),g=c.createGain();
   o.type=w;o.frequency.value=f;
@@ -553,14 +583,22 @@ function playRt(id){
   const r=RTS.find(x=>x.id===id)||RTS[0];
   let i=0;const iv=setInterval(()=>{playTone(r.f,r.w,.12);if(++i>=5)clearInterval(iv);},180);
 }
-function mkRtGrid(el,selId,cb){
+function mkRtGrid(el,selId,onPick){
   if(!el)return;
-  el.innerHTML=[...RTS,...S.custRt].map(r=>`<button class="rt${r.id===selId?' on':''}" onclick="(${cb.toString()})('${r.id}',this)">${r.isC?'🎵 ':''}${r.label}</button>`).join('');
+  el.innerHTML=[...RTS,...S.custRt].map(r=>`
+    <button class="rt${r.id===selId?' on':''}" data-rtid="${r.id}">${r.isC?'🎵 ':''}${r.label}</button>
+  `).join('');
+  el.querySelectorAll('.rt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      el.querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));
+      btn.classList.add('on');
+      onPick(btn.dataset.rtid);
+      playRt(btn.dataset.rtid);
+    });
+  });
 }
 
-// ═══════════════════════════════════════════════════
-// GOOGLE AUTH
-// ═══════════════════════════════════════════════════
+// ═══ GOOGLE AUTH ═══
 let tclient=null,gReady=false,gisReady=false;
 const CLIENT_ID='469599972152-m9dotqvj2k76t9p3nvorf6m86k7q8hmm.apps.googleusercontent.com';
 const SCOPE='https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.profile email';
@@ -578,7 +616,7 @@ window.gisCb=function(){
   tclient=google.accounts.oauth2.initTokenClient({
     client_id:CLIENT_ID,scope:SCOPE,
     callback:async resp=>{
-      if(resp.error){showSt('cal-st','err','Sign-in failed: '+resp.error);return;}
+      if(resp.error){showSt('cal-st','err','Sign-in gagal: '+resp.error);return;}
       sessionStorage.setItem('gtok',JSON.stringify(gapi.client.getToken()));
       S.signedIn=true;
       await loadProfile();
@@ -591,11 +629,8 @@ window.gisCb=function(){
 function onBothReady(){
   const tok=sessionStorage.getItem('gtok');
   if(tok){
-    try{
-      gapi.client.setToken(JSON.parse(tok));
-      S.signedIn=true;
-      loadProfile().then(onSignedIn);
-    }catch(e){showGate();}
+    try{gapi.client.setToken(JSON.parse(tok));S.signedIn=true;loadProfile().then(onSignedIn);}
+    catch(e){showGate();}
   } else showGate();
 }
 
@@ -604,7 +639,7 @@ function showGate(){
   <div class="auth-sc">
     <div class="auth-ico">📅</div>
     <div class="auth-title">ALLENDER</div>
-    <div class="auth-sub">Sambungkan Google Calendar untuk membaca dan mengelola event secara real-time langsung dari browser kamu.</div>
+    <div class="auth-sub">Sambungkan Google Calendar untuk membaca dan mengelola event secara real-time.</div>
     <button class="g-btn" onclick="doSignIn()" id="g-signin-btn">
       <svg width="20" height="20" viewBox="0 0 24 24">
         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -625,13 +660,15 @@ function doSignIn(){
 }
 
 function signOut(){
-  const tok=gapi.client.getToken();
-  if(tok)google.accounts.oauth2.revoke(tok.access_token,()=>{});
-  gapi.client.setToken(null);
+  try{
+    const tok=gapi.client.getToken();
+    if(tok) google.accounts.oauth2.revoke(tok.access_token,()=>{});
+    gapi.client.setToken(null);
+  }catch(e){}
   sessionStorage.removeItem('gtok');
   S.signedIn=false;S.user=null;S.events=[];
   $('sb-user').innerHTML='';$('sb-user').style.display='none';
-  renderTbUser();
+  renderTbRight();
   $('cal-body').style.display='none';
   $('btn-new-ev').style.display='none';
   $('cal-sub').textContent='Sign in to sync your events';
@@ -640,10 +677,7 @@ function signOut(){
 }
 
 async function loadProfile(){
-  try{
-    const r=await gapi.client.request({path:'https://www.googleapis.com/oauth2/v1/userinfo'});
-    S.user=r.result;
-  }catch(e){}
+  try{const r=await gapi.client.request({path:'https://www.googleapis.com/oauth2/v1/userinfo'});S.user=r.result;}catch(e){}
 }
 
 function onSignedIn(){
@@ -651,41 +685,37 @@ function onSignedIn(){
   $('cal-body').style.display='block';
   $('btn-new-ev').style.display='inline-flex';
   $('cal-sub').textContent='Connected to Google Calendar ✓';
-  if(S.tab==='calendar')$('fab').style.display='flex';
-  renderSbUser();
-  renderTbUser();
-  renderCal();
-  fetchEvents();
+  if(S.tab==='calendar') $('fab').style.display='flex';
+  renderSbUser(); renderTbRight();
+  renderCal(); fetchEvents();
 }
 
 function renderSbUser(){
   if(!S.user)return;
   $('sb-user').style.display='block';
   $('sb-user').innerHTML=`<div class="user-row">
-    ${S.user.picture?`<div class="u-av"><img src="${S.user.picture}"/></div>`:`<div class="u-av">${S.user.name[0]}</div>`}
-    <span class="u-name">${S.user.name}</span>
+    ${S.user.picture?`<div class="u-av"><img src="${S.user.picture}" onerror="this.style.display='none'"/></div>`:`<div class="u-av">${(S.user.name||'U')[0]}</div>`}
+    <span class="u-name">${S.user.name||''}</span>
     <button class="u-out" onclick="signOut()">Sign out</button>
   </div>`;
 }
-function renderTbUser(){
-  if(!S.user||!S.signedIn){$('tb-user').innerHTML=`<span class="tb-clock" id="tb-clk">${$('tb-clk')?.textContent||'--:--'}</span>`;return;}
-  $('tb-user').innerHTML=`
-    <span class="tb-clock" id="tb-clk"></span>
-    <div style="display:flex;align-items:center;gap:6px;background:var(--acsoft);border-radius:20px;padding:3px 10px 3px 4px;cursor:pointer" onclick="signOut()">
-      ${S.user.picture?`<img src="${S.user.picture}" style="width:22px;height:22px;border-radius:50%;object-fit:cover"/>`:`<div style="width:22px;height:22px;border-radius:50%;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${S.user.name[0]}</div>`}
-      <span style="font-size:11px;font-weight:600;color:var(--ac)">${S.user.given_name||S.user.name}</span>
-    </div>`;
+
+function renderTbRight(){
+  const clockEl=`<span class="tb-clock" id="tb-clk">${$('tb-clk')?.textContent||'--:--'}</span>`;
+  if(!S.signedIn||!S.user){$('tb-right').innerHTML=clockEl;return;}
+  $('tb-right').innerHTML=`${clockEl}
+  <div style="display:flex;align-items:center;gap:6px;background:var(--acsoft);border-radius:20px;padding:3px 10px 3px 4px;cursor:pointer" onclick="signOut()">
+    ${S.user.picture?`<img src="${S.user.picture}" style="width:22px;height:22px;border-radius:50%;object-fit:cover"/>`:`<div style="width:22px;height:22px;border-radius:50%;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${(S.user.name||'U')[0]}</div>`}
+    <span style="font-size:11px;font-weight:600;color:var(--ac)">${S.user.given_name||S.user.name||''}</span>
+  </div>`;
 }
 
-// Load scripts
-(function(){
+(function loadScripts(){
   const g=document.createElement('script');g.src='https://apis.google.com/js/api.js';g.onload=()=>gapiCb();document.head.appendChild(g);
   const gs=document.createElement('script');gs.src='https://accounts.google.com/gsi/client';gs.onload=()=>gisCb();document.head.appendChild(gs);
 })();
 
-// ═══════════════════════════════════════════════════
-// CALENDAR RENDER
-// ═══════════════════════════════════════════════════
+// ═══ CALENDAR ═══
 function renderCal(){
   $('cal-lbl').textContent=`${MN[S.vm]} ${S.vy}`;
   $('dhds').innerHTML=DAYS.map(d=>`<div class="dhd">${d}</div>`).join('');
@@ -695,7 +725,8 @@ function renderCal(){
   for(let d=1;d<=dm;d++){
     const e=document.createElement('div');
     const isT=d===td.getDate()&&S.vm===td.getMonth()&&S.vy===td.getFullYear();
-    const hasE=S.events.some(ev=>(ev.start?.dateTime||ev.start?.date||'').startsWith(`${S.vy}-${pad(S.vm+1)}-${pad(d)}`));
+    const ds=`${S.vy}-${pad(S.vm+1)}-${pad(d)}`;
+    const hasE=S.events.some(ev=>(ev.start?.dateTime||ev.start?.date||'').startsWith(ds));
     e.className=`dc${isT?' today':''}${d===S.vd?' sel':''}${hasE?' has-ev':''}`;
     e.textContent=d;
     e.addEventListener('click',()=>{S.vd=d;renderCal();renderEvList();});
@@ -713,7 +744,7 @@ function renderEvList(){
   $('ev-cl').textContent=`${evs.length} event${evs.length!==1?'s':''}`;
   const el=$('ev-list');
   if(!evs.length){
-    el.innerHTML=`<div class="empty"><div class="empty-ic">📭</div><div class="empty-t">No events</div><div class="empty-s">Click + to add one</div></div>`;
+    el.innerHTML=`<div class="empty"><div class="empty-ic">📭</div><div class="empty-t">Tidak ada event</div><div class="empty-s">Klik + untuk menambah</div></div>`;
     return;
   }
   el.innerHTML=evs.map(ev=>{
@@ -731,9 +762,6 @@ function renderEvList(){
   }).join('');
 }
 
-// ═══════════════════════════════════════════════════
-// GOOGLE CALENDAR API
-// ═══════════════════════════════════════════════════
 async function fetchEvents(){
   if(!S.signedIn)return;
   $('cal-sp').style.display='inline-block';
@@ -746,7 +774,7 @@ async function fetchEvents(){
     });
     S.events=res.result.items||[];
     renderCal();
-  }catch(e){showSt('cal-st','err','Failed to load events');}
+  }catch(e){showSt('cal-st','err','Gagal memuat event');}
   $('cal-sp').style.display='none';
 }
 
@@ -755,9 +783,9 @@ function renderRems(){
   $('ev-rems').innerHTML=reminders.map((r,i)=>`
     <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
       <select class="fi" style="flex:1" onchange="reminders[${i}].off=+this.value">
-        ${[5,10,15,30,60,120,1440].map(v=>`<option value="${v}"${r.off===v?' selected':''}>${v<60?v+' min':v<1440?(v/60)+' hr':'1 day'} before</option>`).join('')}
+        ${[5,10,15,30,60,120,1440].map(v=>`<option value="${v}"${r.off===v?' selected':''}>${v<60?v+' menit':v<1440?(v/60)+' jam':'1 hari'} sebelum</option>`).join('')}
       </select>
-      ${reminders.length>1?`<button class="btn btn-dn btn-ic" style="flex-shrink:0" onclick="reminders.splice(${i},1);renderRems()">✕</button>`:''}
+      ${reminders.length>1?`<button class="btn btn-dn btn-ic" onclick="reminders.splice(${i},1);renderRems()">✕</button>`:''}
     </div>`).join('');
 }
 function addRem(){reminders.push({off:15});renderRems();}
@@ -765,61 +793,40 @@ renderRems();
 
 // ─── SAVE EVENT ───
 async function saveEvent(){
-  const title=$('ev-title').value.trim();
-  if(!title){
-    showSt('ev-mo-st','err','Please enter an event title');
-    return;
-  }
-  if(!S.signedIn){
-    showSt('ev-mo-st','err','Not signed in to Google Calendar');
-    return;
-  }
+  const title=($('ev-title').value||'').trim();
+  if(!title){showSt('ev-mo-st','err','Judul event tidak boleh kosong!');return;}
+  if(!S.signedIn){showSt('ev-mo-st','err','Belum login ke Google Calendar!');return;}
 
   const btn=$('ev-save-btn');
   btn.disabled=true;
-  btn.innerHTML='<span class="spin"></span> Saving…';
+  btn.innerHTML='<span class="spin"></span> Menyimpan…';
   $('ev-mo-st').innerHTML='';
 
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
   const ds=`${S.vy}-${pad(S.vm+1)}-${pad(S.vd)}`;
-  const startTime=`${ds}T${$('ev-start').value}:00`;
-  const endTime=`${ds}T${$('ev-end').value}:00`;
-
-  const resource={
-    summary:title,
-    start:{dateTime:startTime,timeZone:tz},
-    end:{dateTime:endTime,timeZone:tz},
-    reminders:{
-      useDefault:false,
-      overrides:reminders.map(r=>({method:'popup',minutes:r.off}))
-    }
-  };
 
   try{
     const res=await gapi.client.calendar.events.insert({
       calendarId:'primary',
-      resource:resource
+      resource:{
+        summary:title,
+        start:{dateTime:`${ds}T${$('ev-start').value}:00`,timeZone:tz},
+        end:  {dateTime:`${ds}T${$('ev-end').value}:00`,  timeZone:tz},
+        reminders:{useDefault:false,overrides:reminders.map(r=>({method:'popup',minutes:r.off}))}
+      }
     });
-
     if(res.status===200||res.status===201){
-      showSt('ev-mo-st','ok','✓ Event saved to Google Calendar!');
-      $('ev-title').value='';
-      reminders=[{off:15}];
-      renderRems();
-      setTimeout(()=>{
-        closeMo('mo-event');
-        fetchEvents();
-      },1200);
+      showSt('ev-mo-st','ok','✓ Event berhasil disimpan!');
+      setTimeout(()=>{closeMo('mo-event');fetchEvents();},1000);
     } else {
-      showSt('ev-mo-st','err','Unexpected response. Please try again.');
+      showSt('ev-mo-st','err','Gagal menyimpan. Coba lagi.');
     }
   }catch(err){
-    console.error('Event creation error:',err);
-    const msg=err?.result?.error?.message||'Failed to create event. Check your connection.';
+    const msg=err?.result?.error?.message||'Gagal menyimpan event.';
     showSt('ev-mo-st','err',msg);
   }finally{
     btn.disabled=false;
-    btn.innerHTML='💾 Save to Google Calendar';
+    btn.textContent='Simpan ke Google Calendar';
   }
 }
 
@@ -829,84 +836,110 @@ async function delEvent(id){
     await gapi.client.calendar.events.delete({calendarId:'primary',eventId:id});
     S.events=S.events.filter(e=>e.id!==id);
     renderEvList();renderCal();
-  }catch(e){showSt('cal-st','err','Failed to delete event');}
+  }catch(e){showSt('cal-st','err','Gagal menghapus event');}
 }
 
-// ═══════════════════════════════════════════════════
-// ALARMS
-// ═══════════════════════════════════════════════════
-function updAlBase(){$('al-base').textContent=`Base: ${$('al-time').value||'07:00'}`;}
+// ═══ ALARMS ═══
+function setAlType(t){
+  alType=t;
+  const isRep=t==='repeat';
+  $('al-t-rep').className=`btn btn-sm ${isRep?'btn-br':'btn-gh'}`;
+  $('al-t-date').className=`btn btn-sm ${!isRep?'btn-br':'btn-gh'}`;
+  $('al-rep-panel').style.display=isRep?'block':'none';
+  $('al-date-panel').style.display=isRep?'none':'block';
+}
+
 function renderAlInts(){
   $('al-ints').innerHTML=alInts.slice(1).map((a,i)=>`
     <div style="display:flex;gap:8px;margin-bottom:6px;align-items:center">
-      <input class="fi" type="number" min="1" placeholder="Minutes after base" style="flex:1" value="${a.off||''}" oninput="alInts[${i+1}].off=+this.value"/>
+      <input class="fi" type="number" min="1" placeholder="Menit setelah base" style="flex:1"
+        value="${a.off||''}" oninput="alInts[${i+1}].off=+this.value"/>
       <button class="btn btn-dn btn-ic" onclick="alInts.splice(${i+1},1);renderAlInts()">✕</button>
     </div>`).join('');
 }
 function addInt(){alInts.push({off:''});renderAlInts();}
 
+$('al-time').addEventListener('input',function(){
+  $('al-base-lbl').textContent=`Base: ${this.value||'07:00'}`;
+});
+
 function saveAlarm(){
-  const t=$('al-time').value,lb=$('al-lbl').value;
-  const [hh,mm]=t.split(':').map(Number);
-  const days=[...$('al-days').querySelectorAll('.chip.on')].map(c=>c.textContent);
-  alInts.forEach((a,i)=>{
-    const tot=hh*60+mm+(+a.off||0);
+  const t=$('al-time').value;
+  const lb=($('al-lbl').value||'').trim();
+  if(!t){alert('Pilih waktu alarm!');return;}
+
+  if(alType==='date'){
+    const dateVal=$('al-date').value;
+    if(!dateVal){alert('Pilih tanggal!');return;}
+    const alarmDt=new Date(`${dateVal}T${t}:00`);
+    if(alarmDt<=new Date()){alert('Waktu alarm sudah lewat!');return;}
     S.alarms.push({
-      id:Date.now()+i,
-      time:`${pad(Math.floor(tot/60)%24)}:${pad(tot%60)}`,
-      label:lb||(i===0?'Alarm':`+${a.off||0}min`),
-      rt:S.alRt,days,active:true
+      id:Date.now(),time:t,label:lb||'Alarm',
+      rt:S.alRt,date:dateVal,type:'date',active:true
     });
-  });
-  alInts=[{off:0}];renderAlInts();
-  $('al-time').value='07:00';$('al-lbl').value='';
-  $('al-days').querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));
+  } else {
+    const [hh,mm]=t.split(':').map(Number);
+    const days=[...$('al-days').querySelectorAll('.chip.on')].map(c=>c.textContent);
+    alInts.forEach((a,i)=>{
+      const tot=hh*60+mm+(+a.off||0);
+      S.alarms.push({
+        id:Date.now()+i,
+        time:`${pad(Math.floor(tot/60)%24)}:${pad(tot%60)}`,
+        label:lb||(i===0?'Alarm':`+${a.off||0}min`),
+        rt:S.alRt,days,type:'repeat',active:true
+      });
+    });
+  }
+
   closeMo('mo-alarm');
   renderAlarms();
 }
 
 function renderAlarms(){
-  $('al-sub').textContent=`${S.alarms.filter(a=>a.active).length} active`;
+  const active=S.alarms.filter(a=>a.active).length;
+  $('al-sub').textContent=`${active} aktif`;
   const el=$('al-list');
   if(!S.alarms.length){
-    el.innerHTML=`<div class="card"><div class="empty"><div class="empty-ic">🔕</div><div class="empty-t">No alarms yet</div><div class="empty-s">Tap + to set one</div></div></div>`;
+    el.innerHTML=`<div class="card"><div class="empty"><div class="empty-ic">🔕</div><div class="empty-t">Belum ada alarm</div><div class="empty-s">Tap + untuk set alarm</div></div></div>`;
     return;
   }
   el.innerHTML=S.alarms.map((a,i)=>`
     <div class="ac-card${a.active?'':' off'}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between">
-        <div class="ac-big">${a.time}</div>
-        <button class="tgl${a.active?' on':''}" onclick="S.alarms[${i}].active=!S.alarms[${i}].active;renderAlarms()"></button>
+        <div>
+          <div class="ac-big">${a.time}</div>
+          ${a.type==='date'?`<div class="date-badge">📅 ${a.date}</div>`:''}
+        </div>
+        <button class="tgl${a.active?' on':''}" onclick="toggleAlarm(${i})"></button>
       </div>
-      <div style="font-size:13px;font-weight:500;color:var(--tx2);margin-top:7px">${a.label||'Alarm'}</div>
+      <div style="font-size:13px;font-weight:600;color:var(--tx2);margin-top:7px">${a.label||'Alarm'}</div>
       <div class="ac-tags">
         <span class="atag">${getRtName(a.rt)}</span>
-        <span class="atag">${a.days.length?a.days.join(' '):'Once'}</span>
+        <span class="atag">${a.type==='date'?'Sekali · '+a.date : (a.days&&a.days.length?a.days.join(' '):'Sekali')}</span>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:11px;padding-top:11px;border-top:.5px solid var(--br)">
         <button class="btn btn-gh btn-sm" onclick="playRt('${a.rt}')">▶ Preview</button>
         <div style="flex:1"></div>
-        <button class="btn btn-dn btn-sm" onclick="S.alarms.splice(${i},1);renderAlarms()">Delete</button>
+        <button class="btn btn-dn btn-sm" onclick="deleteAlarm(${i})">Delete</button>
       </div>
     </div>`).join('');
 }
+function toggleAlarm(i){S.alarms[i].active=!S.alarms[i].active;renderAlarms();}
+function deleteAlarm(i){S.alarms.splice(i,1);renderAlarms();}
 function getRtName(id){return[...RTS,...S.custRt].find(r=>r.id===id)?.label||'Beep';}
 renderAlarms();
 
-mkRtGrid($('al-rts'),S.alRt,(id,el)=>{
-  S.alRt=id;
-  el.closest('#al-rts').querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');playRt(id);
-});
+// Ringtone grids
+mkRtGrid($('al-rts'),'beep',id=>{S.alRt=id;});
+mkRtGrid($('cd-rts'),'beep',id=>{S.cdRt=id;});
 
-// ═══════════════════════════════════════════════════
-// CUSTOM RINGTONES
-// ═══════════════════════════════════════════════════
+// ═══ CUSTOM RINGTONES ═══
 function addCustRt(inp){
   const f=inp.files[0];if(!f||!f.type.startsWith('audio/'))return;
   S.custRt.push({id:`c${Date.now()}`,label:f.name.replace(/\.[^.]+$/,''),url:URL.createObjectURL(f),isC:true});
   renderCrtList();inp.value='';
-  refreshRtGrids();
+  mkRtGrid($('al-rts'),S.alRt,id=>{S.alRt=id;});
+  mkRtGrid($('cd-rts'),S.cdRt,id=>{S.cdRt=id;});
 }
 function renderCrtList(){
   $('crt-list').innerHTML=S.custRt.map((r,i)=>`
@@ -914,17 +947,11 @@ function renderCrtList(){
       <div class="vr-ic" style="background:var(--acsoft)">🎵</div>
       <div class="vr-bd"><div class="vr-t">${r.label}</div></div>
       <button class="btn btn-gh btn-sm" onclick="new Audio('${r.url}').play()">▶</button>
-      <button class="btn btn-dn btn-sm" onclick="S.custRt.splice(${i},1);renderCrtList();refreshRtGrids()">✕</button>
+      <button class="btn btn-dn btn-sm" onclick="S.custRt.splice(${i},1);renderCrtList();mkRtGrid($('al-rts'),S.alRt,id=>{S.alRt=id});mkRtGrid($('cd-rts'),S.cdRt,id=>{S.cdRt=id})">✕</button>
     </div>`).join('');
 }
-function refreshRtGrids(){
-  mkRtGrid($('al-rts'),S.alRt,(id,el)=>{S.alRt=id;el.closest('#al-rts').querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));el.classList.add('on');playRt(id);});
-  mkRtGrid($('cd-rts'),S.cdRt,(id,el)=>{S.cdRt=id;el.closest('#cd-rts').querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));el.classList.add('on');playRt(id);});
-}
 
-// ═══════════════════════════════════════════════════
-// IMPORT
-// ═══════════════════════════════════════════════════
+// ═══ IMPORT ═══
 function parseCsv(txt){
   return txt.trim().split('\n').filter(Boolean).map(ln=>{
     const c=ln.split(',').map(s=>s.trim().replace(/^"|"$/g,''));
@@ -934,29 +961,27 @@ function parseCsv(txt){
 function loadCsv(inp){const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=e=>{S.impRows=parseCsv(e.target.result);renderImpPrev();};rd.readAsText(f);}
 function dropCsv(e){e.preventDefault();$('dz').classList.remove('drag');const f=e.dataTransfer.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{S.impRows=parseCsv(ev.target.result);renderImpPrev();};rd.readAsText(f);}
 function pasteCsv(v){S.impRows=parseCsv(v);renderImpPrev();}
-
 function renderImpPrev(){
   $('imp-warn').style.display=S.signedIn?'none':'flex';
   const p=$('imp-prev');
   if(!S.impRows.length){p.style.display='none';return;}
   p.style.display='block';
-  p.innerHTML=`<div class="sec" style="margin-top:14px">${S.impRows.length} events found</div>
+  p.innerHTML=`<div class="sec" style="margin-top:14px">${S.impRows.length} event ditemukan</div>
   <div class="card">${S.impRows.slice(0,5).map((r,i)=>`
     <div class="vrow">
       <div class="vr-ic" style="background:var(--acsoft);color:var(--ac);font-size:12px;font-weight:700">${i+1}</div>
       <div class="vr-bd"><div class="vr-t">${r.title}</div><div class="vr-s">${r.start}${r.end?' → '+r.end:''}</div></div>
     </div>`).join('')}
-    ${S.impRows.length>5?`<div style="padding:9px 16px;font-size:12px;color:var(--tx3)">+${S.impRows.length-5} more…</div>`:''}
+    ${S.impRows.length>5?`<div style="padding:9px 16px;font-size:12px;color:var(--tx3)">+${S.impRows.length-5} lainnya…</div>`:''}
   </div>
   <button class="btn btn-br btn-full" style="margin-top:9px" onclick="doImport()" ${S.signedIn?'':'disabled'}>
-    Import ${S.impRows.length} events to Google Calendar
+    Import ${S.impRows.length} event ke Google Calendar
   </button>`;
 }
-
 async function doImport(){
   if(!S.impRows.length||!S.signedIn)return;
-  showSt('imp-st','inf','Importing…');
-  let ok=0;const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  showSt('imp-st','inf','Mengimpor…');let ok=0;
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
   for(const r of S.impRows){
     try{
       await gapi.client.calendar.events.insert({calendarId:'primary',resource:{
@@ -966,89 +991,136 @@ async function doImport(){
       }});ok++;
     }catch(e){}
   }
-  showSt('imp-st','ok',`Imported ${ok}/${S.impRows.length} events ✓`);
+  showSt('imp-st','ok',`Berhasil import ${ok}/${S.impRows.length} event ✓`);
   S.impRows=[];$('imp-prev').style.display='none';fetchEvents();
 }
 
-// ═══════════════════════════════════════════════════
-// COUNTDOWN
-// ═══════════════════════════════════════════════════
+// ═══ COUNTDOWN ═══
 function fmtMs(ms){
   if(ms<=0)return{d:0,h:0,m:0,s:0};
   const s=Math.floor(ms/1000),mi=Math.floor(s/60),h=Math.floor(mi/60),d=Math.floor(h/24);
   return{d,h:h%24,m:mi%60,s:s%60};
 }
+
 function renderRings(){
-  const dur=S.cdRem!==null?fmtMs(Math.max(0,S.cdRem)):{d:0,h:0,m:0,s:0};
+  const dur=S.cdRem>0?fmtMs(S.cdRem):{d:0,h:0,m:0,s:0};
   const units=[
-    {l:'Days',   v:dur.d,max:365,c:'#8B5E3C'},
-    {l:'Hours',  v:dur.h,max:24, c:'#A0785A'},
-    {l:'Minutes',v:dur.m,max:60, c:'#B89070'},
-    {l:'Seconds',v:dur.s,max:60, c:'#C9A87C'},
+    {l:'Hari',   v:dur.d,max:365,c:'#8B5E3C'},
+    {l:'Jam',    v:dur.h,max:24, c:'#A0785A'},
+    {l:'Menit',  v:dur.m,max:60, c:'#B89070'},
+    {l:'Detik',  v:dur.s,max:60, c:'#C9A87C'},
   ];
   const sz=88;
   $('cd-rings').innerHTML=units.map(u=>{
-    const r=(sz-10)/2,ci=2*Math.PI*r,da=ci*Math.min(1,u.max>0?u.v/u.max:0);
+    const r=(sz-10)/2,ci=2*Math.PI*r;
+    const pct=u.max>0?Math.min(1,u.v/u.max):0;
+    const da=ci*pct;
     const col=S.cdDone?'#C0392B':S.cdRun?u.c:'#DDD0BE';
+    const txcol=S.cdDone?'#C0392B':S.cdRun?u.c:'#6B4E35';
     return`<div class="cd-unit">
       <div style="position:relative;width:${sz}px;height:${sz}px">
         <svg width="${sz}" height="${sz}" style="transform:rotate(-90deg)">
           <circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="#EDE0D0" stroke-width="7"/>
           <circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${col}" stroke-width="7"
             stroke-linecap="round" stroke-dasharray="${da} ${ci}"
-            style="transition:${S.cdRun?'stroke-dasharray 1s linear':'stroke-dasharray .3s'}"/>
+            style="transition:stroke-dasharray ${S.cdRun?'1s linear':'.3s'}"/>
         </svg>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-          <span class="cd-num" style="color:${S.cdDone?'#C0392B':S.cdRun?u.c:'#6B4E35'}">${pad(u.v)}</span>
+          <span class="cd-num" style="color:${txcol}">${pad(u.v)}</span>
         </div>
       </div>
       <span class="cd-lbl">${u.l}</span>
     </div>`;
   }).join('');
 }
-function updCdName(){const v=$('cd-lbl').value.trim();$('cd-name').textContent=v;$('cd-name').style.display=v?'block':'none';}
+
+function updCdName(){
+  const v=($('cd-lbl-in').value||'').trim();
+  $('cd-name').textContent=v;
+  $('cd-name').style.display=v?'block':'none';
+}
+$('cd-lbl-in').addEventListener('input',updCdName);
+
 function cdStart(){
-  const t=$('cd-tgt').value;if(!t)return;
-  S.cdTarget=new Date(t).getTime();
-  const rem=S.cdTarget-Date.now();if(rem<=0)return;
-  S.cdRem=rem;S.cdDone=false;S.cdRun=true;
-  $('cd-s').disabled=true;$('cd-p').disabled=false;
-  $('cd-stxt').textContent=`Until ${new Date(S.cdTarget).toLocaleString()}`;
+  const tval=$('cd-tgt').value;
+  if(!tval){
+    $('cd-stxt').textContent='⚠️ Isi dulu tanggal & waktu target!';
+    $('cd-stxt').style.color='var(--red)';
+    return;
+  }
+  const target=new Date(tval).getTime();
+  if(isNaN(target)){
+    $('cd-stxt').textContent='⚠️ Format tanggal tidak valid!';
+    $('cd-stxt').style.color='var(--red)';
+    return;
+  }
+  const rem=target-Date.now();
+  if(rem<=0){
+    $('cd-stxt').textContent='⚠️ Waktu sudah lewat! Pilih waktu yang akan datang.';
+    $('cd-stxt').style.color='var(--red)';
+    return;
+  }
+
+  clearInterval(cdTimer);
+  S.cdTarget=target;
+  S.cdRem=rem;
+  S.cdDone=false;
+  S.cdRun=true;
+
+  $('cd-btn-start').disabled=true;
+  $('cd-btn-pause').disabled=false;
   $('cd-end-msg').style.display='none';
+  $('cd-stxt').style.color='var(--tx3)';
+  const d=new Date(target);
+  $('cd-stxt').textContent=`Hingga ${d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} pukul ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+  renderRings();
+
   cdTimer=setInterval(()=>{
     S.cdRem=S.cdTarget-Date.now();
     if(S.cdRem<=0){
-      clearInterval(cdTimer);S.cdRun=false;S.cdDone=true;S.cdRem=0;
+      S.cdRem=0;
+      S.cdRun=false;
+      S.cdDone=true;
+      clearInterval(cdTimer);
+      $('cd-btn-start').disabled=false;
+      $('cd-btn-pause').disabled=true;
       $('cd-end-msg').style.display='block';
-      $('cd-stxt').textContent='Completed! 🎉';
-      $('cd-s').disabled=false;$('cd-p').disabled=true;
+      $('cd-stxt').textContent='Selesai! 🎉';
       playRt(S.cdRt);
     }
     renderRings();
   },1000);
 }
-function cdPause(){clearInterval(cdTimer);S.cdRun=false;$('cd-s').disabled=false;$('cd-p').disabled=true;}
+
+function cdPause(){
+  if(!S.cdRun)return;
+  clearInterval(cdTimer);
+  S.cdRun=false;
+  $('cd-btn-start').disabled=false;
+  $('cd-btn-pause').disabled=true;
+  $('cd-stxt').textContent='Di-pause';
+}
+
 function cdReset(){
-  clearInterval(cdTimer);S.cdRun=false;S.cdRem=null;S.cdDone=false;
-  $('cd-s').disabled=false;$('cd-p').disabled=true;
-  $('cd-stxt').textContent='Set a target below to start';
+  clearInterval(cdTimer);
+  S.cdRun=false;S.cdRem=0;S.cdDone=false;S.cdTarget=0;
+  $('cd-btn-start').disabled=false;
+  $('cd-btn-pause').disabled=true;
   $('cd-end-msg').style.display='none';
+  $('cd-stxt').textContent='Isi target di bawah lalu tekan Mulai';
+  $('cd-stxt').style.color='var(--tx3)';
   renderRings();
 }
-renderRings();
-mkRtGrid($('cd-rts'),S.cdRt,(id,el)=>{
-  S.cdRt=id;
-  el.closest('#cd-rts').querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');playRt(id);
-});
 
-// ═══════════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════════
+// init rings
+renderRings();
+
+// ═══ UTILS ═══
 function showSt(cid,type,msg){
   const el=$(cid);if(!el)return;
   el.innerHTML=`<div class="pill ${type}">${msg}</div>`;
-  if(type!=='inf')setTimeout(()=>{if(el.querySelector('.pill')?.textContent===msg)el.innerHTML='';},5000);
+  if(type!=='inf') setTimeout(()=>{try{if(el.querySelector('.pill')?.textContent===msg)el.innerHTML='';}catch(e){}},5000);
 }
 </script>
 </body>
