@@ -163,7 +163,7 @@ textarea.fi{resize:vertical;min-height:75px}
 .cd-num{font-size:22px;font-weight:700;font-family:'DM Mono',monospace}
 .cd-lbl{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:1px;text-transform:uppercase}
 
-/* COUNTDOWN AUDIO BAR — shows while countdown audio is playing */
+/* COUNTDOWN AUDIO BAR */
 #cd-audio-bar{
   display:none;
   align-items:center;gap:10px;
@@ -286,17 +286,6 @@ textarea.fi{resize:vertical;min-height:75px}
   border:none;cursor:pointer;transition:background .15s;
 }
 .cd-box-dismiss:hover{background:var(--ac2)}
-.cd-box-stop{
-  margin-top:8px;width:100%;padding:10px;border-radius:14px;
-  background:var(--surf2);color:var(--tx2);font-size:13px;font-weight:600;
-  border:1px solid var(--br);cursor:pointer;
-}
-.cd-box-stop:hover{background:var(--bg2)}
-.cd-confetti{
-  position:absolute;top:-6px;left:50%;transform:translateX(-50%);
-  font-size:28px;letter-spacing:4px;animation:confettiFade 1.5s ease-out infinite;
-}
-@keyframes confettiFade{0%,100%{opacity:.6}50%{opacity:1}}
 
 @keyframes abPulse{from{transform:scale(1)}to{transform:scale(1.18)}}
 
@@ -421,7 +410,6 @@ textarea.fi{resize:vertical;min-height:75px}
       </div>
       <div id="imp-warn" class="pill warn" style="display:none">⚠️ Sign in to Google Calendar first</div>
 
-      <!-- Format guide -->
       <div class="card" style="margin-bottom:14px">
         <div class="ch"><div class="ch-title">📋 Format CSV</div></div>
         <div style="padding:13px 16px">
@@ -461,7 +449,6 @@ textarea.fi{resize:vertical;min-height:75px}
         <div><div class="ph-title">Countdown</div><div class="ph-sub">Hitung mundur ke event apapun</div></div>
       </div>
 
-      <!-- Display card -->
       <div class="card" style="margin-bottom:14px">
         <div id="cd-name" style="text-align:center;font-size:21px;font-weight:700;color:var(--ac2);padding:18px 18px 0;display:none"></div>
         <div id="cd-stxt" style="text-align:center;font-size:13px;color:var(--tx3);padding:10px 18px 0">Isi target di bawah lalu tekan Mulai</div>
@@ -478,11 +465,11 @@ textarea.fi{resize:vertical;min-height:75px}
             <span></span><span></span><span></span><span></span>
           </div>
           <span class="cd-audio-label">Audio berjalan…</span>
+          <button class="btn btn-gh btn-sm" id="cd-audio-pause-btn" onclick="toggleCdAudio()">⏸ Pause</button>
           <button class="btn btn-dn btn-sm" onclick="stopCdAudio()">⏹ Matikan</button>
         </div>
       </div>
 
-      <!-- Config card -->
       <div class="card">
         <div class="ch"><div class="ch-title">⚙️ Konfigurasi</div></div>
         <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
@@ -536,15 +523,14 @@ textarea.fi{resize:vertical;min-height:75px}
 </div>
 
 <!-- COUNTDOWN DONE BANNER -->
+<!-- PERUBAHAN: hapus emoji confetti di atas, hapus tombol "Matikan Suara" -->
 <div id="cd-banner">
   <div class="cd-box">
-    <div class="cd-confetti">🎉✨🎊</div>
     <span class="cd-box-ring">⏰</span>
     <div class="cd-box-event" id="cd-banner-event"></div>
     <div class="cd-box-done">Waktu Habis!</div>
     <div class="cd-box-sub" id="cd-banner-sub">Countdown selesai.</div>
     <button class="cd-box-dismiss" onclick="dismissCdBanner()">✓ Oke, Mengerti!</button>
-    <button class="cd-box-stop" onclick="stopCdAudio()">⏹ Matikan Suara</button>
   </div>
 </div>
 
@@ -590,7 +576,6 @@ textarea.fi{resize:vertical;min-height:75px}
         <div class="fg"><div class="lb">Label</div><input class="fi" id="al-lbl" placeholder="e.g. Bangun tidur"/></div>
       </div>
 
-      <!-- Tipe alarm -->
       <div class="fg">
         <div class="lb">Tipe Alarm</div>
         <div style="display:flex;gap:8px;margin-top:4px">
@@ -599,7 +584,6 @@ textarea.fi{resize:vertical;min-height:75px}
         </div>
       </div>
 
-      <!-- Panel repeat -->
       <div id="al-rep-panel" class="fg">
         <div class="lb">Ulangi Hari</div>
         <div class="chips" id="al-days">
@@ -619,7 +603,6 @@ textarea.fi{resize:vertical;min-height:75px}
         </div>
       </div>
 
-      <!-- Panel date -->
       <div id="al-date-panel" class="fg" style="display:none">
         <div class="lb">Pilih Tanggal *</div>
         <input class="fi" type="date" id="al-date"/>
@@ -643,13 +626,13 @@ const S={
   events:[],alarms:[],custRt:[],
   alRt:'beep',cdRt:'beep',
   cdRun:false,cdTarget:0,cdRem:0,cdDone:false,
+  cdAudioPaused:false,
   impRows:[]
 };
 let cdTimer=null;
 let reminders=[{off:15}];
 let alInts=[{off:0}];
 let alType='repeat';
-// Track currently firing alarm for snooze
 let _firingAlarm=null;
 
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -702,7 +685,6 @@ function snoozeAlarm(){
   $('alarm-banner').style.display='none';
   stopAll();
   if(!_firingAlarm) return;
-  // Add new one-time alarm 5 minutes from now
   const now=new Date(Date.now()+5*60*1000);
   const snoozeTime=`${pad(now.getHours())}:${pad(now.getMinutes())}`;
   S.alarms.push({
@@ -727,15 +709,67 @@ function showCdBanner(){
   }
   $('cd-banner').style.display='flex';
 }
+
+// PERUBAHAN: dismissCdBanner sekarang juga matikan audio
 function dismissCdBanner(){
   $('cd-banner').style.display='none';
   stopCdAudio();
 }
+
 function stopCdAudio(){
   stopAll();
+  S.cdAudioPaused=false;
   $('cd-audio-bar').classList.remove('visible');
-  // Also hide the banner stop button state — if banner still open keep it open
-  // but we DON'T close the banner here so user can still read the message
+  const btn=$('cd-audio-pause-btn');
+  if(btn) btn.textContent='⏸ Pause';
+}
+
+// Pause/resume audio countdown
+function toggleCdAudio(){
+  const btn=$('cd-audio-pause-btn');
+  if(!_cs) return;
+
+  if(!S.cdAudioPaused){
+    // Pause audio
+    if(_cs.type==='custom' && _cs.audio){
+      _cs.audio.pause();
+    } else if(_cs.type==='tone' && _cs.iv!=null){
+      clearInterval(_cs.iv);
+      _cs.iv=null;
+    }
+    S.cdAudioPaused=true;
+    if(btn) btn.textContent='▶ Lanjut';
+    // Update pulse animation pause
+    const pulse=$('cd-audio-bar').querySelector('.cd-audio-pulse');
+    if(pulse) pulse.style.animationPlayState='paused';
+    const spans=$('cd-audio-bar').querySelectorAll('.cd-audio-pulse span');
+    spans.forEach(s=>s.style.animationPlayState='paused');
+  } else {
+    // Resume audio
+    if(_cs.type==='custom' && _cs.audio){
+      _cs.audio.play().catch(()=>{});
+    } else if(_cs.type==='tone'){
+      // restart tone loop
+      const r=RTS.find(x=>x.id===_cs.id)||RTS[0];
+      const ctx=getAc();
+      const slot=_cs;
+      function pulse(){
+        if(slot.dead){ clearInterval(slot.iv); return; }
+        const osc=ctx.createOscillator(), gain=ctx.createGain();
+        osc.type=r.w; osc.frequency.value=r.f;
+        gain.gain.setValueAtTime(0.28,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.12);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime+0.12);
+      }
+      pulse();
+      slot.iv=setInterval(pulse,180);
+    }
+    S.cdAudioPaused=false;
+    if(btn) btn.textContent='⏸ Pause';
+    const spans=$('cd-audio-bar').querySelectorAll('.cd-audio-pulse span');
+    spans.forEach(s=>s.style.animationPlayState='running');
+  }
 }
 
 // ═══ TABS ═══
@@ -777,10 +811,10 @@ function openMo(id){
 function closeMo(id){$(id).style.display='none';document.body.style.overflow='';}
 
 // ═══════════════════════════════════════════════
-// ═══ AUDIO ENGINE — single-voice, no spam  ════
+// ═══ AUDIO ENGINE                           ════
 // ═══════════════════════════════════════════════
 let actx=null;
-let _cs=null; // currently playing sound slot
+let _cs=null;
 
 function getAc(){
   if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)();
@@ -800,7 +834,6 @@ function stopAll(){
     slot.audio.currentTime=0;
     slot.audio=null;
   }
-  // Hide countdown audio bar when stopped from anywhere
   const bar=$('cd-audio-bar');
   if(bar) bar.classList.remove('visible');
 }
@@ -870,7 +903,6 @@ function _playPreview(id){
   }
 }
 
-/** Play in loop — used by alarm & countdown. Shows cd-audio-bar for countdown. */
 function playRt(id, isCd){
   if(_cs && _cs.id===id && _cs.type==='tone' && !_cs.dead) return;
   if(_cs && _cs.id===id && _cs.type==='custom' && _cs.audio && !_cs.audio.paused) return;
@@ -878,6 +910,9 @@ function playRt(id, isCd){
   const onLoop=isCd?()=>{
     const bar=$('cd-audio-bar');
     if(bar) bar.classList.add('visible');
+    S.cdAudioPaused=false;
+    const btn=$('cd-audio-pause-btn');
+    if(btn) btn.textContent='⏸ Pause';
   }:null;
   if(isCust) _playCustom(id, onLoop);
   else _playTone(id, onLoop);
@@ -1092,20 +1127,16 @@ function renderRems(){
 function addRem(){reminders.push({off:15});renderRems();}
 renderRems();
 
-// ─── SAVE EVENT ───
 async function saveEvent(){
   const title=($('ev-title').value||'').trim();
   if(!title){showSt('ev-mo-st','err','Judul event tidak boleh kosong!');return;}
   if(!S.signedIn){showSt('ev-mo-st','err','Belum login ke Google Calendar!');return;}
-
   const btn=$('ev-save-btn');
   btn.disabled=true;
   btn.innerHTML='<span class="spin"></span> Menyimpan…';
   $('ev-mo-st').innerHTML='';
-
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
   const ds=`${S.vy}-${pad(S.vm+1)}-${pad(S.vd)}`;
-
   try{
     const res=await gapi.client.calendar.events.insert({
       calendarId:'primary',
@@ -1164,10 +1195,14 @@ $('al-time').addEventListener('input',function(){
   $('al-base-lbl').textContent=`Base: ${this.value||'07:00'}`;
 });
 
+// PERUBAHAN: saveAlarm() sekarang stop audio preview sebelum menutup modal
 function saveAlarm(){
   const t=$('al-time').value;
   const lb=($('al-lbl').value||'').trim();
   if(!t){alert('Pilih waktu alarm!');return;}
+
+  // Stop any preview audio that was playing while choosing ringtone
+  stopAll();
 
   if(alType==='date'){
     const dateVal=$('al-date').value;
@@ -1230,7 +1265,6 @@ function deleteAlarm(i){S.alarms.splice(i,1);renderAlarms();}
 function getRtName(id){return[...RTS,...S.custRt].find(r=>r.id===id)?.label||'Beep';}
 renderAlarms();
 
-// Ringtone grids
 mkRtGrid($('al-rts'),'beep',id=>{S.alRt=id;});
 mkRtGrid($('cd-rts'),'beep',id=>{S.cdRt=id;});
 
@@ -1293,32 +1327,16 @@ function updateCrtButtons(activeIdx=-1){
   });
 }
 
-// ═══════════════════════════════════
-// ═══ IMPORT — fixed & robust    ═══
-// ═══════════════════════════════════
-
-/**
- * Smart CSV parser:
- * - handles quoted fields
- * - skips header row if first cell is "title" / "name" / "event"
- * - trims whitespace & BOM
- * - accepts YYYY-MM-DD (adds T00:00 automatically)
- * - accepts YYYY-MM-DDTHH:MM and YYYY-MM-DDTHH:MM:SS
- */
+// ═══ IMPORT ═══
 function parseCsv(txt){
   if(!txt||!txt.trim()) return [];
-  // Strip BOM
   txt=txt.replace(/^\uFEFF/,'');
   const lines=txt.trim().split(/\r?\n/).filter(l=>l.trim());
   if(!lines.length) return [];
-
-  // Detect & skip header row
   let start=0;
   const firstLow=lines[0].split(',')[0].trim().toLowerCase().replace(/^"|"$/g,'');
   if(['title','name','event','subject','judul'].includes(firstLow)) start=1;
-
   return lines.slice(start).map(ln=>{
-    // Quoted-field aware split
     const cols=[];
     let cur='',inQ=false;
     for(let i=0;i<ln.length;i++){
@@ -1328,16 +1346,12 @@ function parseCsv(txt){
       cur+=c;
     }
     cols.push(cur.trim());
-
     const title=(cols[0]||'').trim();
     let start=normalizeDateTime(cols[1]||'');
     let end=normalizeDateTime(cols[2]||'');
     const note=(cols[3]||'').trim();
-
     if(!title||!start) return null;
-    // If end missing, default to start+1hour
     if(!end) end=addHour(start);
-
     return{title,start,end,note};
   }).filter(Boolean);
 }
@@ -1345,14 +1359,11 @@ function parseCsv(txt){
 function normalizeDateTime(s){
   s=(s||'').trim();
   if(!s) return '';
-  // Already has time: 2026-06-15T09:00 or 2026-06-15T09:00:00
-  if(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s)) return s.substring(0,16); // trim to HH:MM
-  // Date only: 2026-06-15 → add T00:00
+  if(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s)) return s.substring(0,16);
   if(/^\d{4}-\d{2}-\d{2}$/.test(s)) return s+'T00:00';
-  // Date+space+time: 2026-06-15 09:00
   const m=s.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})/);
   if(m) return `${m[1]}T${m[2]}`;
-  return s; // pass through, let the API reject if invalid
+  return s;
 }
 
 function addHour(dtStr){
@@ -1366,12 +1377,9 @@ function addHour(dtStr){
 function loadCsv(inp){
   const f=inp.files[0];if(!f)return;
   const rd=new FileReader();
-  rd.onload=e=>{
-    S.impRows=parseCsv(e.target.result);
-    renderImpPrev();
-  };
+  rd.onload=e=>{S.impRows=parseCsv(e.target.result);renderImpPrev();};
   rd.readAsText(f,'UTF-8');
-  inp.value=''; // allow re-selecting same file
+  inp.value='';
 }
 
 function dropCsv(e){
@@ -1397,7 +1405,7 @@ function renderImpPrev(){
     showSt('imp-st','err','Tidak ada baris valid yang ditemukan. Periksa format CSV.');
     return;
   }
-  $('imp-st').innerHTML=''; // clear previous error
+  $('imp-st').innerHTML='';
   p.style.display='block';
   p.innerHTML=`
   <div class="sec" style="margin-top:14px">${S.impRows.length} event ditemukan</div>
@@ -1426,14 +1434,11 @@ function escHtml(s){
 async function doImport(){
   if(!S.impRows.length){showSt('imp-st','err','Tidak ada event untuk diimport.');return;}
   if(!S.signedIn){showSt('imp-st','warn','Login ke Google Calendar dulu!');return;}
-
   const btn=$('imp-do-btn');
   if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span> Mengimpor…';}
   showSt('imp-st','inf',`Mengimpor ${S.impRows.length} event… Harap tunggu.`);
-
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
   let ok=0, fail=0, failMsgs=[];
-
   for(const r of S.impRows){
     try{
       const startDt=r.start.includes('T')?r.start:r.start+'T00:00';
@@ -1455,20 +1460,16 @@ async function doImport(){
       failMsgs.push(`"${r.title}": ${msg}`);
     }
   }
-
   let stType='ok', stMsg=`✓ Berhasil import ${ok}/${S.impRows.length} event ke Google Calendar!`;
   if(ok===0){ stType='err'; stMsg=`✗ Semua ${fail} event gagal diimport.`; }
   else if(fail>0){ stType='warn'; stMsg=`⚠️ ${ok} berhasil, ${fail} gagal.`; }
-
   showSt('imp-st',stType,stMsg);
-
   if(failMsgs.length){
     setTimeout(()=>{
       const el=$('imp-st');
       if(el) el.innerHTML+=`<div style="font-size:11px;color:var(--tx3);margin-top:6px;max-height:80px;overflow-y:auto;background:var(--bg2);border-radius:8px;padding:8px 10px">${failMsgs.slice(0,5).map(m=>`• ${escHtml(m)}`).join('<br>')}</div>`;
     },100);
   }
-
   if(ok>0){ S.impRows=[]; $('imp-prev').style.display='none'; fetchEvents(); }
   if(btn){btn.disabled=false;btn.innerHTML=`☁️ Import lagi`;}
 }
@@ -1522,13 +1523,11 @@ $('cd-lbl-in').addEventListener('input',updCdName);
 function cdStart(){
   const dateVal=($('cd-tgt-date').value||'').trim();
   const timeVal=($('cd-tgt-time').value||'').trim();
-
   if(!dateVal||!timeVal){
     $('cd-stxt').textContent='⚠️ Isi tanggal dan waktu target dulu!';
     $('cd-stxt').style.color='var(--red)';
     return;
   }
-
   const target=new Date(`${dateVal}T${timeVal}:00`).getTime();
   if(isNaN(target)){
     $('cd-stxt').textContent='⚠️ Format tanggal/waktu tidak valid!';
@@ -1541,22 +1540,18 @@ function cdStart(){
     $('cd-stxt').style.color='var(--red)';
     return;
   }
-
   clearInterval(cdTimer);
   S.cdTarget=target;
   S.cdRem=rem;
   S.cdDone=false;
   S.cdRun=true;
-
   $('cd-btn-start').disabled=true;
   $('cd-btn-pause').disabled=false;
   $('cd-end-msg').style.display='none';
   $('cd-stxt').style.color='var(--tx3)';
   const d=new Date(target);
   $('cd-stxt').textContent=`Hingga ${d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} pukul ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-
   renderRings();
-
   cdTimer=setInterval(()=>{
     S.cdRem=S.cdTarget-Date.now();
     if(S.cdRem<=0){
@@ -1566,9 +1561,7 @@ function cdStart(){
       $('cd-btn-pause').disabled=true;
       $('cd-end-msg').style.display='block';
       $('cd-stxt').textContent='Selesai! 🎉';
-      // ── Show countdown banner popup ──
       showCdBanner();
-      // ── Play ringtone (loop) and show audio bar ──
       playRt(S.cdRt, true);
     }
     renderRings();
@@ -1592,12 +1585,10 @@ function cdReset(){
   $('cd-end-msg').style.display='none';
   $('cd-stxt').textContent='Isi target di bawah lalu tekan Mulai';
   $('cd-stxt').style.color='var(--tx3)';
-  // Stop audio & hide audio bar
   stopCdAudio();
   renderRings();
 }
 
-// init rings
 renderRings();
 
 // ═══ UTILS ═══
