@@ -1012,7 +1012,7 @@ function renderCrtList(){
   $('crt-list').innerHTML=S.custRt.map((r,i)=>`
     <div class="vrow" id="crt-row-${i}">
       <div class="vr-ic" style="background:var(--acsoft)">🎵</div>
-      <div class="vr-bd"><div class="vr-t">${r.label}</div><div class="vr-s" id="crt-st-${i}">Diam</div></div>
+      <div class="vr-bd"><div class="vr-t">${r.label}</div><div class="vr-s" id="crt-st-${i}">Idle</div></div>
       <button class="btn btn-gh btn-sm" id="crt-play-${i}" onclick="toggleCrtPlay(${i})">▶</button>
       <button class="btn btn-dn btn-sm" onclick="deleteCrt(${i})">✕</button>
     </div>`).join('');
@@ -1034,7 +1034,7 @@ function toggleCrtPlay(i){
   if(_cs && _cs.type==='custom' && _cs.id===r.id){
     stopAll();
     const pb=$('crt-play-'+i); if(pb) pb.textContent='▶';
-    const st=$('crt-st-'+i);  if(st) st.textContent='Diam';
+    const st=$('crt-st-'+i);  if(st) st.textContent='Idle';
     return;
   }
 
@@ -1046,7 +1046,7 @@ function toggleCrtPlay(i){
   audio.onended=()=>{
     if(_cs===slot) _cs=null;
     const pb=$('crt-play-'+i); if(pb) pb.textContent='▶';
-    const st=$('crt-st-'+i);  if(st) st.textContent='Selesai';
+    const st=$('crt-st-'+i);  if(st) st.textContent='Done';
     updateCrtButtons();
   };
   audio.play().catch(()=>{ if(_cs===slot) _cs=null; });
@@ -1061,10 +1061,10 @@ function updateCrtButtons(activeIdx=-1){
     if(!pb) return;
     if(i===activeIdx){
       pb.textContent='⏸';
-      if(st) st.textContent='Memutar…';
+      if(st) st.textContent='Playing…';
     } else {
       pb.textContent='▶';
-      if(st) st.textContent='Diam';
+      if(st) st.textContent='Idle';
     }
   });
 }
