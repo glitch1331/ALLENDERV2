@@ -287,12 +287,6 @@ textarea.fi{resize:vertical;min-height:75px}
 }
 .ab-dismiss:hover{background:var(--ac2)}
 .ab-dismiss:active{transform:scale(.97)}
-.ab-snooze{
-  margin-top:9px;width:100%;padding:10px;border-radius:14px;
-  background:var(--surf2);color:var(--tx2);font-size:13px;font-weight:600;
-  border:1px solid var(--br);cursor:pointer;transition:background .15s;
-}
-.ab-snooze:hover{background:var(--bg2)}
 
 /* COUNTDOWN DONE BANNER */
 #cd-banner{
@@ -562,7 +556,6 @@ textarea.fi{resize:vertical;min-height:75px}
     <div class="ab-label" id="ab-label">Alarm</div>
     <div class="ab-sub" id="ab-sub"></div>
     <button class="ab-dismiss" onclick="dismissAlarm()">Matikan Alarm</button>
-    <button class="ab-snooze" onclick="snoozeAlarm()">😴 Snooze 5 menit</button>
   </div>
 </div>
 
@@ -743,21 +736,6 @@ function dismissAlarm(){
   $('alarm-banner').style.display='none';
   _firingAlarm=null;
   stopAll();
-}
-function snoozeAlarm(){
-  $('alarm-banner').style.display='none';
-  stopAll();
-  if(!_firingAlarm) return;
-  const now=new Date(Date.now()+5*60*1000);
-  const snoozeTime=`${pad(now.getHours())}:${pad(now.getMinutes())}`;
-  S.alarms.push({
-    id:Date.now(),time:snoozeTime,label:'⏰ Snooze · '+(_firingAlarm.label||'Alarm'),
-    rt:_firingAlarm.rt,type:'date',
-    date:`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`,
-    active:true
-  });
-  _firingAlarm=null;
-  renderAlarms();
 }
 
 // ─── COUNTDOWN BANNER ───
