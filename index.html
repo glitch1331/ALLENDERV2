@@ -358,13 +358,17 @@ textarea.fi{resize:vertical;min-height:75px}
         <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
           <div class="g2">
             <div>
-              <div class="lb">Target Tanggal & Waktu *</div>
-              <input class="fi" type="datetime-local" id="cd-tgt"/>
+              <div class="lb">Tanggal Target *</div>
+              <input class="fi" type="date" id="cd-tgt-date"/>
             </div>
             <div>
-              <div class="lb">Nama Event</div>
-              <input class="fi" id="cd-lbl-in" placeholder="e.g. Ujian Nasional"/>
+              <div class="lb">Waktu Target *</div>
+              <input class="fi" type="time" id="cd-tgt-time" value="08:00"/>
             </div>
+          </div>
+          <div>
+            <div class="lb">Nama Event</div>
+            <input class="fi" id="cd-lbl-in" placeholder="e.g. Ujian Nasional"/>
           </div>
           <div>
             <div class="lb">Ringtone Alarm</div>
@@ -1042,15 +1046,18 @@ function updCdName(){
 $('cd-lbl-in').addEventListener('input',updCdName);
 
 function cdStart(){
-  const tval=$('cd-tgt').value;
-  if(!tval){
-    $('cd-stxt').textContent='⚠️ Isi dulu tanggal & waktu target!';
+  const dateVal=($('cd-tgt-date').value||'').trim();
+  const timeVal=($('cd-tgt-time').value||'').trim();
+
+  if(!dateVal||!timeVal){
+    $('cd-stxt').textContent='⚠️ Isi tanggal dan waktu target dulu!';
     $('cd-stxt').style.color='var(--red)';
     return;
   }
-  const target=new Date(tval).getTime();
+
+  const target=new Date(`${dateVal}T${timeVal}:00`).getTime();
   if(isNaN(target)){
-    $('cd-stxt').textContent='⚠️ Format tanggal tidak valid!';
+    $('cd-stxt').textContent='⚠️ Format tanggal/waktu tidak valid!';
     $('cd-stxt').style.color='var(--red)';
     return;
   }
@@ -1079,9 +1086,7 @@ function cdStart(){
   cdTimer=setInterval(()=>{
     S.cdRem=S.cdTarget-Date.now();
     if(S.cdRem<=0){
-      S.cdRem=0;
-      S.cdRun=false;
-      S.cdDone=true;
+      S.cdRem=0;S.cdRun=false;S.cdDone=true;
       clearInterval(cdTimer);
       $('cd-btn-start').disabled=false;
       $('cd-btn-pause').disabled=true;
