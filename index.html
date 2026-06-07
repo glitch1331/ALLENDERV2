@@ -513,7 +513,6 @@ function tick(){
   const n=new Date();
   $('sb-clk').textContent=`${pad(n.getHours())}:${pad(n.getMinutes())}:${pad(n.getSeconds())}`;
   $('tb-clk').textContent=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
-  // check alarms
   if(n.getSeconds()===0){
     const ts=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
     const today=`${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;
@@ -567,28 +566,90 @@ function openMo(id){
 }
 function closeMo(id){$(id).style.display='none';document.body.style.overflow='';}
 
-// ═══ AUDIO ═══
+// ═══════════════════════════════════════════════
+// ═══ AUDIO ENGINE — single-voice, no spam  ════
+// ═══════════════════════════════════════════════
 let actx=null;
-const caMap={};
-function getAc(){if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();return actx;}
-function playTone(f,w,d){
-  const c=getAc(),o=c.createOscillator(),g=c.createGain();
-  o.type=w;o.frequency.value=f;
-  g.gain.setValueAtTime(.28,c.currentTime);
-  g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);
-  o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+d);
+// _cs = currently playing sound slot
+// { type:'tone'|'custom', id:string, iv:intervalId|null, audio:HTMLAudioElement|null, dead:bool }
+let _cs=null;
+
+function getAc(){
+  if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)();
+  // Resume if suspended (browser autoplay policy)
+  if(actx.state==='suspended') actx.resume();
+  return actx;
 }
-function playRt(id){
-  const cr=S.custRt.find(r=>r.id===id);
-  if(cr){
-    if(caMap[id]){caMap[id].pause();caMap[id].currentTime=0;}
-    caMap[id]=new Audio(cr.url);caMap[id].play().catch(()=>{});return;
+
+/** Kill whatever is currently playing — safe to call any time */
+function stopAll(){
+  if(!_cs) return;
+  const slot=_cs;
+  slot.dead=true;   // signal beep loop to abort
+  _cs=null;
+  if(slot.iv!=null){ clearInterval(slot.iv); slot.iv=null; }
+  if(slot.audio){
+    slot.audio.onended=null;
+    slot.audio.pause();
+    slot.audio.currentTime=0;
+    slot.audio=null;
   }
-  const r=RTS.find(x=>x.id===id)||RTS[0];
-  let i=0;const iv=setInterval(()=>{playTone(r.f,r.w,.12);if(++i>=5)clearInterval(iv);},180);
 }
+
+/** Play built-in oscillator beeps (5 short pulses) */
+function _playTone(id){
+  stopAll();
+  const r=RTS.find(x=>x.id===id)||RTS[0];
+  const ctx=getAc();
+  let n=0;
+  const slot={type:'tone',id,iv:null,audio:null,dead:false};
+  _cs=slot;
+
+  function pulse(){
+    if(slot.dead){ clearInterval(slot.iv); return; }
+    const osc=ctx.createOscillator(), gain=ctx.createGain();
+    osc.type=r.w; osc.frequency.value=r.f;
+    gain.gain.setValueAtTime(0.28,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.12);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime+0.12);
+    if(++n>=5){ clearInterval(slot.iv); slot.iv=null; if(_cs===slot) _cs=null; }
+  }
+
+  pulse();
+  slot.iv=setInterval(pulse,180);
+}
+
+/** Play an uploaded custom audio file */
+function _playCustom(id){
+  const cr=S.custRt.find(r=>r.id===id);
+  if(!cr){ console.warn('Custom ringtone not found:',id); return; }
+  stopAll();
+  const audio=new Audio(cr.url);
+  const slot={type:'custom',id,iv:null,audio,dead:false};
+  _cs=slot;
+  audio.onended=()=>{ if(_cs===slot){ _cs=null; } };
+  audio.play().catch(e=>{ console.warn('Audio play failed:',e); if(_cs===slot) _cs=null; });
+}
+
+/**
+ * Main entry — plays ringtone `id`, automatically stopping whatever was playing.
+ * Anti-spam: calling with the same tone id while it's mid-play is ignored.
+ */
+function playRt(id){
+  // Anti-spam: same tone already playing → skip
+  if(_cs && _cs.id===id && _cs.type==='tone' && !_cs.dead) return;
+  // Same custom audio already playing → skip (don't restart)
+  if(_cs && _cs.id===id && _cs.type==='custom' && _cs.audio && !_cs.audio.paused) return;
+
+  const isCust=S.custRt.some(r=>r.id===id);
+  if(isCust) _playCustom(id);
+  else _playTone(id);
+}
+
+/** Build a ringtone picker grid. onPick(id) is called when user selects. */
 function mkRtGrid(el,selId,onPick){
-  if(!el)return;
+  if(!el) return;
   el.innerHTML=[...RTS,...S.custRt].map(r=>`
     <button class="rt${r.id===selId?' on':''}" data-rtid="${r.id}">${r.isC?'🎵 ':''}${r.label}</button>
   `).join('');
@@ -596,8 +657,9 @@ function mkRtGrid(el,selId,onPick){
     btn.addEventListener('click',()=>{
       el.querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));
       btn.classList.add('on');
-      onPick(btn.dataset.rtid);
-      playRt(btn.dataset.rtid);
+      const picked=btn.dataset.rtid;
+      onPick(picked);   // update S.alRt / S.cdRt
+      playRt(picked);   // preview the ringtone (stops previous)
     });
   });
 }
@@ -945,43 +1007,66 @@ function addCustRt(inp){
   mkRtGrid($('al-rts'),S.alRt,id=>{S.alRt=id;});
   mkRtGrid($('cd-rts'),S.cdRt,id=>{S.cdRt=id;});
 }
+
 function renderCrtList(){
   $('crt-list').innerHTML=S.custRt.map((r,i)=>`
     <div class="vrow" id="crt-row-${i}">
       <div class="vr-ic" style="background:var(--acsoft)">🎵</div>
-      <div class="vr-bd"><div class="vr-t">${r.label}</div><div class="vr-s" id="crt-st-${i}">Idle</div></div>
+      <div class="vr-bd"><div class="vr-t">${r.label}</div><div class="vr-s" id="crt-st-${i}">Diam</div></div>
       <button class="btn btn-gh btn-sm" id="crt-play-${i}" onclick="toggleCrtPlay(${i})">▶</button>
-      <button class="btn btn-dn btn-sm" onclick="stopCrt(${i});S.custRt.splice(${i},1);renderCrtList();mkRtGrid($('al-rts'),S.alRt,id=>{S.alRt=id});mkRtGrid($('cd-rts'),S.cdRt,id=>{S.cdRt=id})">✕</button>
+      <button class="btn btn-dn btn-sm" onclick="deleteCrt(${i})">✕</button>
     </div>`).join('');
 }
 
-function toggleCrtPlay(i){
-  const r=S.custRt[i]; if(!r)return;
-  if(!caMap['crt_'+i]){
-    caMap['crt_'+i]=new Audio(r.url);
-    caMap['crt_'+i].addEventListener('ended',()=>{
-      caMap['crt_'+i]=null;
-      const pb=$('crt-play-'+i); if(pb)pb.textContent='▶';
-      const st=$('crt-st-'+i);  if(st)st.textContent='Done';
-    });
-  }
-  const a=caMap['crt_'+i];
-  const pb=$('crt-play-'+i);
-  const st=$('crt-st-'+i);
-  if(a.paused){
-    a.play().catch(()=>{});
-    if(pb)pb.textContent='⏸';
-    if(st)st.textContent='Playing…';
-  } else {
-    a.pause();
-    if(pb)pb.textContent='▶';
-    if(st)st.textContent='Pause';
-  }
+function deleteCrt(i){
+  // Stop if currently playing
+  if(_cs && _cs.type==='custom' && _cs.id===S.custRt[i]?.id) stopAll();
+  S.custRt.splice(i,1);
+  renderCrtList();
+  mkRtGrid($('al-rts'),S.alRt,id=>{S.alRt=id});
+  mkRtGrid($('cd-rts'),S.cdRt,id=>{S.cdRt=id});
 }
 
-function stopCrt(i){
-  const a=caMap['crt_'+i];
-  if(a){a.pause();a.currentTime=0;caMap['crt_'+i]=null;}
+function toggleCrtPlay(i){
+  const r=S.custRt[i]; if(!r) return;
+
+  // If this track is already playing → stop (toggle off)
+  if(_cs && _cs.type==='custom' && _cs.id===r.id){
+    stopAll();
+    const pb=$('crt-play-'+i); if(pb) pb.textContent='▶';
+    const st=$('crt-st-'+i);  if(st) st.textContent='Diam';
+    return;
+  }
+
+  // Stop whatever is playing, play this one
+  stopAll();
+  const audio=new Audio(r.url);
+  const slot={type:'custom',id:r.id,iv:null,audio,dead:false};
+  _cs=slot;
+  audio.onended=()=>{
+    if(_cs===slot) _cs=null;
+    const pb=$('crt-play-'+i); if(pb) pb.textContent='▶';
+    const st=$('crt-st-'+i);  if(st) st.textContent='Selesai';
+    updateCrtButtons();
+  };
+  audio.play().catch(()=>{ if(_cs===slot) _cs=null; });
+
+  updateCrtButtons(i);
+}
+
+function updateCrtButtons(activeIdx=-1){
+  S.custRt.forEach((_,i)=>{
+    const pb=$('crt-play-'+i);
+    const st=$('crt-st-'+i);
+    if(!pb) return;
+    if(i===activeIdx){
+      pb.textContent='⏸';
+      if(st) st.textContent='Memutar…';
+    } else {
+      pb.textContent='▶';
+      if(st) st.textContent='Diam';
+    }
+  });
 }
 
 // ═══ IMPORT ═══
