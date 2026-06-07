@@ -163,6 +163,31 @@ textarea.fi{resize:vertical;min-height:75px}
 .cd-num{font-size:22px;font-weight:700;font-family:'DM Mono',monospace}
 .cd-lbl{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:1px;text-transform:uppercase}
 
+/* COUNTDOWN AUDIO BAR — shows while countdown audio is playing */
+#cd-audio-bar{
+  display:none;
+  align-items:center;gap:10px;
+  padding:10px 15px;
+  background:var(--acsoft);
+  border-top:1px solid var(--br);
+}
+#cd-audio-bar.visible{display:flex}
+.cd-audio-label{font-size:12px;font-weight:600;color:var(--ac);flex:1}
+.cd-audio-pulse{
+  display:flex;gap:3px;align-items:flex-end;height:18px;
+}
+.cd-audio-pulse span{
+  width:3px;border-radius:2px;background:var(--ac);
+  animation:audioPulse .8s ease-in-out infinite;
+}
+.cd-audio-pulse span:nth-child(2){animation-delay:.15s}
+.cd-audio-pulse span:nth-child(3){animation-delay:.3s}
+.cd-audio-pulse span:nth-child(4){animation-delay:.45s}
+@keyframes audioPulse{
+  0%,100%{height:4px;opacity:.4}
+  50%{height:14px;opacity:1}
+}
+
 /* DROPZONE */
 .dz{border:1.5px dashed var(--br2);border-radius:14px;padding:34px 20px;text-align:center;cursor:pointer;background:var(--surf);transition:all .2s}
 .dz:hover,.dz.drag{border-color:var(--ac);background:var(--acsoft)}
@@ -215,6 +240,7 @@ textarea.fi{resize:vertical;min-height:75px}
 }
 .ab-time{font-size:48px;font-weight:300;font-family:'DM Mono',monospace;color:var(--ac2);line-height:1;letter-spacing:-2px}
 .ab-label{font-size:16px;font-weight:700;color:var(--tx2);margin-top:8px}
+.ab-sub{font-size:12px;color:var(--tx3);margin-top:5px}
 .ab-dismiss{
   margin-top:22px;width:100%;padding:14px;border-radius:14px;
   background:var(--ac);color:#fff;font-size:15px;font-weight:700;
@@ -222,6 +248,56 @@ textarea.fi{resize:vertical;min-height:75px}
 }
 .ab-dismiss:hover{background:var(--ac2)}
 .ab-dismiss:active{transform:scale(.97)}
+.ab-snooze{
+  margin-top:9px;width:100%;padding:10px;border-radius:14px;
+  background:var(--surf2);color:var(--tx2);font-size:13px;font-weight:600;
+  border:1px solid var(--br);cursor:pointer;transition:background .15s;
+}
+.ab-snooze:hover{background:var(--bg2)}
+
+/* COUNTDOWN DONE BANNER */
+#cd-banner{
+  position:fixed;inset:0;z-index:998;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(44,26,14,.6);backdrop-filter:blur(8px);
+  animation:fadeIn .3s;
+}
+.cd-box{
+  background:var(--surf);border:2px solid var(--ac);border-radius:24px;
+  padding:36px 32px 28px;text-align:center;max-width:340px;width:92%;
+  box-shadow:0 20px 60px rgba(44,26,14,.3);animation:scaleIn .3s;
+  position:relative;
+}
+.cd-box-ring{
+  font-size:60px;margin-bottom:8px;
+  animation:cdRingAnim .5s ease-in-out infinite alternate;
+  display:block;
+}
+@keyframes cdRingAnim{
+  from{transform:rotate(-12deg) scale(1)}
+  to{transform:rotate(12deg) scale(1.1)}
+}
+.cd-box-event{font-size:13px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.cd-box-done{font-size:22px;font-weight:800;color:var(--ac2);letter-spacing:-.3px}
+.cd-box-sub{font-size:13px;color:var(--tx3);margin-top:6px;line-height:1.6}
+.cd-box-dismiss{
+  margin-top:24px;width:100%;padding:14px;border-radius:14px;
+  background:var(--ac);color:#fff;font-size:15px;font-weight:700;
+  border:none;cursor:pointer;transition:background .15s;
+}
+.cd-box-dismiss:hover{background:var(--ac2)}
+.cd-box-stop{
+  margin-top:8px;width:100%;padding:10px;border-radius:14px;
+  background:var(--surf2);color:var(--tx2);font-size:13px;font-weight:600;
+  border:1px solid var(--br);cursor:pointer;
+}
+.cd-box-stop:hover{background:var(--bg2)}
+.cd-confetti{
+  position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  font-size:28px;letter-spacing:4px;animation:confettiFade 1.5s ease-out infinite;
+}
+@keyframes confettiFade{0%,100%{opacity:.6}50%{opacity:1}}
+
 @keyframes abPulse{from{transform:scale(1)}to{transform:scale(1.18)}}
 
 /* SPIN */
@@ -344,18 +420,36 @@ textarea.fi{resize:vertical;min-height:75px}
         <div><div class="ph-title">Import</div><div class="ph-sub">CSV → Google Calendar</div></div>
       </div>
       <div id="imp-warn" class="pill warn" style="display:none">⚠️ Sign in to Google Calendar first</div>
+
+      <!-- Format guide -->
+      <div class="card" style="margin-bottom:14px">
+        <div class="ch"><div class="ch-title">📋 Format CSV</div></div>
+        <div style="padding:13px 16px">
+          <div style="font-size:12px;color:var(--tx3);margin-bottom:8px">Kolom yang didukung (header opsional):</div>
+          <code style="display:block;background:var(--bg2);border-radius:8px;padding:10px 12px;font-size:11px;font-family:'DM Mono',monospace;color:var(--tx2);line-height:1.8">
+            title, start, end, note<br>
+            Rapat Tim, 2026-06-15T09:00, 2026-06-15T10:00, Weekly<br>
+            Ujian, 2026-06-20T08:00, 2026-06-20T12:00,
+          </code>
+          <div style="font-size:11px;color:var(--tx3);margin-top:8px">• <b>start/end</b>: format ISO 8601 — <code style="background:var(--bg2);padding:1px 5px;border-radius:4px">YYYY-MM-DDTHH:MM</code><br>
+          • Kolom <b>note</b> opsional<br>
+          • Baris pertama bisa berupa header atau langsung data</div>
+        </div>
+      </div>
+
       <div class="dz" id="dz" onclick="document.getElementById('csv-f').click()"
         ondragover="event.preventDefault();this.classList.add('drag')"
         ondragleave="this.classList.remove('drag')"
         ondrop="dropCsv(event)">
         <div style="font-size:34px;margin-bottom:9px">📄</div>
-        <div style="font-size:14px;font-weight:700;color:var(--tx2);margin-bottom:3px">Drop CSV or tap to browse</div>
-        <div style="font-size:12px;color:var(--tx3)">Columns: title, start (ISO), end, note</div>
+        <div style="font-size:14px;font-weight:700;color:var(--tx2);margin-bottom:3px">Drop CSV atau tap untuk browse</div>
+        <div style="font-size:12px;color:var(--tx3)">Kolom: title, start (ISO), end, note</div>
         <input type="file" id="csv-f" accept=".csv,.txt" style="display:none" onchange="loadCsv(this)"/>
       </div>
       <div style="margin-top:14px">
-        <div class="lb">Or paste CSV</div>
-        <textarea class="fi" rows="4" placeholder="Meeting,2026-06-15T09:00,2026-06-15T10:00,Weekly" oninput="pasteCsv(this.value)"></textarea>
+        <div class="lb">Atau paste CSV</div>
+        <textarea class="fi" rows="5" id="csv-paste" placeholder="Rapat Tim,2026-06-15T09:00,2026-06-15T10:00,Weekly&#10;Ujian,2026-06-20T08:00,2026-06-20T12:00,"></textarea>
+        <button class="btn btn-gh btn-sm" style="margin-top:6px" onclick="pasteCsv(document.getElementById('csv-paste').value)">Parse CSV</button>
       </div>
       <div id="imp-st"></div>
       <div id="imp-prev" style="display:none"></div>
@@ -372,11 +466,19 @@ textarea.fi{resize:vertical;min-height:75px}
         <div id="cd-name" style="text-align:center;font-size:21px;font-weight:700;color:var(--ac2);padding:18px 18px 0;display:none"></div>
         <div id="cd-stxt" style="text-align:center;font-size:13px;color:var(--tx3);padding:10px 18px 0">Isi target di bawah lalu tekan Mulai</div>
         <div class="cd-wrap" id="cd-rings"></div>
-        <div id="cd-end-msg" style="display:none;text-align:center;padding:0 16px 10px;font-size:15px;font-weight:700;color:var(--red)">⏰ Waktu habis!</div>
+        <div id="cd-end-msg" style="display:none;text-align:center;padding:0 16px 4px;font-size:14px;font-weight:700;color:var(--red)">⏰ Waktu habis!</div>
         <div style="display:flex;gap:9px;padding:0 15px 15px">
           <button class="btn btn-br" style="flex:1" id="cd-btn-start" onclick="cdStart()">▶ Mulai</button>
-          <button class="btn btn-gh" style="flex:1" id="cd-btn-pause" onclick="cdPause()">⏸ Pause</button>
+          <button class="btn btn-gh" style="flex:1" id="cd-btn-pause" onclick="cdPause()" disabled>⏸ Pause</button>
           <button class="btn btn-gh" style="flex:1" onclick="cdReset()">↺ Reset</button>
+        </div>
+        <!-- AUDIO BAR — shows when countdown audio is playing -->
+        <div id="cd-audio-bar">
+          <div class="cd-audio-pulse">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <span class="cd-audio-label">Audio berjalan…</span>
+          <button class="btn btn-dn btn-sm" onclick="stopCdAudio()">⏹ Matikan</button>
         </div>
       </div>
 
@@ -427,7 +529,22 @@ textarea.fi{resize:vertical;min-height:75px}
     <span class="ab-pulse">⏰</span>
     <div class="ab-time" id="ab-time">--:--</div>
     <div class="ab-label" id="ab-label">Alarm</div>
+    <div class="ab-sub" id="ab-sub"></div>
     <button class="ab-dismiss" onclick="dismissAlarm()">Matikan Alarm</button>
+    <button class="ab-snooze" onclick="snoozeAlarm()">😴 Snooze 5 menit</button>
+  </div>
+</div>
+
+<!-- COUNTDOWN DONE BANNER -->
+<div id="cd-banner">
+  <div class="cd-box">
+    <div class="cd-confetti">🎉✨🎊</div>
+    <span class="cd-box-ring">⏰</span>
+    <div class="cd-box-event" id="cd-banner-event"></div>
+    <div class="cd-box-done">Waktu Habis!</div>
+    <div class="cd-box-sub" id="cd-banner-sub">Countdown selesai.</div>
+    <button class="cd-box-dismiss" onclick="dismissCdBanner()">✓ Oke, Mengerti!</button>
+    <button class="cd-box-stop" onclick="stopCdAudio()">⏹ Matikan Suara</button>
   </div>
 </div>
 
@@ -532,6 +649,8 @@ let cdTimer=null;
 let reminders=[{off:15}];
 let alInts=[{off:0}];
 let alType='repeat';
+// Track currently firing alarm for snooze
+let _firingAlarm=null;
 
 const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -567,14 +686,56 @@ setInterval(tick,1000); tick();
 
 // ─── ALARM BANNER ───
 function showAlarmBanner(alarm){
+  _firingAlarm=alarm;
   $('ab-time').textContent=alarm.time;
   $('ab-label').textContent=alarm.label||'Alarm';
+  $('ab-sub').textContent=alarm.type==='date'?`📅 ${alarm.date}`:'';
   $('alarm-banner').style.display='flex';
   playRt(alarm.rt);
 }
 function dismissAlarm(){
   $('alarm-banner').style.display='none';
+  _firingAlarm=null;
   stopAll();
+}
+function snoozeAlarm(){
+  $('alarm-banner').style.display='none';
+  stopAll();
+  if(!_firingAlarm) return;
+  // Add new one-time alarm 5 minutes from now
+  const now=new Date(Date.now()+5*60*1000);
+  const snoozeTime=`${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  S.alarms.push({
+    id:Date.now(),time:snoozeTime,label:'⏰ Snooze · '+(_firingAlarm.label||'Alarm'),
+    rt:_firingAlarm.rt,type:'date',
+    date:`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`,
+    active:true
+  });
+  _firingAlarm=null;
+  renderAlarms();
+}
+
+// ─── COUNTDOWN BANNER ───
+function showCdBanner(){
+  const evName=($('cd-lbl-in').value||'').trim();
+  $('cd-banner-event').textContent=evName||'Countdown';
+  $('cd-banner-event').style.display=evName?'block':'none';
+  const target=S.cdTarget;
+  if(target){
+    const d=new Date(target);
+    $('cd-banner-sub').textContent=`Tepat ${d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} pukul ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+  $('cd-banner').style.display='flex';
+}
+function dismissCdBanner(){
+  $('cd-banner').style.display='none';
+  stopCdAudio();
+}
+function stopCdAudio(){
+  stopAll();
+  $('cd-audio-bar').classList.remove('visible');
+  // Also hide the banner stop button state — if banner still open keep it open
+  // but we DON'T close the banner here so user can still read the message
 }
 
 // ═══ TABS ═══
@@ -619,22 +780,18 @@ function closeMo(id){$(id).style.display='none';document.body.style.overflow='';
 // ═══ AUDIO ENGINE — single-voice, no spam  ════
 // ═══════════════════════════════════════════════
 let actx=null;
-// _cs = currently playing sound slot
-// { type:'tone'|'custom', id:string, iv:intervalId|null, audio:HTMLAudioElement|null, dead:bool }
-let _cs=null;
+let _cs=null; // currently playing sound slot
 
 function getAc(){
   if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)();
-  // Resume if suspended (browser autoplay policy)
   if(actx.state==='suspended') actx.resume();
   return actx;
 }
 
-/** Kill whatever is currently playing — safe to call any time */
 function stopAll(){
   if(!_cs) return;
   const slot=_cs;
-  slot.dead=true;   // signal beep loop to abort
+  slot.dead=true;
   _cs=null;
   if(slot.iv!=null){ clearInterval(slot.iv); slot.iv=null; }
   if(slot.audio){
@@ -643,10 +800,12 @@ function stopAll(){
     slot.audio.currentTime=0;
     slot.audio=null;
   }
+  // Hide countdown audio bar when stopped from anywhere
+  const bar=$('cd-audio-bar');
+  if(bar) bar.classList.remove('visible');
 }
 
-/** Play built-in oscillator beeps — loops forever until stopAll() */
-function _playTone(id){
+function _playTone(id, onLoop){
   stopAll();
   const r=RTS.find(x=>x.id===id)||RTS[0];
   const ctx=getAc();
@@ -662,13 +821,12 @@ function _playTone(id){
     osc.connect(gain); gain.connect(ctx.destination);
     osc.start(); osc.stop(ctx.currentTime+0.12);
   }
-
   pulse();
   slot.iv=setInterval(pulse,180);
+  if(onLoop) onLoop();
 }
 
-/** Play an uploaded custom audio file — loops forever until stopAll() */
-function _playCustom(id){
+function _playCustom(id, onLoop){
   const cr=S.custRt.find(r=>r.id===id);
   if(!cr){ console.warn('Custom ringtone not found:',id); return; }
   stopAll();
@@ -677,9 +835,9 @@ function _playCustom(id){
   const slot={type:'custom',id,iv:null,audio,dead:false};
   _cs=slot;
   audio.play().catch(e=>{ console.warn('Audio play failed:',e); if(_cs===slot) _cs=null; });
+  if(onLoop) onLoop();
 }
 
-/** Preview only — plays once (5 beeps or single play), does NOT loop */
 function _playPreview(id){
   stopAll();
   const isCust=S.custRt.some(r=>r.id===id);
@@ -712,19 +870,19 @@ function _playPreview(id){
   }
 }
 
-/**
- * Main entry — plays ringtone `id` in LOOP mode (alarm/countdown).
- * Anti-spam: calling with the same sound while it's playing is ignored.
- */
-function playRt(id){
+/** Play in loop — used by alarm & countdown. Shows cd-audio-bar for countdown. */
+function playRt(id, isCd){
   if(_cs && _cs.id===id && _cs.type==='tone' && !_cs.dead) return;
   if(_cs && _cs.id===id && _cs.type==='custom' && _cs.audio && !_cs.audio.paused) return;
   const isCust=S.custRt.some(r=>r.id===id);
-  if(isCust) _playCustom(id);
-  else _playTone(id);
+  const onLoop=isCd?()=>{
+    const bar=$('cd-audio-bar');
+    if(bar) bar.classList.add('visible');
+  }:null;
+  if(isCust) _playCustom(id, onLoop);
+  else _playTone(id, onLoop);
 }
 
-/** Build a ringtone picker grid. onPick(id) is called when user selects. */
 function mkRtGrid(el,selId,onPick){
   if(!el) return;
   el.innerHTML=[...RTS,...S.custRt].map(r=>`
@@ -735,8 +893,8 @@ function mkRtGrid(el,selId,onPick){
       el.querySelectorAll('.rt').forEach(b=>b.classList.remove('on'));
       btn.classList.add('on');
       const picked=btn.dataset.rtid;
-      onPick(picked);       // update S.alRt / S.cdRt
-      _playPreview(picked); // preview once (no loop)
+      onPick(picked);
+      _playPreview(picked);
     });
   });
 }
@@ -1096,7 +1254,6 @@ function renderCrtList(){
 }
 
 function deleteCrt(i){
-  // Stop if currently playing
   if(_cs && _cs.type==='custom' && _cs.id===S.custRt[i]?.id) stopAll();
   S.custRt.splice(i,1);
   renderCrtList();
@@ -1106,16 +1263,12 @@ function deleteCrt(i){
 
 function toggleCrtPlay(i){
   const r=S.custRt[i]; if(!r) return;
-
-  // If this track is already playing → stop (toggle off)
   if(_cs && _cs.type==='custom' && _cs.id===r.id){
     stopAll();
     const pb=$('crt-play-'+i); if(pb) pb.textContent='▶';
     const st=$('crt-st-'+i);  if(st) st.textContent='Idle';
     return;
   }
-
-  // Stop whatever is playing, play this one
   stopAll();
   const audio=new Audio(r.url);
   const slot={type:'custom',id:r.id,iv:null,audio,dead:false};
@@ -1127,7 +1280,6 @@ function toggleCrtPlay(i){
     updateCrtButtons();
   };
   audio.play().catch(()=>{ if(_cs===slot) _cs=null; });
-
   updateCrtButtons(i);
 }
 
@@ -1136,58 +1288,189 @@ function updateCrtButtons(activeIdx=-1){
     const pb=$('crt-play-'+i);
     const st=$('crt-st-'+i);
     if(!pb) return;
-    if(i===activeIdx){
-      pb.textContent='⏸';
-      if(st) st.textContent='Playing…';
-    } else {
-      pb.textContent='▶';
-      if(st) st.textContent='Idle';
-    }
+    if(i===activeIdx){pb.textContent='⏸';if(st) st.textContent='Playing…';}
+    else{pb.textContent='▶';if(st) st.textContent='Idle';}
   });
 }
 
-// ═══ IMPORT ═══
+// ═══════════════════════════════════
+// ═══ IMPORT — fixed & robust    ═══
+// ═══════════════════════════════════
+
+/**
+ * Smart CSV parser:
+ * - handles quoted fields
+ * - skips header row if first cell is "title" / "name" / "event"
+ * - trims whitespace & BOM
+ * - accepts YYYY-MM-DD (adds T00:00 automatically)
+ * - accepts YYYY-MM-DDTHH:MM and YYYY-MM-DDTHH:MM:SS
+ */
 function parseCsv(txt){
-  return txt.trim().split('\n').filter(Boolean).map(ln=>{
-    const c=ln.split(',').map(s=>s.trim().replace(/^"|"$/g,''));
-    return{title:c[0]||'Untitled',start:c[1]||'',end:c[2]||'',note:c[3]||''};
-  }).filter(r=>r.title&&r.start);
+  if(!txt||!txt.trim()) return [];
+  // Strip BOM
+  txt=txt.replace(/^\uFEFF/,'');
+  const lines=txt.trim().split(/\r?\n/).filter(l=>l.trim());
+  if(!lines.length) return [];
+
+  // Detect & skip header row
+  let start=0;
+  const firstLow=lines[0].split(',')[0].trim().toLowerCase().replace(/^"|"$/g,'');
+  if(['title','name','event','subject','judul'].includes(firstLow)) start=1;
+
+  return lines.slice(start).map(ln=>{
+    // Quoted-field aware split
+    const cols=[];
+    let cur='',inQ=false;
+    for(let i=0;i<ln.length;i++){
+      const c=ln[i];
+      if(c==='"'){ inQ=!inQ; continue; }
+      if(c===','&&!inQ){ cols.push(cur.trim()); cur=''; continue; }
+      cur+=c;
+    }
+    cols.push(cur.trim());
+
+    const title=(cols[0]||'').trim();
+    let start=normalizeDateTime(cols[1]||'');
+    let end=normalizeDateTime(cols[2]||'');
+    const note=(cols[3]||'').trim();
+
+    if(!title||!start) return null;
+    // If end missing, default to start+1hour
+    if(!end) end=addHour(start);
+
+    return{title,start,end,note};
+  }).filter(Boolean);
 }
-function loadCsv(inp){const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=e=>{S.impRows=parseCsv(e.target.result);renderImpPrev();};rd.readAsText(f);}
-function dropCsv(e){e.preventDefault();$('dz').classList.remove('drag');const f=e.dataTransfer.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{S.impRows=parseCsv(ev.target.result);renderImpPrev();};rd.readAsText(f);}
-function pasteCsv(v){S.impRows=parseCsv(v);renderImpPrev();}
+
+function normalizeDateTime(s){
+  s=(s||'').trim();
+  if(!s) return '';
+  // Already has time: 2026-06-15T09:00 or 2026-06-15T09:00:00
+  if(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s)) return s.substring(0,16); // trim to HH:MM
+  // Date only: 2026-06-15 → add T00:00
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s)) return s+'T00:00';
+  // Date+space+time: 2026-06-15 09:00
+  const m=s.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})/);
+  if(m) return `${m[1]}T${m[2]}`;
+  return s; // pass through, let the API reject if invalid
+}
+
+function addHour(dtStr){
+  try{
+    const d=new Date(dtStr+':00');
+    d.setHours(d.getHours()+1);
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }catch(e){return dtStr;}
+}
+
+function loadCsv(inp){
+  const f=inp.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=e=>{
+    S.impRows=parseCsv(e.target.result);
+    renderImpPrev();
+  };
+  rd.readAsText(f,'UTF-8');
+  inp.value=''; // allow re-selecting same file
+}
+
+function dropCsv(e){
+  e.preventDefault();
+  $('dz').classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(!f)return;
+  const rd=new FileReader();
+  rd.onload=ev=>{S.impRows=parseCsv(ev.target.result);renderImpPrev();};
+  rd.readAsText(f,'UTF-8');
+}
+
+function pasteCsv(v){
+  S.impRows=parseCsv(v);
+  renderImpPrev();
+}
+
 function renderImpPrev(){
   $('imp-warn').style.display=S.signedIn?'none':'flex';
   const p=$('imp-prev');
-  if(!S.impRows.length){p.style.display='none';return;}
+  if(!S.impRows.length){
+    p.style.display='none';
+    showSt('imp-st','err','Tidak ada baris valid yang ditemukan. Periksa format CSV.');
+    return;
+  }
+  $('imp-st').innerHTML=''; // clear previous error
   p.style.display='block';
-  p.innerHTML=`<div class="sec" style="margin-top:14px">${S.impRows.length} event ditemukan</div>
-  <div class="card">${S.impRows.slice(0,5).map((r,i)=>`
+  p.innerHTML=`
+  <div class="sec" style="margin-top:14px">${S.impRows.length} event ditemukan</div>
+  <div class="card">
+    ${S.impRows.slice(0,5).map((r,i)=>`
     <div class="vrow">
       <div class="vr-ic" style="background:var(--acsoft);color:var(--ac);font-size:12px;font-weight:700">${i+1}</div>
-      <div class="vr-bd"><div class="vr-t">${r.title}</div><div class="vr-s">${r.start}${r.end?' → '+r.end:''}</div></div>
+      <div class="vr-bd">
+        <div class="vr-t">${escHtml(r.title)}</div>
+        <div class="vr-s">${r.start}${r.end?' → '+r.end:''}</div>
+        ${r.note?`<div class="vr-s" style="color:var(--tx3)">📝 ${escHtml(r.note)}</div>`:''}
+      </div>
     </div>`).join('')}
     ${S.impRows.length>5?`<div style="padding:9px 16px;font-size:12px;color:var(--tx3)">+${S.impRows.length-5} lainnya…</div>`:''}
   </div>
-  <button class="btn btn-br btn-full" style="margin-top:9px" onclick="doImport()" ${S.signedIn?'':'disabled'}>
-    Import ${S.impRows.length} event ke Google Calendar
+  <button class="btn btn-br btn-full" style="margin-top:9px" id="imp-do-btn"
+    onclick="doImport()" ${S.signedIn?'':'disabled'}>
+    ☁️ Import ${S.impRows.length} event ke Google Calendar
   </button>`;
 }
+
+function escHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 async function doImport(){
-  if(!S.impRows.length||!S.signedIn)return;
-  showSt('imp-st','inf','Mengimpor…');let ok=0;
+  if(!S.impRows.length){showSt('imp-st','err','Tidak ada event untuk diimport.');return;}
+  if(!S.signedIn){showSt('imp-st','warn','Login ke Google Calendar dulu!');return;}
+
+  const btn=$('imp-do-btn');
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span> Mengimpor…';}
+  showSt('imp-st','inf',`Mengimpor ${S.impRows.length} event… Harap tunggu.`);
+
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  let ok=0, fail=0, failMsgs=[];
+
   for(const r of S.impRows){
     try{
-      await gapi.client.calendar.events.insert({calendarId:'primary',resource:{
-        summary:r.title,description:r.note||'',
-        start:{dateTime:r.start.includes('T')?r.start:r.start+'T00:00:00',timeZone:tz},
-        end:{dateTime:r.end.includes('T')?r.end:r.end+'T01:00:00',timeZone:tz}
-      }});ok++;
-    }catch(e){}
+      const startDt=r.start.includes('T')?r.start:r.start+'T00:00';
+      const endDt  =r.end.includes('T')  ?r.end  :r.end  +'T01:00';
+      const res=await gapi.client.calendar.events.insert({
+        calendarId:'primary',
+        resource:{
+          summary:r.title,
+          description:r.note||'',
+          start:{dateTime:startDt+':00',timeZone:tz},
+          end:  {dateTime:endDt  +':00',timeZone:tz},
+        }
+      });
+      if(res.status===200||res.status===201) ok++;
+      else{ fail++; failMsgs.push(`"${r.title}": HTTP ${res.status}`); }
+    }catch(e){
+      fail++;
+      const msg=e?.result?.error?.message||String(e);
+      failMsgs.push(`"${r.title}": ${msg}`);
+    }
   }
-  showSt('imp-st','ok',`Berhasil import ${ok}/${S.impRows.length} event ✓`);
-  S.impRows=[];$('imp-prev').style.display='none';fetchEvents();
+
+  let stType='ok', stMsg=`✓ Berhasil import ${ok}/${S.impRows.length} event ke Google Calendar!`;
+  if(ok===0){ stType='err'; stMsg=`✗ Semua ${fail} event gagal diimport.`; }
+  else if(fail>0){ stType='warn'; stMsg=`⚠️ ${ok} berhasil, ${fail} gagal.`; }
+
+  showSt('imp-st',stType,stMsg);
+
+  if(failMsgs.length){
+    setTimeout(()=>{
+      const el=$('imp-st');
+      if(el) el.innerHTML+=`<div style="font-size:11px;color:var(--tx3);margin-top:6px;max-height:80px;overflow-y:auto;background:var(--bg2);border-radius:8px;padding:8px 10px">${failMsgs.slice(0,5).map(m=>`• ${escHtml(m)}`).join('<br>')}</div>`;
+    },100);
+  }
+
+  if(ok>0){ S.impRows=[]; $('imp-prev').style.display='none'; fetchEvents(); }
+  if(btn){btn.disabled=false;btn.innerHTML=`☁️ Import lagi`;}
 }
 
 // ═══ COUNTDOWN ═══
@@ -1283,7 +1566,10 @@ function cdStart(){
       $('cd-btn-pause').disabled=true;
       $('cd-end-msg').style.display='block';
       $('cd-stxt').textContent='Selesai! 🎉';
-      playRt(S.cdRt);
+      // ── Show countdown banner popup ──
+      showCdBanner();
+      // ── Play ringtone (loop) and show audio bar ──
+      playRt(S.cdRt, true);
     }
     renderRings();
   },1000);
@@ -1306,6 +1592,8 @@ function cdReset(){
   $('cd-end-msg').style.display='none';
   $('cd-stxt').textContent='Isi target di bawah lalu tekan Mulai';
   $('cd-stxt').style.color='var(--tx3)';
+  // Stop audio & hide audio bar
+  stopCdAudio();
   renderRings();
 }
 
@@ -1316,7 +1604,7 @@ renderRings();
 function showSt(cid,type,msg){
   const el=$(cid);if(!el)return;
   el.innerHTML=`<div class="pill ${type}">${msg}</div>`;
-  if(type!=='inf') setTimeout(()=>{try{if(el.querySelector('.pill')?.textContent===msg)el.innerHTML='';}catch(e){}},5000);
+  if(type!=='inf') setTimeout(()=>{try{if(el.querySelector('.pill')?.textContent===msg)el.innerHTML='';}catch(e){}},6000);
 }
 </script>
 </body>
