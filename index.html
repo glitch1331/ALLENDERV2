@@ -15,6 +15,45 @@
   --pale:#EDE0D0;--red:#C0392B;--green:#4A7C59;
   --sb:248px;
 }
+/* DARK MODE */
+body.dark{
+  --bg:#1A1210;--bg2:#231815;--surf:#2A1F1A;--surf2:#322520;
+  --br:#3D2B23;--br2:#5A3D30;
+  --tx:#F0E4D8;--tx2:#C9A882;--tx3:#8A6A52;
+  --ac:#C4895A;--ac2:#E0AA7A;--acsoft:#2E1F16;
+  --pale:#2E2018;--red:#E05C4A;--green:#5A9B6E;
+}
+/* DARK MODE TOGGLE */
+.dm-btn{
+  display:flex;align-items:center;gap:8px;
+  margin:0 12px 10px;padding:9px 12px;
+  border-radius:10px;border:1px solid var(--br);
+  background:none;cursor:pointer;
+  font-size:12px;font-weight:600;color:var(--tx2);
+  transition:all .2s;width:calc(100% - 24px);
+}
+.dm-btn:hover{background:var(--bg2);border-color:var(--br2)}
+.dm-track{
+  width:36px;height:20px;border-radius:10px;
+  background:var(--br2);position:relative;
+  transition:background .25s;flex-shrink:0;margin-left:auto;
+}
+body.dark .dm-track{background:var(--ac)}
+.dm-thumb{
+  width:16px;height:16px;border-radius:50%;background:#fff;
+  position:absolute;top:2px;left:2px;
+  transition:left .25s;box-shadow:0 1px 3px rgba(0,0,0,.3);
+}
+body.dark .dm-thumb{left:18px}
+.dm-btn-tb{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--br);background:none;cursor:pointer;
+  font-size:15px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;color:var(--tx2);
+}
+.dm-btn-tb:hover{background:var(--bg2)}
+body.dark input[type=date]::-webkit-calendar-picker-indicator,
+body.dark input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.7) opacity(.7)}
 html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--tx)}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:4px}
@@ -328,6 +367,11 @@ textarea.fi{resize:vertical;min-height:75px}
     <button class="si" data-tab="import"><span class="si-ico">📥</span>Import</button>
     <button class="si" data-tab="countdown"><span class="si-ico">⏱</span>Countdown</button>
   </nav>
+  <button class="dm-btn" onclick="toggleDark()" id="dm-sb-btn">
+    <span id="dm-sb-ico">🌙</span>
+    <span id="dm-sb-lbl">Dark Mode</span>
+    <div class="dm-track"><div class="dm-thumb"></div></div>
+  </button>
   <div class="sb-clock" id="sb-clk">--:--:--</div>
 </aside>
 
@@ -335,7 +379,7 @@ textarea.fi{resize:vertical;min-height:75px}
 <div id="main">
   <div id="topbar">
     <span class="tb-logo">ALLENDER</span>
-    <div id="tb-right"><span class="tb-clock" id="tb-clk">--:--</span></div>
+    <div id="tb-right"><span class="tb-clock" id="tb-clk">--:--</span><button class="dm-btn-tb" onclick="toggleDark()" id="dm-tb-btn" title="Toggle Dark Mode">🌙</button></div>
   </div>
 
   <div id="scroll">
@@ -619,6 +663,25 @@ textarea.fi{resize:vertical;min-height:75px}
 </div>
 
 <script>
+// ═══ DARK MODE ═══
+(function initDark(){
+  if(localStorage.getItem('allender-dark')==='1') applyDark(true);
+})();
+function applyDark(on){
+  document.body.classList.toggle('dark',on);
+  const ico=document.getElementById('dm-sb-ico');
+  const lbl=document.getElementById('dm-sb-lbl');
+  const tb=document.getElementById('dm-tb-btn');
+  if(ico) ico.textContent=on?'☀️':'🌙';
+  if(lbl) lbl.textContent=on?'Light Mode':'Dark Mode';
+  if(tb)  tb.textContent=on?'☀️':'🌙';
+}
+function toggleDark(){
+  const on=!document.body.classList.contains('dark');
+  applyDark(on);
+  localStorage.setItem('allender-dark',on?'1':'0');
+}
+
 // ═══ STATE ═══
 const S={
   tab:'calendar',signedIn:false,user:null,
