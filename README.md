@@ -1,6 +1,6 @@
 # ALLENDER
-ALLENDER CALENDAR & ALARM SYSTEM
-Live: https://allenderv-2.vercel.app/ 
+ALLENDER CALENDAR & ALARM SYSTEM  
+URL: https://allenderv-2.vercel.app/ 
 
 ALLENDER adalah aplikasi berbasis web yang mengintegrasikan kalender, alarm, dan countdown timer dalam satu platform. Aplikasi ini dirancang untuk membantu pengguna mengelola jadwal, alarm, serta tenggat waktu dengan lebih efisien melalui antarmuka yang sederhana, modern, dan responsif.
 
