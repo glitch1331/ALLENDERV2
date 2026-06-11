@@ -6,7 +6,7 @@
 
 Manage schedules, reminders, deadlines, and Google Calendar events from a single platform.
 
-🌐 **Live Demo:** https://allenderv-2.vercel.app/
+🌐 **Website:** https://allenderv-2.vercel.app/
 
 ![HTML](https://img.shields.io/badge/HTML5-Frontend-orange)
 ![CSS](https://img.shields.io/badge/CSS3-Styling-blue)
@@ -251,7 +251,7 @@ YYYY-MM-DDTHH:MM
 
 ---
 
-# 🌐 Live Demo
+# 🌐 Website
 
 https://allenderv-2.vercel.app/
 
