@@ -69,9 +69,9 @@ Set Alarm:
 1. Buka tab Alarms → klik + New Alarm
 2. Pilih waktu dan label
 3. Pilih tipe:
-  -Hari Berulang (alarm berbunyi setiap hari yang dipilih)
-  -Tanggal Spesifik (alarm berbunyi sekali pada tanggal & waktu tertentu)
-4.Tambah interval untuk set beberapa alarm sekaligus (opsional)
+  - Hari Berulang (alarm berbunyi setiap hari yang dipilih)
+  - Tanggal Spesifik (alarm berbunyi sekali pada tanggal & waktu tertentu)
+4.Tambah interval untuk set beberapa alarm sekaligus (opsional)  
 Contoh:
   - Base: 07:00
   - +15 menit → alarm ke-2 jam 07:15
