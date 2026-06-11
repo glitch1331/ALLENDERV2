@@ -1,4 +1,4 @@
-# ALLENDERV2
+# ALLENDER
 ALLENDER CALENDAR & ALARM SYSTEM
 Live: https://allenderv-2.vercel.app/ 
 FITUR:
