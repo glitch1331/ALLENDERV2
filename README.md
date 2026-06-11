@@ -29,6 +29,7 @@ MANFAAT:
 - Meningkatkan produktivitas dalam mengatur aktivitas sehari-hari.
 
 FITUR:
+
 -CALENDAR:
   - Menampilkan jadwal dalam tampilan kalender bulanan.
   - Menambahkan event baru.
