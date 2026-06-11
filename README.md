@@ -40,8 +40,8 @@ Ujian, 2026-06-20T08:00, 2026-06-20T12:00,
 
 Teknologi:
 HTML + CSS + Vanilla JS
-Google Calendar API v3: untuk baca/tulis event
-Google Identity Services: OAuth 2.0 login
+Google Calendar API: untuk baca/tulis event
+Google Identity Services: OAuth login
 Web Audio API: ringtone built-in (Beep, Chime, Buzz, Retro)
 HTML5 Audio: untuk ringtone custom yang diupload user
 Vercel: hosting web static
