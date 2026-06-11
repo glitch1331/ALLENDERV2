@@ -12,7 +12,7 @@ Manage schedules, reminders, deadlines, and Google Calendar events from a single
 ![CSS](https://img.shields.io/badge/CSS3-Styling-blue)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)
 ![Google Calendar](https://img.shields.io/badge/Google%20Calendar-API-green)
-![Vercel](https://img.shields.io/badge/Vercel-Deployed-black)
+![Vercel](https://img.shields.io/badge/Vercel-Deployed-red)
 
 </div>
 
