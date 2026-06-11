@@ -48,10 +48,9 @@ HTML5 Audio: untuk ringtone custom yang diupload user
 Vercel: hosting web static
 
 Struktur:
-alebder/
-└── alender/
-    ├── index.html     # Seluruh aplikasi (HTML + CSS + JS dalam 1 file)
-    └── vercel.json    # Konfigurasi deploy Vercel
+allender berisi 2 file yaitu
+- index.html (HTML, CSS dan javascript
+- vercel.json  (konfigurasi deploy dari Vercel)
 
 Notes:
 - Data alarm tidak tersimpan jika halaman di-refresh (tersimpan di memori saja)
