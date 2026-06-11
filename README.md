@@ -1,13 +1,64 @@
 # ALLENDER
 ALLENDER CALENDAR & ALARM SYSTEM
 Live: https://allenderv-2.vercel.app/ 
+
+ALLENDER adalah aplikasi berbasis web yang mengintegrasikan kalender, alarm, dan countdown timer dalam satu platform. Aplikasi ini dirancang untuk membantu pengguna mengelola jadwal, alarm, serta tenggat waktu dengan lebih efisien melalui antarmuka yang sederhana, modern, dan responsif.
+
+LATAR BELAKANG:
+Dalam kehidupan sehari-hari, pengguna sering menggunakan beberapa aplikasi berbeda untuk mengelola aktivitas mereka, seperti:
+- Aplikasi kalender untuk mencatat jadwal.
+- Aplikasi alarm untuk pengingat.
+- Aplikasi countdown untuk menghitung mundur menuju suatu acara.
+- Spreadsheet untuk mengelola data jadwal dalam jumlah besar.
+
+Penggunaan banyak aplikasi secara terpisah menyebabkan beberapa kendala, antara lain:
+- Informasi jadwal tersebar di berbagai platform.
+- Pengguna harus memasukkan data yang sama berulang kali.
+- Sulit memantau tenggat waktu dan pengingat dalam satu tampilan.
+- Tidak tersedia fitur impor data jadwal secara jumlah besar.
+
+SOLUSI:
+ALLENDER hadir sebagai solusi dengan menggabungkan fungsi kalender, alarm, countdown timer, dan impor data dalam satu aplikasi terintegrasi.
+Melalui integrasi dengan Google Calendar, pengguna dapat mengelola seluruh aktivitas dan pengingat tanpa perlu berpindah-pindah aplikasi.
+
+MANFAAT:
+- Mengelola jadwal dan pengingat dalam satu aplikasi.
+- Mengurangi penggunaan banyak aplikasi secara bersamaan.
+- Memantau deadline dan acara penting dengan lebih mudah.
+- Mengimpor jadwal dalam jumlah besar secara cepat.
+- Meningkatkan produktivitas dalam mengatur aktivitas sehari-hari.
+
 FITUR:
--CALENDAR: Tampilkan, tambah, dan hapus event Google Calendar secara real-time
--ALARM: Alarm berulang (per hari) atau sekali di tanggal tertentu dengan interval & ringtone custom
--COUNTDOWN: Hitung mundur ke tanggal & waktu target
--IMPORT CSV: Import event secara jumlah besar ke Google Calendar dari file CSV atau paste teks dengan format CSV
--DARK MODE: Toggle Dark/Light mode
--DESKTOP AND MOBILE COMPATIBLE
+-CALENDAR:
+  - Menampilkan jadwal dalam tampilan kalender bulanan.
+  - Menambahkan event baru.
+  - Menghapus event.
+  - Sinkronisasi langsung dengan akun Google Calendar.
+
+-ALARM:
+  - Membuat alarm satu kali.
+  - Membuat alarm berulang (Recurring Alarm).
+  - Memberikan label pada alarm.
+  - Menentukan interval pengingat.
+  - Menggunakan ringtone custom.
+  - Menampilkan notifikasi alarm secara visual.
+
+-COUNTDOWN:
+  - Menghitung mundur menuju tanggal dan waktu tertentu.
+  - Memberikan nama pada countdown.
+  - Menampilkan sisa waktu secara real-time.
+  - Memutar notifikasi ketika countdown selesai.
+
+-IMPORT CSV:
+  - Import jadwal dari file CSV.
+  - Drag & drop file CSV.
+  - Paste data CSV langsung ke web.
+  - Menambahkan event ke Google Calendar secara jumlah besar.
+
+-SIMPLE AND MODERN DESIGN:
+  - Dark and Light Mode
+  - Tampilan sederhana dan mudah digunakan.
+  - Responsive untuk desktop dan mobile
 
 Cara Pakai:
 Fitur Calendar dan Import memerlukan akun Google. Klik Sign in with Google di halaman Calendar. (Email harus terdaftar di Google Cloud Console)
@@ -52,7 +103,7 @@ Vercel: hosting web static
 
 Struktur:
 allender berisi 2 file yaitu
-- index.html (HTML, CSS dan javascript
+- index.html (HTML, CSS dan vanilla JavaScript)
 - vercel.json  (konfigurasi deploy dari Vercel)
 
 Notes:
