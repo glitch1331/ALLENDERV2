@@ -1,47 +1,41 @@
-<p align="center">
-  <img width="180" src="https://cdn-icons-png.flaticon.com/512/747/747310.png">
-</p>
+<div align="center">
 
-<p align="center">
-  Smart Calendar • Alarm • Countdown Management System
-</p>
+# ALLENDER
 
-<p align="center">
-  🌐 https://allenderv-2.vercel.app/
-</p>
+### 📅 Smart Calendar • ⏰ Alarm • ⌛ Countdown Management System
 
----
+Manage schedules, reminders, deadlines, and Google Calendar events from a single platform.
 
-# 📅 ALLENDER
+🌐 **Live Demo:** https://allenderv-2.vercel.app/
 
-ALLENDER adalah aplikasi berbasis web yang mengintegrasikan **Kalender**, **Alarm**, dan **Countdown Timer** dalam satu platform. Aplikasi ini dirancang untuk membantu pengguna mengelola jadwal, alarm, serta tenggat waktu dengan lebih efisien melalui antarmuka yang sederhana, modern, dan responsif.
+![HTML](https://img.shields.io/badge/HTML5-Frontend-orange)
+![CSS](https://img.shields.io/badge/CSS3-Styling-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)
+![Google Calendar](https://img.shields.io/badge/Google%20Calendar-API-green)
+![Vercel](https://img.shields.io/badge/Vercel-Deployed-black)
+
+</div>
 
 ---
 
 ## 📌 Overview
 
-| Informasi     | Detail                                 |
-| ------------- | -------------------------------------- |
-| Nama Aplikasi | ALLENDER                               |
-| Tipe          | Calendar & Alarm System                |
-| Platform      | Web Application                        |
-| URL           | https://allenderv-2.vercel.app/        |
-| Fokus         | Manajemen Jadwal, Alarm, dan Countdown |
-| Integrasi     | Google Calendar                        |
-| Hosting       | Vercel                                 |
+ALLENDER adalah aplikasi berbasis web yang mengintegrasikan **Kalender**, **Alarm**, dan **Countdown Timer** dalam satu platform. Aplikasi ini dirancang untuk membantu pengguna mengelola jadwal, alarm, serta tenggat waktu dengan lebih efisien melalui antarmuka yang sederhana, modern, dan responsif.
 
 ---
 
 ## 🚨 Latar Belakang
 
-Dalam kehidupan sehari-hari, pengguna sering menggunakan beberapa aplikasi berbeda untuk mengelola aktivitas mereka, seperti:
+Dalam kehidupan sehari-hari, pengguna sering menggunakan beberapa aplikasi berbeda untuk mengelola aktivitas mereka.
 
-* 📅 Aplikasi kalender untuk mencatat jadwal.
-* ⏰ Aplikasi alarm untuk pengingat.
-* ⌛ Aplikasi countdown untuk menghitung mundur menuju suatu acara.
-* 📊 Spreadsheet untuk mengelola data jadwal dalam jumlah besar.
+| Aplikasi       | Fungsi                                            |
+| -------------- | ------------------------------------------------- |
+| 📅 Kalender    | Mencatat jadwal dan agenda                        |
+| ⏰ Alarm        | Memberikan pengingat aktivitas penting            |
+| ⌛ Countdown    | Menghitung waktu menuju suatu acara atau deadline |
+| 📊 Spreadsheet | Mengelola data jadwal dalam jumlah besar          |
 
-Penggunaan banyak aplikasi secara terpisah menyebabkan beberapa kendala, antara lain:
+Penggunaan banyak aplikasi secara terpisah menyebabkan beberapa kendala:
 
 * ❌ Informasi jadwal tersebar di berbagai platform.
 * ❌ Pengguna harus memasukkan data yang sama berulang kali.
@@ -76,15 +70,11 @@ Melalui integrasi dengan Google Calendar, pengguna dapat mengelola seluruh aktiv
 
 Dengan menggunakan ALLENDER, pengguna dapat:
 
-✅ Mengelola jadwal dan pengingat dalam satu aplikasi.
-
-✅ Mengurangi penggunaan banyak aplikasi secara bersamaan.
-
-✅ Memantau deadline dan acara penting dengan lebih mudah.
-
-✅ Mengimpor jadwal dalam jumlah besar secara cepat.
-
-✅ Meningkatkan produktivitas dalam mengatur aktivitas sehari-hari.
+* ✅ Mengelola jadwal dan pengingat dalam satu aplikasi.
+* ✅ Mengurangi penggunaan banyak aplikasi secara bersamaan.
+* ✅ Memantau deadline dan acara penting dengan lebih mudah.
+* ✅ Mengimpor jadwal dalam jumlah besar secara cepat.
+* ✅ Meningkatkan produktivitas dalam mengatur aktivitas sehari-hari.
 
 ---
 
@@ -201,7 +191,7 @@ Ujian,2026-06-20T08:00,2026-06-20T12:00,
 
 ---
 
-# ⚙️ Teknologi yang Digunakan
+# ⚙️ Teknologi
 
 ## Frontend
 
@@ -211,8 +201,8 @@ Ujian,2026-06-20T08:00,2026-06-20T12:00,
 
 ## API & Services
 
-* Google Calendar API → baca/tulis event kalender.
-* Google Identity Services → OAuth Login.
+* Google Calendar API → baca dan tulis event kalender.
+* Google Identity Services → OAuth Login Google.
 
 ## Audio
 
@@ -221,7 +211,7 @@ Ujian,2026-06-20T08:00,2026-06-20T12:00,
 
 ## Deployment
 
-* Vercel → Hosting Web Static.
+* Vercel → Hosting aplikasi web statis.
 
 ---
 
@@ -236,8 +226,10 @@ ALLENDER/
 
 ### Keterangan
 
-* `index.html` → HTML, CSS, dan seluruh Vanilla JavaScript aplikasi.
-* `vercel.json` → konfigurasi deployment Vercel.
+| File        | Fungsi                                                  |
+| ----------- | ------------------------------------------------------- |
+| index.html  | Berisi HTML, CSS, dan seluruh logika Vanilla JavaScript |
+| vercel.json | Konfigurasi deployment Vercel                           |
 
 ---
 
@@ -245,13 +237,13 @@ ALLENDER/
 
 * Data alarm tidak tersimpan jika halaman di-refresh (hanya tersimpan di memori browser).
 * Alarm hanya dapat berbunyi selama tab browser masih aktif.
-* Format tanggal menggunakan standar ISO 8601:
+* Format tanggal menggunakan standar ISO 8601.
+
+Contoh:
 
 ```text
 YYYY-MM-DDTHH:MM
 ```
-
-Contoh:
 
 ```text
 2026-06-15T09:00
