@@ -28,15 +28,16 @@ MANFAAT:
 - Mengimpor jadwal dalam jumlah besar secara cepat.
 - Meningkatkan produktivitas dalam mengatur aktivitas sehari-hari.
 
+
 FITUR:
 
--CALENDAR:
+- CALENDAR:
   - Menampilkan jadwal dalam tampilan kalender bulanan.
   - Menambahkan event baru.
   - Menghapus event.
   - Sinkronisasi langsung dengan akun Google Calendar.
 
--ALARM:
+- ALARM:
   - Membuat alarm satu kali.
   - Membuat alarm berulang (Recurring Alarm).
   - Memberikan label pada alarm.
@@ -44,26 +45,25 @@ FITUR:
   - Menggunakan ringtone custom.
   - Menampilkan notifikasi alarm secara visual.
 
--COUNTDOWN:
+- COUNTDOWN:
   - Menghitung mundur menuju tanggal dan waktu tertentu.
   - Memberikan nama pada countdown.
   - Menampilkan sisa waktu secara real-time.
   - Memutar notifikasi ketika countdown selesai.
 
--IMPORT CSV:
+- IMPORT CSV:
   - Import jadwal dari file CSV.
   - Drag & drop file CSV.
   - Paste data CSV langsung ke web.
   - Menambahkan event ke Google Calendar secara jumlah besar.
 
--SIMPLE AND MODERN DESIGN:
+- SIMPLE AND MODERN DESIGN:
   - Dark and Light Mode
   - Tampilan sederhana dan mudah digunakan.
   - Responsive untuk desktop dan mobile
 
 Cara Pakai:
-Fitur Calendar dan Import memerlukan akun Google. Klik Sign in with Google di halaman Calendar. (Email harus terdaftar di Google Cloud Console)
-Alarm dan Countdown bisa dipakai tanpa login.
+Fitur Calendar dan Import memerlukan akun Google. Klik Sign in with Google di halaman Calendar. Alarm dan Countdown bisa dipakai tanpa login.
 
 Set Alarm:
 1. Buka tab Alarms → klik + New Alarm
