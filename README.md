@@ -17,16 +17,16 @@ Set Alarm:
 1. Buka tab Alarms → klik + New Alarm
 2. Pilih waktu dan label
 3. Pilih tipe:
-  -Hari Berulang — alarm berbunyi setiap hari yang dipilih (Su/Mo/Tu/We/Th/Fr/Sa)
-  -Tanggal Spesifik — alarm berbunyi sekali pada tanggal & waktu tertentu
-4.Opsional: tambah interval untuk set beberapa alarm sekaligus dari satu waktu base
+  -Hari Berulang (alarm berbunyi setiap hari yang dipilih)
+  -Tanggal Spesifik (alarm berbunyi sekali pada tanggal & waktu tertentu)
+4.Tambah interval untuk set beberapa alarm sekaligus (opsional)
 5. Pilih ringtone → klik Set Alarm
 
 Countdown:
 1. Buka tab Countdown
 2. Isi tanggal target, waktu target, dan nama event
 3. Pilih ringtone yang akan berbunyi saat selesai
-4. Klik ▶ Mulai
+4. Klik Mulai
 
 Import CSV:
 1. Buka tab Import
@@ -37,7 +37,6 @@ Format:
 title, start, end, note
 Rapat Tim, 2026-06-15T09:00, 2026-06-15T10:00, Weekly
 Ujian, 2026-06-20T08:00, 2026-06-20T12:00,
-Note: start / end dalam format ISO 8601: YYYY-MM-DDTHH:MM
 
 Teknologi:
 HTML + CSS + Vanilla JS: tidak ada framework
@@ -55,4 +54,4 @@ allender berisi 2 file yaitu
 Notes:
 - Data alarm tidak tersimpan jika halaman di-refresh (tersimpan di memori saja)
 - Alarm hanya berbunyi selama tab browser aktif
-- Saat status OAuth masih Testing, hanya email yang terdaftar sebagai test user yang bisa login — tambahkan email di Google Cloud Console → Audience → Test Users
+- Note: start / end dalam format ISO 8601: YYYY-MM-DDTHH:MM
