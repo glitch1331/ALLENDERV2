@@ -20,6 +20,10 @@ Set Alarm:
   -Hari Berulang (alarm berbunyi setiap hari yang dipilih)
   -Tanggal Spesifik (alarm berbunyi sekali pada tanggal & waktu tertentu)
 4.Tambah interval untuk set beberapa alarm sekaligus (opsional)
+Contoh:
+  - Base: 07:00
+  - +15 menit → alarm ke-2 jam 07:15
+  - +30 menit → alarm ke-3 jam 07:30
 5. Pilih ringtone → klik Set Alarm
 
 Countdown:
