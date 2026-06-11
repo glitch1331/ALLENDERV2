@@ -39,8 +39,8 @@ Rapat Tim, 2026-06-15T09:00, 2026-06-15T10:00, Weekly
 Ujian, 2026-06-20T08:00, 2026-06-20T12:00,
 
 Teknologi:
-HTML + CSS + Vanilla JS: tidak ada framework
-Google Calendar API v3:untuk baca/tulis event
+HTML + CSS + Vanilla JS
+Google Calendar API v3: untuk baca/tulis event
 Google Identity Services: OAuth 2.0 login
 Web Audio API: ringtone built-in (Beep, Chime, Buzz, Retro)
 HTML5 Audio: untuk ringtone custom yang diupload user
