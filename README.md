@@ -33,7 +33,7 @@ Dalam kehidupan sehari-hari, pengguna sering menggunakan beberapa aplikasi berbe
 | 📅 Kalender    | Mencatat jadwal dan agenda                        |
 | ⏰ Alarm        | Memberikan pengingat aktivitas penting            |
 | ⌛ Countdown    | Menghitung waktu menuju suatu acara atau deadline |
-| 📊 Spreadsheet | Mengelola data jadwal dalam jumlah besar          |
+| 📊 Import CSV | Mengelola data jadwal dalam jumlah besar          |
 
 Penggunaan banyak aplikasi secara terpisah menyebabkan beberapa kendala:
 
