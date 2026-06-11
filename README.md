@@ -41,7 +41,7 @@ FITUR:
   - Membuat alarm satu kali.
   - Membuat alarm berulang (Recurring Alarm).
   - Memberikan label pada alarm.
-  - Menentukan interval pengingat.
+  - Menentukan interval alarm.
   - Menggunakan ringtone custom.
   - Menampilkan notifikasi alarm secara visual.
 
