@@ -267,7 +267,7 @@ Tampilan awal aplikasi ALLENDER sebelum pengguna terhubung dengan akun Google. P
 <p align="center">
   <img src="assets/Mockup-login.png" width="900">
 </p>
----
+
 
 ### Calendar Dashboard
 
@@ -276,7 +276,7 @@ Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pe
 <p align="center">
   <img src="assets/Mockup-Calendar-Event.png" width="900">
 </p>
----
+
 
 ### Calendar Event View
 
@@ -285,7 +285,7 @@ Tampilan kalender ketika event telah berhasil ditambahkan. Informasi event ditam
 <p align="center">
   <img src="assets/Mockup-Calendar-Add.png" width="900">
 </p>
----
+
 
 ### Empty Calendar State
 
@@ -294,7 +294,7 @@ Tampilan ketika tidak terdapat event pada tanggal yang dipilih. Desain ini membe
 <p align="center">
   <img src="assets/Mockup-Calendar-Empty.png" width="900">
 </p>
----
+
 
 ### Alarm Management
 
@@ -303,7 +303,7 @@ Fitur alarm yang memungkinkan pengguna membuat alarm satu kali maupun alarm beru
 <p align="center">
   <img src="assets/Mockup-alarm.png" width="900">
 </p>
----
+
 
 ### CSV Import to Google Calendar
 
@@ -312,7 +312,7 @@ Fitur impor data jadwal dalam format CSV. Pengguna dapat melakukan drag & drop f
 <p align="center">
   <img src="assets/Mockup-ImportCSV.png" width="900">
 </p>
----
+
 
 ### Countdown Timer
 
@@ -321,7 +321,7 @@ Fitur countdown timer untuk menghitung mundur menuju suatu acara atau tenggat wa
 <p align="center">
   <img src="assets/Mockup-Countdown.png" width="900">
 </p>
----
+
 
 ### Responsive Dark & Light Mode
 
@@ -331,9 +331,9 @@ ALLENDER mendukung tema Dark Mode dan Light Mode yang dapat diganti secara langs
 |-----------|------------|
 | <p align="center">
   <img src="assets/Mockup-Calendar-Empty.png" width="900">
-</p> | <p align="center">
+</p>  <p align="center">
   <img src="assets/Mockup-light.png" width="900">
-</p> |
+</p> 
 
 ## 👨‍💻 Developer
 
