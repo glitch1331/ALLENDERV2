@@ -283,7 +283,7 @@ Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pe
 Tampilan kalender ketika event telah berhasil ditambahkan. Informasi event ditampilkan pada panel detail sehingga pengguna dapat memantau jadwal dengan lebih mudah.
 
 <p align="center">
-  <img src="assets/Mockup-Calendar-Event" width="900">
+  <img src="assets/Mockup-Calendar-Add" width="900">
 </p>
 ---
 
