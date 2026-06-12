@@ -257,6 +257,72 @@ https://allenderv-2.vercel.app/
 
 ---
 
+## 📸 Mock Up
+
+### Landing Page & Google Calendar Authentication
+
+Tampilan awal aplikasi ALLENDER sebelum pengguna terhubung dengan akun Google. Pada halaman ini pengguna dapat melakukan autentikasi menggunakan Google Account untuk mengakses dan mengelola event secara langsung melalui Google Calendar.
+
+![Landing Page](assets/mockup-login.png)
+
+---
+
+### Calendar Dashboard
+
+Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pengguna dapat membuat, melihat, dan menghapus event yang tersinkronisasi secara real-time dengan Google Calendar.
+
+![Calendar Dashboard](assets/mockup-calendar-dashboard.png)
+
+---
+
+### Calendar Event View
+
+Tampilan kalender ketika event telah berhasil ditambahkan. Informasi event ditampilkan pada panel detail sehingga pengguna dapat memantau jadwal dengan lebih mudah.
+
+![Calendar Event](assets/mockup-calendar-event.png)
+
+---
+
+### Empty Calendar State
+
+Tampilan ketika tidak terdapat event pada tanggal yang dipilih. Desain ini memberikan pengalaman pengguna yang tetap bersih dan informatif.
+
+![Calendar Empty State](assets/mockup-calendar-empty.png)
+
+---
+
+### Alarm Management
+
+Fitur alarm yang memungkinkan pengguna membuat alarm satu kali maupun alarm berulang. Pengguna juga dapat memilih ringtone bawaan atau mengunggah ringtone sendiri sesuai kebutuhan.
+
+![Alarm Feature](assets/mockup-alarm.png)
+
+---
+
+### CSV Import to Google Calendar
+
+Fitur impor data jadwal dalam format CSV. Pengguna dapat melakukan drag & drop file CSV maupun menempelkan data secara langsung untuk ditambahkan ke Google Calendar secara massal.
+
+![CSV Import](assets/mockup-import.png)
+
+---
+
+### Countdown Timer
+
+Fitur countdown timer untuk menghitung mundur menuju suatu acara atau tenggat waktu tertentu. Pengguna dapat menentukan nama event, tanggal target, waktu target, serta ringtone notifikasi yang akan diputar saat countdown selesai.
+
+![Countdown](assets/mockup-countdown.png)
+
+---
+
+### Responsive Dark & Light Mode
+
+ALLENDER mendukung tema Dark Mode dan Light Mode yang dapat diganti secara langsung sesuai preferensi pengguna untuk meningkatkan kenyamanan penggunaan.
+
+| Dark Mode | Light Mode |
+|-----------|------------|
+| ![Dark Mode](assets/mockup-dark.png) | ![Light Mode](assets/mockup-light.png) |
+
 ## 👨‍💻 Developer
 
 Developed with ❤️ using HTML, CSS, Vanilla JavaScript, Google Calendar API, and Vercel.
