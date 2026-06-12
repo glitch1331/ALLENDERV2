@@ -273,24 +273,27 @@ Tampilan awal aplikasi ALLENDER sebelum pengguna terhubung dengan akun Google. P
 
 Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pengguna dapat membuat, melihat, dan menghapus event yang tersinkronisasi secara real-time dengan Google Calendar.
 
-![Calendar Dashboard](assets/mockup-calendar-dashboard.png)
-
+<p align="center">
+  <img src="assets/Mockup-Calendar-Event" width="900">
+</p>
 ---
 
 ### Calendar Event View
 
 Tampilan kalender ketika event telah berhasil ditambahkan. Informasi event ditampilkan pada panel detail sehingga pengguna dapat memantau jadwal dengan lebih mudah.
 
-![Calendar Event](assets/mockup-calendar-event.png)
-
+<p align="center">
+  <img src="assets/Mockup-Calendar-Event" width="900">
+</p>
 ---
 
 ### Empty Calendar State
 
 Tampilan ketika tidak terdapat event pada tanggal yang dipilih. Desain ini memberikan pengalaman pengguna yang tetap bersih dan informatif.
 
-![Calendar Empty State](assets/mockup-calendar-empty.png)
-
+<p align="center">
+  <img src="assets/Mockup-Calendar-Empty.png" width="900">
+</p>
 ---
 
 ### Alarm Management
