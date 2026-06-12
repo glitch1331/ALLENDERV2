@@ -274,7 +274,7 @@ Tampilan awal aplikasi ALLENDER sebelum pengguna terhubung dengan akun Google. P
 Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pengguna dapat membuat, melihat, dan menghapus event yang tersinkronisasi secara real-time dengan Google Calendar.
 
 <p align="center">
-  <img src="assets/Mockup-Calendar-Event" width="900">
+  <img src="assets/Mockup-Calendar-Event.png" width="900">
 </p>
 ---
 
@@ -283,7 +283,7 @@ Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pe
 Tampilan kalender ketika event telah berhasil ditambahkan. Informasi event ditampilkan pada panel detail sehingga pengguna dapat memantau jadwal dengan lebih mudah.
 
 <p align="center">
-  <img src="assets/Mockup-Calendar-Add" width="900">
+  <img src="assets/Mockup-Calendar-Add.png" width="900">
 </p>
 ---
 
@@ -300,24 +300,27 @@ Tampilan ketika tidak terdapat event pada tanggal yang dipilih. Desain ini membe
 
 Fitur alarm yang memungkinkan pengguna membuat alarm satu kali maupun alarm berulang. Pengguna juga dapat memilih ringtone bawaan atau mengunggah ringtone sendiri sesuai kebutuhan.
 
-![Alarm Feature](assets/mockup-alarm.png)
-
+<p align="center">
+  <img src="assets/Mockup-alarm.png" width="900">
+</p>
 ---
 
 ### CSV Import to Google Calendar
 
 Fitur impor data jadwal dalam format CSV. Pengguna dapat melakukan drag & drop file CSV maupun menempelkan data secara langsung untuk ditambahkan ke Google Calendar secara massal.
 
-![CSV Import](assets/mockup-import.png)
-
+<p align="center">
+  <img src="assets/Mockup-ImportCSV.png" width="900">
+</p>
 ---
 
 ### Countdown Timer
 
 Fitur countdown timer untuk menghitung mundur menuju suatu acara atau tenggat waktu tertentu. Pengguna dapat menentukan nama event, tanggal target, waktu target, serta ringtone notifikasi yang akan diputar saat countdown selesai.
 
-![Countdown](assets/mockup-countdown.png)
-
+<p align="center">
+  <img src="assets/Mockup-Countdown.png" width="900">
+</p>
 ---
 
 ### Responsive Dark & Light Mode
@@ -326,7 +329,11 @@ ALLENDER mendukung tema Dark Mode dan Light Mode yang dapat diganti secara langs
 
 | Dark Mode | Light Mode |
 |-----------|------------|
-| ![Dark Mode](assets/mockup-dark.png) | ![Light Mode](assets/mockup-light.png) |
+| <p align="center">
+  <img src="assets/Mockup-Calendar-Empty.png" width="900">
+</p> | <p align="center">
+  <img src="assets/Mockup-light.png" width="900">
+</p> |
 
 ## 👨‍💻 Developer
 
