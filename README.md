@@ -274,7 +274,7 @@ Tampilan awal aplikasi ALLENDER sebelum pengguna terhubung dengan akun Google. P
 Halaman utama kalender yang menampilkan seluruh event dalam tampilan bulanan. Pengguna dapat membuat, melihat, dan menghapus event yang tersinkronisasi secara real-time dengan Google Calendar.
 
 <p align="center">
-  <img src="assets/Mockup-Calendar-Event.png" width="900">
+  <img src="assets/MockUp-Calendar-Event.png" width="900">
 </p>
 
 
