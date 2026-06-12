@@ -349,43 +349,38 @@ Demonstrasi proses login menggunakan akun Google dan akses ke dashboard utama AL
 ### Create Calendar Event
 
 <p align="center">
-  <img src="assets/demo-calendar.gif" width="900">
+  <img src="assets/createevent.gif" width="900">
 </p>
 
 Menambahkan event baru ke kalender dan melakukan sinkronisasi langsung dengan Google Calendar.
 
----
 
 ### Create Alarm
 
 <p align="center">
-  <img src="assets/demo-alarm.gif" width="900">
+  <img src="assets/createalarm.gif" width="900">
 </p>
 
 Membuat alarm baru dengan pengaturan waktu, label, interval, dan ringtone sesuai kebutuhan pengguna.
 
----
 
 ### Create Countdown
 
 <p align="center">
-  <img src="assets/demo-countdown.gif" width="900">
+  <img src="assets/countdown.gif" width="900">
 </p>
 
 Membuat countdown menuju tanggal dan waktu tertentu dengan tampilan sisa waktu secara real-time.
 
----
 
 ### Import CSV to Google Calendar
 
 <p align="center">
-  <img src="assets/demo-import.gif" width="900">
+  <img src="assets/importCSV.gif" width="900">
 </p>
 
 Mengimpor data jadwal menggunakan file CSV untuk menambahkan banyak event ke Google Calendar secara otomatis.
 
----
 
-## 👨‍💻 Developer
 
 Developed with ❤️ using HTML, CSS, Vanilla JavaScript, Google Calendar API, and Vercel.
