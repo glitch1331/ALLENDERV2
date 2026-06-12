@@ -264,8 +264,9 @@ https://allenderv-2.vercel.app/
 
 Tampilan awal aplikasi ALLENDER sebelum pengguna terhubung dengan akun Google. Pada halaman ini pengguna dapat melakukan autentikasi menggunakan Google Account untuk mengakses dan mengelola event secara langsung melalui Google Calendar.
 
-![Landing Page](assets/mockup-login.png)
-
+<p align="center">
+  <img src="assets/Mockup-login.png" width="900">
+</p>
 ---
 
 ### Calendar Dashboard
