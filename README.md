@@ -340,12 +340,11 @@ ALLENDER mendukung tema Dark Mode dan Light Mode yang dapat diganti secara langs
 ### Login & Dashboard
 
 <p align="center">
-  <img src="assets/demo-login-dashboard.gif" width="900">
+  <img src="assets/registeranddash.gif" width="900">
 </p>
 
 Demonstrasi proses login menggunakan akun Google dan akses ke dashboard utama ALLENDER yang terintegrasi dengan Google Calendar.
 
----
 
 ### Create Calendar Event
 
